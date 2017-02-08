@@ -1,3 +1,3 @@
 function Run(stats)
-	return stats.GetInt("true");
+	return typeof(int);
 end
