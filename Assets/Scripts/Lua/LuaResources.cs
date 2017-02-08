@@ -11,7 +11,6 @@ namespace Lua {
 	/// </summary>
 	public static class LuaResources {
 		private static string _luaRoot = Application.streamingAssetsPath;
-
 		private static Dictionary<string, LuaWrapper> _resources = new Dictionary<string, LuaWrapper>();
 
 		/// <summary>
@@ -23,7 +22,7 @@ namespace Lua {
 
 			string[] files = DirectoryIO.GetFileNamesRecursively(_luaRoot, ".lua");
 			foreach (string file in files) {
-				LoadLua(Path.Combine(_luaRoot, file), registeredTypes);
+				LoadLua(file, registeredTypes);
 			}
 		}
 
@@ -35,6 +34,13 @@ namespace Lua {
 		}
 
 		/// <summary>
+		/// Returns lua loaded at path.
+		/// </summary>
+		public static LuaWrapper Load(string path) {
+			return _resources[path];
+		}
+
+		/// <summary>
 		/// Loads a lua file at path, also adding type dependencies.
 		/// </summary>
 		private static LuaWrapper LoadLua(string path, IEnumerable<Type> dependencies) {
@@ -42,6 +48,8 @@ namespace Lua {
 			if (File.Exists(path)) {
 				lua = new LuaWrapper(FileIO.GetFileContent(path));
 				AddDependencies(lua, dependencies);
+
+				_resources.Add(path, lua);
 			} else {
 				Debug.LogError("No file found at " + path);
 			}
