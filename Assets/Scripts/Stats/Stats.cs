@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using FullSerializer;
 
 [Serializable]
+[fsObject(Processor = typeof(SerializableProcessor))]
 public class Stats {
 	[SerializeField]
 	private Dictionary<string, float> _baseStats;
@@ -48,5 +50,9 @@ public class Stats {
 			}
 			_stats[stat.Key] = value;
 		}
+	}
+
+	public void OnAfterDeserialize() {
+		_stats = new Dictionary<string, float>(_baseStats);
 	}
 }

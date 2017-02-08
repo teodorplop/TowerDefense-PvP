@@ -1,0 +1,16 @@
+{
+	"baseStats": [
+		{
+			"Key": "Range",
+			"Value": 1
+		},
+		{
+			"Key": "Damage",
+			"Value": 10
+		},
+		{
+			"Key": "Attack Speed",
+			"Value": 1
+		}
+	]
+}

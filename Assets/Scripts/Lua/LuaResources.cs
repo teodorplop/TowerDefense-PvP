@@ -10,7 +10,7 @@ namespace Lua {
 	/// Loads and unloads lua objects.
 	/// </summary>
 	public static class LuaResources {
-		private static string _luaRoot = Application.streamingAssetsPath;
+		private static string _resourcesRoot = Application.streamingAssetsPath;
 		private static Dictionary<string, LuaWrapper> _resources = new Dictionary<string, LuaWrapper>();
 
 		/// <summary>
@@ -20,7 +20,7 @@ namespace Lua {
 			UserData.RegisterAssembly();
 			IEnumerable<Type> registeredTypes = UserData.GetRegisteredTypes();
 
-			string[] files = DirectoryIO.GetFileNamesRecursively(_luaRoot, ".lua");
+			string[] files = DirectoryIO.GetFileNamesRecursively(_resourcesRoot, ".lua");
 			foreach (string file in files) {
 				LoadLua(file, registeredTypes);
 			}
@@ -37,7 +37,7 @@ namespace Lua {
 		/// Returns lua loaded at path.
 		/// </summary>
 		public static LuaWrapper Load(string path) {
-			return _resources[path];
+			return _resources[Hash(path)];
 		}
 
 		/// <summary>
@@ -48,8 +48,7 @@ namespace Lua {
 			if (File.Exists(path)) {
 				lua = new LuaWrapper(FileIO.GetFileContent(path));
 				AddDependencies(lua, dependencies);
-
-				_resources.Add(path, lua);
+				_resources.Add(Hash(path), lua);
 			} else {
 				Debug.LogError("No file found at " + path);
 			}
@@ -65,6 +64,13 @@ namespace Lua {
 					lua.SetGlobal(type.Name, type);
 				}
 			}
+		}
+
+		/// <summary>
+		/// Returns an universal path, with \ instead of /.
+		/// </summary>
+		private static string Hash(string path) {
+			return path.Replace('/', '\\');
 		}
 	}
 }
