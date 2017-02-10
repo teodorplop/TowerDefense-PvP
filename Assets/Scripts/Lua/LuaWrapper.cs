@@ -7,20 +7,18 @@ namespace Lua {
 	/// </summary>
 	public class LuaWrapper {
 		private Script _script;
-		private DynValue _runFunction;
 		public LuaWrapper(string source) {
 			_script = new Script();
 			_script.DoString(source);
-			_runFunction = _script.Globals.Get("Run");
 		}
 
 		public void SetGlobal(string name, object obj) {
 			_script.Globals[name] = obj;
 		}
-		public object Call(params object[] args) {
+		public object Call(string function, params object[] args) {
 			DynValue value = null;
 			try {
-				value = _script.Call(_runFunction, args);
+				value = _script.Call(_script.Globals.Get(function), args);
 			} catch (ScriptRuntimeException e) {
 				Debug.LogError("Error occured!\n" + e.DecoratedMessage);
 			}
