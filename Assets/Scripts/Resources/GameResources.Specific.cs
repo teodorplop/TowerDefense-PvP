@@ -14,6 +14,14 @@ public static partial class GameResources {
 	}
 
 	/// <summary>
+	/// Unloads all resources, including game specific ones
+	/// </summary>
+	public static void GSUnloadAll() {
+		LuaResources.UnloadAll();
+		UnloadAll();
+	}
+
+	/// <summary>
 	/// Loads all towers into memory
 	/// </summary>
 	private static void LoadTowers() {

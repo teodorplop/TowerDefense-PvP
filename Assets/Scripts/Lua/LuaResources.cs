@@ -10,7 +10,7 @@ namespace Lua {
 	/// Loads and unloads lua objects.
 	/// </summary>
 	public static class LuaResources {
-		private static string _resourcesRoot = Path.Combine(Application.streamingAssetsPath, "GameResources");
+		private static string _resourcesRoot = Path.Combine(Application.streamingAssetsPath, "GameResources").Replace('/', '\\');
 		private static string _extension = ".lua";
 		private static Dictionary<string, LuaWrapper> _resources = new Dictionary<string, LuaWrapper>();
 
@@ -38,33 +38,28 @@ namespace Lua {
 		/// Returns lua loaded at path.
 		/// </summary>
 		public static LuaWrapper Load(string path) {
-			path = Hash(path);
+			string hash = Hash(path);
 
-			if (!_resources.ContainsKey(path)) {
+			if (!_resources.ContainsKey(hash)) {
 				LuaWrapper lua = LoadLua(path, UserData.GetRegisteredTypes());
 				if (lua == null) {
 					Debug.LogError("No lua at " + path);
 				}
 				return lua;
 			}
-			return _resources[path];
+			return _resources[hash];
 		}
 
 		/// <summary>
 		/// Loads a lua file at path, also adding type dependencies.
 		/// </summary>
 		private static LuaWrapper LoadLua(string path, IEnumerable<Type> dependencies) {
-			if (!Path.HasExtension(path)) {
-				path += _extension;
-			}
+			path = FullPath(path);
 
 			LuaWrapper lua = null;
 			if (File.Exists(path)) {
 				lua = new LuaWrapper(FileIO.GetFileContent(path));
 				AddDependencies(lua, dependencies);
-
-				path = path.Remove(0, _resourcesRoot.Length + 1);
-				path = path.Remove(path.Length - _extension.Length, _extension.Length);
 				_resources.Add(Hash(path), lua);
 			} else {
 				Debug.LogError("No file found at " + path);
@@ -85,10 +80,39 @@ namespace Lua {
 		}
 
 		/// <summary>
-		/// Returns an universal path, with \ instead of /.
+		/// Compares two paths
+		/// </summary>
+		private static bool PathsAreEqual(string path1, string path2) {
+			return path1.Replace('/', '\\') == path2.Replace('/', '\\');
+		}
+
+		/// <summary>
+		/// Returns full given path.
+		/// </summary>
+		private static string FullPath(string path) {
+			if (path.Length < _resourcesRoot.Length || !PathsAreEqual(path.Substring(0, _resourcesRoot.Length), _resourcesRoot)) {
+				path = Path.Combine(_resourcesRoot, path);
+			}
+			if (!Path.HasExtension(path)) {
+				path += _extension;
+			}
+			return path;
+		}
+
+		/// <summary>
+		/// Returns hash equal with relative path.
 		/// </summary>
 		private static string Hash(string path) {
-			return path.Replace('/', '\\');
+			path = path.Replace('/', '\\');
+			if (path.Length >= _resourcesRoot.Length && PathsAreEqual(path.Substring(0, _resourcesRoot.Length), _resourcesRoot)) {
+				path = path.Remove(0, _resourcesRoot.Length + 1);
+			}
+			if (path.Length >= _extension.Length &&
+				path.Substring(path.Length - _extension.Length, _extension.Length) == _extension) {
+				path = path.Remove(path.Length - _extension.Length, _extension.Length);
+			}
+
+			return path;
 		}
 	}
 }

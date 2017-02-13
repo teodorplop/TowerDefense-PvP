@@ -11,8 +11,18 @@ public class Tower {
 	public Tower(TowerBase towerBase) {
 		_towerBase = towerBase;
 		_stats = new Stats(_towerBase.baseStats);
+	}
 
-		int x = System.Convert.ToInt32(towerBase.actions.Call("OnSpawn", this));
-		GDebug.Log(x);
+	private void OnSpawn() {
+		towerBase.actions.Call("OnSpawn", this);
+	}
+	private void OnAttack() {
+		towerBase.actions.Call("OnAttack", this);
+	}
+	private void OnSell() {
+		towerBase.actions.Call("OnSell", this);
+	}
+	private void OnDestroy() {
+		towerBase.actions.Call("OnDestroy", this);
 	}
 }
