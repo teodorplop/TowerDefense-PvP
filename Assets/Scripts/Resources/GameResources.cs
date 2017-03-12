@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 
 public static partial class GameResources {
-	private static string _resourcesRoot = Path.Combine(Application.streamingAssetsPath, "GameResources");
+	private static string resourcesRoot { get { return Path.Combine(Application.streamingAssetsPath, "GameResources"); } }
+
 	private static string _extension = ".json";
 	private static Dictionary<string, object> _resources = new Dictionary<string, object>();
 
@@ -43,6 +44,14 @@ public static partial class GameResources {
 	}
 
 	/// <summary>
+	/// Saves a resource of type T at a given path.
+	/// </summary>
+	public static void Save<T>(T resource, string path) {
+		path = FullPath(path);
+		DataSerializer.SerializeData<T>(resource, path, true);
+	}
+
+	/// <summary>
 	/// Loads an object at path.
 	/// </summary>
 	private static T LoadResource<T>(string path) {
@@ -69,8 +78,8 @@ public static partial class GameResources {
 	/// Returns full given path.
 	/// </summary>
 	private static string FullPath(string path) {
-		if (path.Length < _resourcesRoot.Length || !PathsAreEqual(path.Substring(0, _resourcesRoot.Length), _resourcesRoot)) {
-			path = Path.Combine(_resourcesRoot, path);
+		if (path.Length < resourcesRoot.Length || !PathsAreEqual(path.Substring(0, resourcesRoot.Length), resourcesRoot)) {
+			path = Path.Combine(resourcesRoot, path);
 		}
 		if (!Path.HasExtension(path)) {
 			path += _extension;
@@ -83,8 +92,8 @@ public static partial class GameResources {
 	/// </summary>
 	private static string Hash(string path) {
 		path = path.Replace('/', '\\');
-		if (path.Length >= _resourcesRoot.Length && PathsAreEqual(path.Substring(0, _resourcesRoot.Length), _resourcesRoot)) {
-			path = path.Remove(0, _resourcesRoot.Length + 1);
+		if (path.Length >= resourcesRoot.Length && PathsAreEqual(path.Substring(0, resourcesRoot.Length), resourcesRoot)) {
+			path = path.Remove(0, resourcesRoot.Length + 1);
 		}
 		if (path.Length >= _extension.Length &&
 			path.Substring(path.Length - _extension.Length, _extension.Length) == _extension) {

@@ -3,7 +3,7 @@ using Utils.IO;
 using Lua;
 
 public static partial class GameResources {
-	private static string _towersRoot = Path.Combine(_resourcesRoot, "Towers");
+	private static string _towersRoot = Path.Combine(resourcesRoot, "Towers");
 
 	/// <summary>
 	/// Load all game specific resources into memory
@@ -29,7 +29,7 @@ public static partial class GameResources {
 		foreach (string directory in directories) {
 			TowerBase towerBase = Load<TowerBase>(Path.Combine(directory, "TowerBase"));
 			towerBase.name = directory.Remove(0, _towersRoot.Length + 1);
-			towerBase.actions = LuaResources.Load(Path.Combine(directory.Remove(0, _resourcesRoot.Length + 1), "Actions"));
+			towerBase.actions = LuaResources.Load(Path.Combine(directory.Remove(0, resourcesRoot.Length + 1), "Actions"));
 		}
 	}
 }

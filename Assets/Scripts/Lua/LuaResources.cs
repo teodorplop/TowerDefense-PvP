@@ -10,7 +10,8 @@ namespace Lua {
 	/// Loads and unloads lua objects.
 	/// </summary>
 	public static class LuaResources {
-		private static string _resourcesRoot = Path.Combine(Application.streamingAssetsPath, "GameResources").Replace('/', '\\');
+		private static string resourcesRoot { get { return Path.Combine(Application.streamingAssetsPath, "GameResources").Replace('/', '\\'); } }
+
 		private static string _extension = ".lua";
 		private static Dictionary<string, LuaWrapper> _resources = new Dictionary<string, LuaWrapper>();
 
@@ -21,7 +22,7 @@ namespace Lua {
 			UserData.RegisterAssembly();
 			IEnumerable<Type> registeredTypes = UserData.GetRegisteredTypes();
 
-			string[] files = DirectoryIO.GetFileNamesRecursively(_resourcesRoot, _extension);
+			string[] files = DirectoryIO.GetFileNamesRecursively(resourcesRoot, _extension);
 			foreach (string file in files) {
 				LoadLua(file, registeredTypes);
 			}
@@ -90,8 +91,8 @@ namespace Lua {
 		/// Returns full given path.
 		/// </summary>
 		private static string FullPath(string path) {
-			if (path.Length < _resourcesRoot.Length || !PathsAreEqual(path.Substring(0, _resourcesRoot.Length), _resourcesRoot)) {
-				path = Path.Combine(_resourcesRoot, path);
+			if (path.Length < resourcesRoot.Length || !PathsAreEqual(path.Substring(0, resourcesRoot.Length), resourcesRoot)) {
+				path = Path.Combine(resourcesRoot, path);
 			}
 			if (!Path.HasExtension(path)) {
 				path += _extension;
@@ -104,8 +105,8 @@ namespace Lua {
 		/// </summary>
 		private static string Hash(string path) {
 			path = path.Replace('/', '\\');
-			if (path.Length >= _resourcesRoot.Length && PathsAreEqual(path.Substring(0, _resourcesRoot.Length), _resourcesRoot)) {
-				path = path.Remove(0, _resourcesRoot.Length + 1);
+			if (path.Length >= resourcesRoot.Length && PathsAreEqual(path.Substring(0, resourcesRoot.Length), resourcesRoot)) {
+				path = path.Remove(0, resourcesRoot.Length + 1);
 			}
 			if (path.Length >= _extension.Length &&
 				path.Substring(path.Length - _extension.Length, _extension.Length) == _extension) {

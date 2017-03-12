@@ -1,7 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 
 [MoonSharpUserData]
-public class Tower {
+public class Tower : ITickable {
 	private readonly TowerBase _towerBase;
 	public TowerBase towerBase { get { return _towerBase; } }
 
@@ -14,6 +14,7 @@ public class Tower {
 	}
 
 	private void OnSpawn() {
+		TickEngine.Register(this);
 		towerBase.actions.Call("OnSpawn", this);
 	}
 	private void OnAttack() {
@@ -23,6 +24,10 @@ public class Tower {
 		towerBase.actions.Call("OnSell", this);
 	}
 	private void OnDestroy() {
+		TickEngine.Unregister(this);
 		towerBase.actions.Call("OnDestroy", this);
+	}
+
+	public void Tick() {
 	}
 }

@@ -6,6 +6,7 @@ function OnSpawn(tower)
 end
 
 function OnAttack(tower, enemy)
+	
 end
 
 function OnSell(tower)
