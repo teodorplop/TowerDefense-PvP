@@ -30,7 +30,7 @@ public class MapRenderer : MonoBehaviour {
 		Vector3 offset = new Vector3((column - 1) * _offset.x, 0, (row - 1) * _offset.z);
 		return new Vector3(offset.x + column, 0, offset.z + row);
 	}
-	protected TileRenderer InstantiateTileRenderer(Tile tile, int row, int column) {
+	protected TileRenderer InstantiateTileRenderer(TileDescription tile, int row, int column) {
 		TileRenderer tr = Instantiate(_prefab);
 		tr.transform.SetParent(transform);
 		tr.transform.localPosition = GetPositionForTile(row, column);

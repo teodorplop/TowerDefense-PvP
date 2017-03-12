@@ -25,11 +25,11 @@ public static partial class GameResources {
 	/// Loads all towers into memory
 	/// </summary>
 	private static void LoadTowers() {
-		string[] directories = DirectoryIO.GetDirectories(_towersRoot);
-		foreach (string directory in directories) {
-			TowerBase towerBase = Load<TowerBase>(Path.Combine(directory, "TowerBase"));
-			towerBase.name = directory.Remove(0, _towersRoot.Length + 1);
-			towerBase.actions = LuaResources.Load(Path.Combine(directory.Remove(0, resourcesRoot.Length + 1), "Actions"));
+		string[] files = DirectoryIO.GetFileNames(_towersRoot, ".json");
+		foreach (string file in files) {
+			TowerBase towerBase = Load<TowerBase>(file);
+			towerBase.name = Path.GetFileNameWithoutExtension(file);
+			towerBase.actions = LuaResources.Load(Path.Combine(_towersRoot, towerBase.name + "_Actions"));
 		}
 	}
 }

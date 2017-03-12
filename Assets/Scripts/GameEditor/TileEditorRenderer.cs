@@ -4,9 +4,6 @@ namespace GameEditor {
 	public class TileEditorRenderer : TileRenderer {
 		public static TileType selectedTileType;
 
-		[SerializeField]
-		private Color _highlightedColor;
-
 		void OnMouseEnter() {
 			if (Input.GetMouseButton(0)) {
 				OnMouseDown();
@@ -17,8 +14,8 @@ namespace GameEditor {
 			_renderer.material.color = _color;
 		}
 		void OnMouseDown() {
-			_target.tileType = selectedTileType;
-			SetTile(_target);
+			_tile.tileType = selectedTileType;
+			SetTile(_tile);
 		}
 	}
 }

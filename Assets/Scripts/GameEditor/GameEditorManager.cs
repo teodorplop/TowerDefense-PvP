@@ -26,6 +26,8 @@ namespace GameEditor {
 			FindObjectOfType<SaveSettingsPanel>().Initialize(_mapDescription);
 		}
 		IEnumerator Initialize() {
+			GameResources.LoadAll();
+
 			AsyncOperation uiScene = SceneManager.LoadSceneAsync("EditorUI", LoadSceneMode.Additive);
 			while (!uiScene.isDone) {
 				yield return null;

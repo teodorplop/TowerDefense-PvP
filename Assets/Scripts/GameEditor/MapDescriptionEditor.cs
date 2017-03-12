@@ -3,7 +3,7 @@
 namespace GameEditor {
 	public class MapDescriptionEditor : MapDescription {
 		public MapDescriptionEditor(int rows, int columns) {
-			_tiles = new List<List<Tile>>();
+			_tiles = new List<List<TileDescription>>();
 			Resize(rows, columns);
 		}
 
@@ -15,7 +15,7 @@ namespace GameEditor {
 				_tiles.RemoveRange(rows, _tiles.Count - rows);
 			} else {
 				while (rows > _tiles.Count) {
-					_tiles.Add(new List<Tile>());
+					_tiles.Add(new List<TileDescription>());
 				}
 			}
 
@@ -24,7 +24,7 @@ namespace GameEditor {
 					_tiles[i].RemoveRange(columns, _tiles[i].Count - columns);
 				} else {
 					while (columns > _tiles[i].Count) {
-						_tiles[i].Add(new Tile());
+						_tiles[i].Add(new TileDescription());
 					}
 				}
 			}
