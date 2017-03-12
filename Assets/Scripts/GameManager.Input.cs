@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public partial class GameManager {
 	private TileRenderer _selected;
