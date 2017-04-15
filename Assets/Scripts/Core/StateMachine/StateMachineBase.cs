@@ -3,24 +3,24 @@ using UnityEngine;
 using System.Reflection;
 
 /// <summary>
-/// Inherit this to have a state machine like behaviour. If you need to implement a separate Awake or Update functions, override OnAwake and OnUpdate functions.
+/// Inherit this to have a state machine like behaviour.
 /// </summary>
 public abstract class StateMachineBase : MonoBehaviour {
 	protected StateMachineHandler _stateMachineHandler;
 	void Awake() {
 		_stateMachineHandler = gameObject.AddComponent<StateMachineHandler>();
-		OnAwake();
 	}
-
-	protected virtual void OnAwake() {}
-	protected virtual void OnUpdate() {}
 
 	private Enum _currentState;
 	public Enum currentState {
 		get { return _currentState; }
 		set {
 			_currentState = value;
-			ConfigureCurrentState();
+			if (_currentState == null) {
+				ConfigureEmptyState();
+			} else {
+				ConfigureCurrentState();
+			}
 		}
 	}
 
@@ -49,37 +49,58 @@ public abstract class StateMachineBase : MonoBehaviour {
 	#endregion
 
 	#region configuration
+	private void ConfigureEmptyState() {
+		DoUpdate = DoNothing;
+		DoLateUpdate = DoNothing;
+		DoFixedUpdate = DoNothing;
+		DoOnTriggerEnter = DoNothingCollider;
+		DoOnTriggerStay = DoNothingCollider;
+		DoOnTriggerExit = DoNothingCollider;
+		DoOnCollisionEnter = DoNothingCollision;
+		DoOnCollisionStay = DoNothingCollision;
+		DoOnCollisionExit = DoNothingCollision;
+		DoOnMouseEnter = DoNothing;
+		DoOnMouseUp = DoNothing;
+		DoOnMouseDown = DoNothing;
+		DoOnMouseOver = DoNothing;
+		DoOnMouseDrag = DoNothing;
+		DoOnMouseExit = DoNothing;
+		DoOnGUI = DoNothing;
+
+		useGUILayout = false;
+	}
 	private void ConfigureCurrentState() {
-		DoUpdate = ConfigureDelegate<Action>("Update", DoNothing);
-		DoLateUpdate = ConfigureDelegate<Action>("LateUpdate", DoNothing);
-		DoFixedUpdate = ConfigureDelegate<Action>("FixedUpdate", DoNothing);
-		DoOnTriggerEnter = ConfigureDelegate<Action<Collider>>("OnTriggerEnter", DoNothingCollider);
-		DoOnTriggerStay = ConfigureDelegate<Action<Collider>>("OnTriggerStay", DoNothingCollider);
-		DoOnTriggerExit = ConfigureDelegate<Action<Collider>>("OnTriggerExit", DoNothingCollider);
-		DoOnCollisionEnter = ConfigureDelegate<Action<Collision>>("OnCollisionEnter", DoNothingCollision);
-		DoOnCollisionStay = ConfigureDelegate<Action<Collision>>("OnCollisionStay", DoNothingCollision);
-		DoOnCollisionExit = ConfigureDelegate<Action<Collision>>("OnCollisionExit", DoNothingCollision);
-		DoOnMouseEnter = ConfigureDelegate<Action>("OnMouseEnter", DoNothing);
-		DoOnMouseUp = ConfigureDelegate<Action>("OnMouseUp", DoNothing);
-		DoOnMouseDown = ConfigureDelegate<Action>("OnMouseDown", DoNothing);
-		DoOnMouseOver = ConfigureDelegate<Action>("OnMouseOver", DoNothing);
-		DoOnMouseDrag = ConfigureDelegate<Action>("OnMouseDrag", DoNothing);
-		DoOnMouseExit = ConfigureDelegate<Action>("OnMouseExit", DoNothing);
-		DoOnGUI = ConfigureDelegate<Action>("OnGUI", DoNothing);
+		DoUpdate = ConfigureDelegate<Action>(_currentState, "Update", DoNothing);
+		DoLateUpdate = ConfigureDelegate<Action>(_currentState, "LateUpdate", DoNothing);
+		DoFixedUpdate = ConfigureDelegate<Action>(_currentState, "FixedUpdate", DoNothing);
+		DoOnTriggerEnter = ConfigureDelegate<Action<Collider>>(_currentState, "OnTriggerEnter", DoNothingCollider);
+		DoOnTriggerStay = ConfigureDelegate<Action<Collider>>(_currentState, "OnTriggerStay", DoNothingCollider);
+		DoOnTriggerExit = ConfigureDelegate<Action<Collider>>(_currentState, "OnTriggerExit", DoNothingCollider);
+		DoOnCollisionEnter = ConfigureDelegate<Action<Collision>>(_currentState, "OnCollisionEnter", DoNothingCollision);
+		DoOnCollisionStay = ConfigureDelegate<Action<Collision>>(_currentState, "OnCollisionStay", DoNothingCollision);
+		DoOnCollisionExit = ConfigureDelegate<Action<Collision>>(_currentState, "OnCollisionExit", DoNothingCollision);
+		DoOnMouseEnter = ConfigureDelegate<Action>(_currentState, "OnMouseEnter", DoNothing);
+		DoOnMouseUp = ConfigureDelegate<Action>(_currentState, "OnMouseUp", DoNothing);
+		DoOnMouseDown = ConfigureDelegate<Action>(_currentState, "OnMouseDown", DoNothing);
+		DoOnMouseOver = ConfigureDelegate<Action>(_currentState, "OnMouseOver", DoNothing);
+		DoOnMouseDrag = ConfigureDelegate<Action>(_currentState, "OnMouseDrag", DoNothing);
+		DoOnMouseExit = ConfigureDelegate<Action>(_currentState, "OnMouseExit", DoNothing);
+		DoOnGUI = ConfigureDelegate<Action>(_currentState, "OnGUI", DoNothing);
 
 		useGUILayout = DoOnGUI != DoNothing;
 	}
 	
-	public T ConfigureField<T>(string fieldRoot, T Default) {
-		FieldInfo field = GetType().GetField(_currentState.ToString() + "_" + fieldRoot, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+	public T ConfigureField<T>(Enum state, string fieldRoot, T Default) {
+		FieldInfo field = GetType().GetField(state.ToString() + "_" + fieldRoot, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
 		if (field != null) {
 			return (T)field.GetValue(this);
 		}
 		return Default;
 	}
-	public T ConfigureDelegate<T>(string methodRoot, T Default) where T : class {
-		MethodInfo method = GetType().GetMethod(_currentState.ToString() + "_" + methodRoot, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
+
+	public T ConfigureDelegate<T>(Enum state, string methodRoot, T Default) where T : class {
+		MethodInfo method = GetType().GetMethod(state.ToString() + "_" + methodRoot, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
 
 		if (method != null) {
 			return Delegate.CreateDelegate(typeof(T), this, method) as T;
@@ -92,7 +113,6 @@ public abstract class StateMachineBase : MonoBehaviour {
 	#region functions
 	void Update() {
 		DoUpdate();
-		OnUpdate();
 	}
 	void LateUpdate() {
 		DoLateUpdate();

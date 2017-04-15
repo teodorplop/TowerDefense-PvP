@@ -2,468 +2,10 @@
     "_tiles": [
         [
             {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
                 "tileType": "Environment"
             },
             {
                 "tileType": "Environment"
-            }
-        ],
-        [
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            }
-        ],
-        [
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            }
-        ],
-        [
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            }
-        ],
-        [
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            }
-        ],
-        [
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            },
-            {
-                "tileType": "Path"
-            }
-        ],
-        [
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            },
-            {
-                "tileType": "Constructable"
-            }
-        ],
-        [
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Path"
             },
             {
                 "tileType": "Environment"
@@ -521,9 +63,6 @@
             }
         ],
         [
-            {
-                "tileType": "Environment"
-            },
             {
                 "tileType": "Environment"
             },
@@ -645,80 +184,9 @@
             },
             {
                 "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
             }
         ],
         [
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            },
-            {
-                "tileType": "Environment"
-            }
-        ],
-        [
-            {
-                "tileType": "Environment"
-            },
             {
                 "tileType": "Environment"
             },
@@ -840,6 +308,189 @@
             },
             {
                 "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
             },
             {
                 "tileType": "Environment"
@@ -849,6 +500,685 @@
             {
                 "tileType": "Environment"
             },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Constructable"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Path"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            },
+            {
+                "tileType": "Environment"
+            }
+        ],
+        [
             {
                 "tileType": "Environment"
             },

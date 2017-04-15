@@ -64,13 +64,13 @@ namespace GameEditor {
 			_stateMachineHandler.SetState(state, this);
 
 			// push new state input context
-			_inputManager.PushContext(GenerateInputContext());
+			_inputManager.PushContext(GenerateInputContext(state));
 		}
 
-		private InputContext GenerateInputContext() {
-			Action<Vector3> onMouseDown = ConfigureDelegate<Action<Vector3>>("HandleMouseDown", None_HandleMouseDown);
-			Action<Vector3> onMouseUp = ConfigureDelegate<Action<Vector3>>("HandleMouseUp", None_HandleMouseUp);
-			Action<Vector3> onMouse = ConfigureDelegate<Action<Vector3>>("HandleMouse", None_HandleMouse);
+		private InputContext GenerateInputContext(GameEditorState state) {
+			Action<Vector3> onMouseDown = ConfigureDelegate<Action<Vector3>>(state, "HandleMouseDown", None_HandleMouseDown);
+			Action<Vector3> onMouseUp = ConfigureDelegate<Action<Vector3>>(state, "HandleMouseUp", None_HandleMouseUp);
+			Action<Vector3> onMouse = ConfigureDelegate<Action<Vector3>>(state, "HandleMouse", None_HandleMouse);
 			return new InputContext(onMouseDown, onMouseUp, onMouse);
 		}
 	}
