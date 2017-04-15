@@ -6,7 +6,7 @@ public class TileRenderer : MonoBehaviour {
 	[SerializeField]
 	private Color _environmentColor;
 	[SerializeField]
-	private Color _pathColor;
+	private Color _reachableColor;
 	[SerializeField]
 	protected Color _highlightedColor;
 
@@ -25,8 +25,8 @@ public class TileRenderer : MonoBehaviour {
 			_color = _renderer.material.color = _constructableColor;
 		} else if (target.tileType == TileType.Environment) {
 			_color = _renderer.material.color = _environmentColor;
-		} else if (target.tileType == TileType.Path) {
-			_color = _renderer.material.color = _pathColor;
+		} else if (target.tileType == TileType.Reachable) {
+			_color = _renderer.material.color = _reachableColor;
 		}
 	}
 

@@ -11,7 +11,8 @@ namespace GameEditor {
 
 		public enum GameEditorState {
 			None,
-			MapEditor
+			MapEditor,
+			PathsEditor
 		}
 
 		[SerializeField]
@@ -35,6 +36,14 @@ namespace GameEditor {
 			} else {
 				Initialized();
 			}
+
+			EventManager.AddListener<EditorStateChangedEvent>(OnEditorStateChanged);
+		}
+		void OnDestroy() {
+			EventManager.RemoveListener<EditorStateChangedEvent>(OnEditorStateChanged);
+		}
+		private void OnEditorStateChanged(EditorStateChangedEvent evt) {
+			SetState(evt.State);
 		}
 
 		IEnumerator Initialize() {
@@ -51,13 +60,17 @@ namespace GameEditor {
 		private void Initialized() {
 			// Initialize UI
 			FindObjectOfType<MapSettingsPanel>().Initialize(_mapDescription);
-			FindObjectOfType<SaveSettingsPanel>().Initialize(_mapDescription);
+			//FindObjectOfType<SaveSettingsPanel>().Initialize(_mapDescription);
 
 			// Initialize state machine
 			SetState(GameEditorState.MapEditor);
 		}
 
 		private void SetState(GameEditorState state) {
+			if (currentState != null && (GameEditorState)currentState == state) {
+				return;
+			}
+
 			// remove old state input context
 			_inputManager.PopContext();
 
