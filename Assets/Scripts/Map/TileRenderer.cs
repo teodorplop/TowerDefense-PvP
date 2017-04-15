@@ -33,18 +33,4 @@ public class TileRenderer : MonoBehaviour {
 	public void Select(bool selected) {
 		_renderer.material.color = selected ? _highlightedColor : _color;
 	}
-
-	/*void OnMouseEnter() {
-		if (_target.tileType == TileType.Constructable) {
-			_renderer.material.color = _highlightedColor;
-		}
-	}
-	void OnMouseExit() {
-		_renderer.material.color = _color;
-	}
-	void OnMouseDown() {
-		if (_target.tileType == TileType.Constructable) {
-			EventManager.Instance.Raise(new TilePressedEvent(this));
-		}
-	}*/
 }

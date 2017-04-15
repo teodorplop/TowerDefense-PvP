@@ -35,7 +35,7 @@ public partial class GameManager : MonoBehaviour {
 		InputContext context = new InputContext(OnMouseDown, OnMouseUp, OnMouse);
 		FindObjectOfType<InputManager>().PushContext(context);
 
-		EventManager.Instance.AddListener<TowerConstructionEvent>(OnTowerConstruction);
+		EventManager.AddListener<TowerConstructionEvent>(OnTowerConstruction);
 
 		InitializeUI();
 	}

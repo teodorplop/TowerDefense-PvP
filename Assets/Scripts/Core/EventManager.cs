@@ -6,12 +6,9 @@ public class GameEvent {}
 
 public class EventManager {
 	private static EventManager _instance = null;
-	public static EventManager Instance {
+	private static EventManager Instance {
 		get {
-			if (_instance == null) {
-				_instance = new EventManager();
-			}
-			return _instance;
+			return _instance == null ? _instance = new EventManager() : _instance;
 		}
 	}
 
@@ -19,7 +16,9 @@ public class EventManager {
 
 	private Dictionary<Type, Delegate> delegates = new Dictionary<Type, Delegate>();
 
-	public void AddListener<T>(EventDelegate<T> del) where T : GameEvent {
+	public static void AddListener<T>(EventDelegate<T> del) where T : GameEvent {
+		Dictionary<Type, Delegate> delegates = Instance.delegates;
+
 		if (delegates.ContainsKey(typeof(T))) {
 			Delegate tempDel = delegates[typeof(T)];
 
@@ -29,7 +28,9 @@ public class EventManager {
 		}
 	}
 
-	public void RemoveListener<T>(EventDelegate<T> del) where T : GameEvent {
+	public static void RemoveListener<T>(EventDelegate<T> del) where T : GameEvent {
+		Dictionary<Type, Delegate> delegates = Instance.delegates;
+
 		if (delegates.ContainsKey(typeof(T))) {
 			Delegate currentDel = Delegate.Remove(delegates[typeof(T)], del);
 
@@ -41,12 +42,13 @@ public class EventManager {
 		}
 	}
 
-	public void Raise(GameEvent e) {
+	public static void Raise(GameEvent e) {
 		if (e == null) {
 			Debug.Log("Invalid event argument: " + e.GetType().ToString());
 			return;
 		}
 
+		Dictionary<Type, Delegate> delegates = Instance.delegates;
 		if (delegates.ContainsKey(e.GetType())) {
 			delegates[e.GetType()].DynamicInvoke(e);
 		}

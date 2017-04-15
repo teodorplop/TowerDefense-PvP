@@ -18,4 +18,8 @@ public static class InputScanner {
 	public static bool CheckForUI(Vector3 mousePosition) {
 		return EventSystem.current == null ? false : EventSystem.current.IsPointerOverGameObject();
 	}
+
+	public static bool IsOverUI() {
+		return CheckForUI(Input.mousePosition);
+	}
 }

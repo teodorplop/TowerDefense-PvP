@@ -16,7 +16,7 @@ namespace Interface {
 		}
 
 		public void OnPress() {
-			EventManager.Instance.Raise(new TowerConstructionEvent(_tower));
+			EventManager.Raise(new TowerConstructionEvent(_tower));
 		}
 	}
 }
