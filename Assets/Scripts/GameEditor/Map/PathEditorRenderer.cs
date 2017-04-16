@@ -34,6 +34,11 @@ namespace GameEditor {
 		}
 
 		public void DisplayPath(PathDescriptionEditor path) {
+			if (path == null) {
+				Resize(0);
+				return;
+			}
+
 			List<Vector2i> points = path.Points;
 
 			Resize(points.Count);

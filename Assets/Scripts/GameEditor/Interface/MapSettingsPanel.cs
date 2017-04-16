@@ -9,12 +9,9 @@ namespace GameEditor.Interface {
 		private IntLabel _columnsLabel;
 
 		private GameEditorManager _gameManager;
-		void Awake() {
-			_gameManager = FindObjectOfType<GameEditorManager>();
-		}
-
 		private MapDescriptionEditor _mapDescription;
-		public void Inject(MapDescriptionEditor mapDescription) {
+		public void Inject(GameEditorManager gameManager, MapDescriptionEditor mapDescription) {
+			_gameManager = gameManager;
 			_mapDescription = mapDescription;
 
 			_rowsLabel.value = _mapDescription.rows;

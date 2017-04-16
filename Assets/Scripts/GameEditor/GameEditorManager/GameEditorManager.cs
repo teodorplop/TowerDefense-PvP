@@ -61,7 +61,7 @@ namespace GameEditor {
 
 		private void Initialized() {
 			// Initialize UI
-			FindObjectOfType<EditorUIManager>().Inject(_mapDescription);
+			FindObjectOfType<EditorUIManager>().Inject(this, _mapDescription);
 
 			// Initialize state machine
 			SetState(GameEditorState.MapEditor);

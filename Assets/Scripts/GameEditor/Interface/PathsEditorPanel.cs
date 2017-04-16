@@ -16,12 +16,12 @@ namespace GameEditor.Interface {
 			_pathPrefab.gameObject.SetActive(false);
 			_pathsIndex = 0;
 			_paths = new List<PathButtonUI>();
-			_gameManager = FindObjectOfType<GameEditorManager>();
 			_pathsTabGroup.OnSelectionChangedEvent += OnSelectedPathChangedEvent;
 		}
 
 		private MapDescriptionEditor _mapDescription;
-		public void Inject(MapDescriptionEditor mapDescription) {
+		public void Inject(GameEditorManager gameManager, MapDescriptionEditor mapDescription) {
+			_gameManager = gameManager;
 			_mapDescription = mapDescription;
 		}
 
@@ -51,8 +51,12 @@ namespace GameEditor.Interface {
 		}
 
 		private void OnSelectedPathChangedEvent(Tab tab) {
-			string path = tab.GetComponent<PathButtonUI>().PathName;
-			_gameManager.SetSelectedPath(path);
+			if (tab != null) {
+				string path = tab.GetComponent<PathButtonUI>().PathName;
+				_gameManager.SetSelectedPath(path);
+			} else {
+				_gameManager.SetSelectedPath("");
+			}
 		}
 	}
 }

@@ -31,9 +31,14 @@ namespace GameEditor {
 
 		private PathDescriptionEditor _selectedPath;
 		public void SetSelectedPath(string pathName) {
-			PathDescriptionEditor path = _mapDescription.GetPath(pathName) as PathDescriptionEditor;
-			_selectedPath = path;
-			_pathRenderer.DisplayPath(_selectedPath);
+			if (string.IsNullOrEmpty(pathName)) {
+				_selectedPath = null;
+				_pathRenderer.DisplayPath(_selectedPath);
+			} else {
+				PathDescriptionEditor path = _mapDescription.GetPath(pathName) as PathDescriptionEditor;
+				_selectedPath = path;
+				_pathRenderer.DisplayPath(_selectedPath);
+			}
 		}
 	}
 }

@@ -51,6 +51,8 @@ namespace Interface {
 
 			if (tab == selectedTab && tabs.Count >= 1) {
 				Select(tabs[0]);
+			} else if (OnSelectionChangedEvent != null) {
+				OnSelectionChangedEvent(null);
 			}
 		}
 		
