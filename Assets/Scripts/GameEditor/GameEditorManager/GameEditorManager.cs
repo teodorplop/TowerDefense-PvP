@@ -46,7 +46,7 @@ namespace GameEditor {
 			SetState(evt.State);
 		}
 
-		IEnumerator Initialize() {
+		private IEnumerator Initialize() {
 			GameResources.LoadAll();
 
 			AsyncOperation uiScene = SceneManager.LoadSceneAsync("EditorUI", LoadSceneMode.Additive);
@@ -59,8 +59,7 @@ namespace GameEditor {
 
 		private void Initialized() {
 			// Initialize UI
-			FindObjectOfType<MapSettingsPanel>().Initialize(_mapDescription);
-			//FindObjectOfType<SaveSettingsPanel>().Initialize(_mapDescription);
+			FindObjectOfType<EditorUIManager>().Inject(_mapDescription);
 
 			// Initialize state machine
 			SetState(GameEditorState.MapEditor);

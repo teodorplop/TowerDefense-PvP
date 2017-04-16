@@ -10,7 +10,7 @@ namespace GameEditor.Interface {
 
 		private bool _initialized;
 		private MapDescriptionEditor _mapDescription;
-		public void Initialize(MapDescriptionEditor mapDescription) {
+		public void Inject(MapDescriptionEditor mapDescription) {
 			_mapDescription = mapDescription;
 
 			_rowsLabel.value = _mapDescription.rows;

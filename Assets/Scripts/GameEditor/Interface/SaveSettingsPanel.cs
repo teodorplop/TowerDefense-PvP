@@ -7,7 +7,7 @@ namespace GameEditor.Interface {
 		private TMP_InputField _mapNameInputField;
 		
 		private MapDescription _mapDescription;
-		public void Initialize(MapDescription mapDescription) {
+		public void Inject(MapDescription mapDescription) {
 			_mapDescription = mapDescription;
 		}
 		
