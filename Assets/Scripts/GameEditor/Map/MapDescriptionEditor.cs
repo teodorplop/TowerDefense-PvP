@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameEditor {
 	public class MapDescriptionEditor : MapDescription {
 		public MapDescriptionEditor(int rows, int columns) {
-			_tiles = new List<List<TileDescription>>();
 			Resize(rows, columns);
 		}
-
-		public delegate void OnResizeHandler();
-		public event OnResizeHandler OnResizeEvent;
-
 		public void Resize(int rows, int columns) {
 			if (rows < _tiles.Count) {
 				_tiles.RemoveRange(rows, _tiles.Count - rows);
@@ -28,10 +24,13 @@ namespace GameEditor {
 					}
 				}
 			}
+		}
 
-			if (OnResizeEvent != null) {
-				OnResizeEvent();
-			}
+		public void AddPath(string pathName) {
+			_paths.Add(pathName, new PathDescriptionEditor());
+		}
+		public void RemovePath(string pathName) {
+			_paths.Remove(pathName);
 		}
 	}
 }

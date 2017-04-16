@@ -6,15 +6,10 @@ namespace GameEditor {
 
 		public override void Initialize(MapDescription mapDescription) {
 			base.Initialize(mapDescription);
-
 			_mapDescriptionEditor = mapDescription as MapDescriptionEditor;
-			_mapDescriptionEditor.OnResizeEvent += OnResized;
-		}
-		void OnDestroy() {
-			_mapDescriptionEditor.OnResizeEvent -= OnResized;
 		}
 
-		private void OnResized() {
+		public void OnMapResized() {
 			if (_mapDescription.rows < _tiles.Count) {
 				for (int i = _mapDescription.rows; i < _tiles.Count; ++i) {
 					foreach (TileRenderer tr in _tiles[i]) {

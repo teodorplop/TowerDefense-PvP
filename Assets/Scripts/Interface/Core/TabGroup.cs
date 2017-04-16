@@ -22,13 +22,19 @@ namespace Interface {
         }
 
         private void Select(Tab tab) {
-            if (selectedTab != null) {
-                selectedTab.Deselect();
-            }
-            selectedTab = tab;
-            if (selectedTab != null) {
-                selectedTab.Select();
-            }
+			if (selectedTab != tab) {
+				if (selectedTab != null) {
+					selectedTab.Deselect();
+				}
+				selectedTab = tab;
+				if (selectedTab != null) {
+					selectedTab.Select();
+				}
+
+				if (OnSelectionChangedEvent != null) {
+					OnSelectionChangedEvent(tab);
+				}
+			}
         }
 
 		public void AddTab(Tab tab) {
@@ -47,5 +53,8 @@ namespace Interface {
 				Select(tabs[0]);
 			}
 		}
+		
+		public delegate void OnSelectionChanged(Tab tab);
+		public event OnSelectionChanged OnSelectionChangedEvent;
     }
 }

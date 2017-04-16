@@ -32,8 +32,8 @@ public partial class GameManager : MonoBehaviour {
 
 		FindObjectOfType<MapRenderer>().Initialize(_mapDescription);
 
-		InputContext context = new InputContext(OnMouseDown, OnMouseUp, OnMouse);
-		FindObjectOfType<InputManager>().PushContext(context);
+		//InputContext context = new InputContext(OnMouseDown, OnMouseUp, OnMouse);
+		//FindObjectOfType<InputManager>().PushContext(context);
 
 		EventManager.AddListener<TowerConstructionEvent>(OnTowerConstruction);
 

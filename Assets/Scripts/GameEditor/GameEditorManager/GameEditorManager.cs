@@ -22,10 +22,12 @@ namespace GameEditor {
 
 		private InputManager _inputManager;
 		private MapEditorRenderer _mapRenderer;
+		private PathEditorRenderer _pathRenderer;
 		private MapDescriptionEditor _mapDescription;
 		void Start() {
 			_inputManager = FindObjectOfType<InputManager>();
 			_mapRenderer = FindObjectOfType<MapEditorRenderer>();
+			_pathRenderer = FindObjectOfType<PathEditorRenderer>();
 			_mapDescription = new MapDescriptionEditor(_mapRows, _mapColumns);
 
 			SetState(GameEditorState.None);
@@ -80,10 +82,14 @@ namespace GameEditor {
 		}
 
 		private InputContext GenerateInputContext(GameEditorState state) {
-			Action<Vector3> onMouseDown = ConfigureDelegate<Action<Vector3>>(state, "HandleMouseDown", None_HandleMouseDown);
-			Action<Vector3> onMouseUp = ConfigureDelegate<Action<Vector3>>(state, "HandleMouseUp", None_HandleMouseUp);
-			Action<Vector3> onMouse = ConfigureDelegate<Action<Vector3>>(state, "HandleMouse", None_HandleMouse);
-			return new InputContext(onMouseDown, onMouseUp, onMouse);
+			InputContext inputContext = new InputContext();
+
+			inputContext.onMouseDown = ConfigureDelegate<Action<int, Vector3>>(state, "HandleMouseDown", None_HandleMouseDown);
+			inputContext.onMouseUp = ConfigureDelegate<Action<int, Vector3>>(state, "HandleMouseUp", None_HandleMouseUp);
+			inputContext.onMouse = ConfigureDelegate<Action<int, Vector3>>(state, "HandleMouse", None_HandleMouse);
+			inputContext.onKey = ConfigureDelegate<Action>(state, "HandleKey", None_HandleKey);
+
+			return inputContext;
 		}
 	}
 }

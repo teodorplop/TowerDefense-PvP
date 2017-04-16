@@ -3,22 +3,17 @@ using System;
 using System.Collections.Generic;
 
 public class InputContext {
-	private static void DoNothing(Vector3 v3) { }
+	private static void DoNothing(int m, Vector3 v) { }
+	private static void DoNothing() { }
 
-	private Action<Vector3> _onMouseDown;
-	public Action<Vector3> OnMouseDown { get { return _onMouseDown; } }
-	private Action<Vector3> _onMouseUp;
-	public Action<Vector3> OnMouseUp { get { return _onMouseUp; } }
-	private Action<Vector3> _onMouse;
-	public Action<Vector3> OnMouse { get { return _onMouse; } }
+	public Action<int, Vector3> onMouseDown;
+	public Action<int, Vector3> onMouseUp;
+	public Action<int, Vector3> onMouse;
+	public Action onKey;
 
 	public InputContext() {
-		_onMouseDown = _onMouseUp = _onMouse = DoNothing;
-	}
-	public InputContext(Action<Vector3> onMouseDown, Action<Vector3> onMouseUp, Action<Vector3> onMouse) {
-		_onMouseDown = onMouseDown != null ? onMouseDown : DoNothing;
-		_onMouseUp = onMouseUp != null ? onMouseUp : DoNothing;
-		_onMouse = onMouse != null ? onMouse : DoNothing;
+		onMouseDown = onMouseUp = onMouse = DoNothing;
+		onKey = DoNothing;
 	}
 }
 
@@ -39,15 +34,18 @@ public class InputManager : MonoBehaviour {
 
 		InputContext context = ActiveContext;
 
-		if (Input.GetMouseButtonDown(0)) {
-			context.OnMouseDown(mousePosition);
+		for (int i = 0; i < 3; ++i) {
+			if (Input.GetMouseButtonDown(i)) {
+				context.onMouseDown(i, mousePosition);
+			}
+			if (Input.GetMouseButton(i)) {
+				context.onMouse(i, mousePosition);
+			}
+			if (Input.GetMouseButtonUp(i)) {
+				context.onMouseUp(i, mousePosition);
+			}
 		}
-		if (Input.GetMouseButton(0)) {
-			context.OnMouse(mousePosition);
-		}
-		if (Input.GetMouseButtonUp(0)) {
-			context.OnMouseUp(mousePosition);
-		}
+		context.onKey();
 	}
 
 	public void PushContext(InputContext context) {

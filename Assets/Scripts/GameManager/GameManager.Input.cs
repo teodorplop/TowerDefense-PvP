@@ -22,19 +22,19 @@ public partial class GameManager {
 		}
 	}
 
-	private void OnMouseDown(Vector3 mousePosition) {
+	private void OnMouseDown(int mouseButton, Vector3 mousePosition) {
 		TileRenderer target = InputScanner.ScanFor<TileRenderer>(mousePosition, 1 << 8);
 		if (target != null && target.Tile.tileType == TileType.Constructable) {
 			SelectTile(target);
 		}
 	}
-	private void OnMouse(Vector3 mousePosition) {
+	private void OnMouse(int mouseButton, Vector3 mousePosition) {
 		TileRenderer target = InputScanner.ScanFor<TileRenderer>(mousePosition, 1 << 8);
 		if (target != _selected) {
 			SelectTile(null);
 		}
 	}
-	private void OnMouseUp(Vector3 mousePosition) {
+	private void OnMouseUp(int mouseButton, Vector3 mousePosition) {
 		TileRenderer target = InputScanner.ScanFor<TileRenderer>(mousePosition, 1 << 8);
 		if (target != _selected) {
 			SelectTile(null);

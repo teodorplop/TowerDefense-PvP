@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class MapRenderer : MonoBehaviour {
 	[SerializeField]
 	protected TileRenderer _prefab;
-	[SerializeField]
-	protected Vector3 _offset;
 
 	protected MapDescription _mapDescription;
 	protected List<List<TileRenderer>> _tiles;
@@ -27,8 +25,7 @@ public class MapRenderer : MonoBehaviour {
 		}
 	}
 	private Vector3 GetPositionForTile(int row, int column) {
-		Vector3 offset = new Vector3((column - 1) * _offset.x, 0, (row - 1) * _offset.z);
-		return new Vector3(offset.x + column, 0, offset.z + row);
+		return new Vector3(column, 0, row);
 	}
 	protected TileRenderer InstantiateTileRenderer(TileDescription tile, int row, int column) {
 		TileRenderer tr = Instantiate(_prefab);
