@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace Pathfinding {
-	public class Grid : MonoBehaviour {
-		[SerializeField]
+	public class Grid {
 		private float _nodeRadius;
-
 		private float _nodeDiameter;
 
 		private Rect _worldRectangle;
@@ -12,11 +11,13 @@ namespace Pathfinding {
 		private Node[,] _grid;
 		public Node[,] Nodes { get { return _grid; } }
 
-		void Awake() {
-			_nodeDiameter = _nodeRadius * 2;
+		public Grid(float nodeRadius, TerrainInfo terrain) {
+			_nodeRadius = nodeRadius;
+			_nodeDiameter = nodeRadius * 2;
+			CreateGrid(terrain);
 		}
 
-		public void CreateGrid(TerrainInfo terrain) {
+		private void CreateGrid(TerrainInfo terrain) {
 			_worldRectangle = terrain.WorldRectangle;
 			Vector3 worldBottomLeft = new Vector3(_worldRectangle.xMin, 0, _worldRectangle.yMin);
 			_gridSizeX = Mathf.RoundToInt(_worldRectangle.size.x / _nodeDiameter);
@@ -45,14 +46,5 @@ namespace Pathfinding {
 
 			return _grid[x, y];
 		}
-
-		/*void OnDrawGizmos() {
-			if (_grid != null) {
-				foreach (Node n in _grid) {
-					Gizmos.color = n.walkable ? Color.white : Color.red;
-					Gizmos.DrawCube(n.worldPosition, Vector3.one * (_nodeDiameter - .1f));
-				}
-			}
-		}*/
 	}
 }

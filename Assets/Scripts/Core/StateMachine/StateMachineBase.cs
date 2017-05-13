@@ -7,7 +7,7 @@ using System.Reflection;
 /// </summary>
 public abstract class StateMachineBase : MonoBehaviour {
 	protected StateMachineHandler _stateMachineHandler;
-	void Awake() {
+	protected void Awake() {
 		_stateMachineHandler = gameObject.AddComponent<StateMachineHandler>();
 	}
 

@@ -4,15 +4,17 @@ using System.Collections.Generic;
 
 public class InputContext {
 	private static void DoNothing(int m, Vector3 v) { }
+	private static void DoNothing(Vector3 v) { }
 	private static void DoNothing() { }
 
 	public Action<int, Vector3> onMouseDown;
 	public Action<int, Vector3> onMouseUp;
-	public Action<int, Vector3> onMouse;
+	public Action<Vector3> onMouse;
 	public Action onKey;
 
 	public InputContext() {
-		onMouseDown = onMouseUp = onMouse = DoNothing;
+		onMouseDown = onMouseUp = DoNothing;
+		onMouse = DoNothing;
 		onKey = DoNothing;
 	}
 }
@@ -34,12 +36,10 @@ public class InputManager : MonoBehaviour {
 
 		InputContext context = ActiveContext;
 
+		context.onMouse(mousePosition);
 		for (int i = 0; i < 3; ++i) {
 			if (Input.GetMouseButtonDown(i)) {
 				context.onMouseDown(i, mousePosition);
-			}
-			if (Input.GetMouseButton(i)) {
-				context.onMouse(i, mousePosition);
 			}
 			if (Input.GetMouseButtonUp(i)) {
 				context.onMouseUp(i, mousePosition);
