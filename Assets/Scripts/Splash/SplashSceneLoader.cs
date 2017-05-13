@@ -8,6 +8,10 @@ public class SplashSceneLoader : MonoBehaviour {
 	[SerializeField]
 	private string _worldScene;
 
+	void Start() {
+		StartCoroutine(LoadScenes());
+	}
+
 	protected IEnumerator LoadScenes() {
 		AsyncOperation uiScene = SceneManager.LoadSceneAsync(_uiScene, LoadSceneMode.Additive);
 		AsyncOperation worldScene = SceneManager.LoadSceneAsync(_worldScene, LoadSceneMode.Additive);

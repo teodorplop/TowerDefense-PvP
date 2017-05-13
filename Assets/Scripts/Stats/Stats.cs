@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Utils.Linq;
-using MoonSharp.Interpreter;
 
-[MoonSharpUserData]
 public class Stats {
 	private Dictionary<string, float> _baseStats;
 
