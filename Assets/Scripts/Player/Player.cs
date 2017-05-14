@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Pathfinding;
+using Utils.Linq;
+using UnityEngine;
 
 public class Player {
 	private string _name;
@@ -52,5 +54,12 @@ public class Player {
 	}
 	public void Unregister(Monster monster) {
 		_monsters.Remove(monster);
+	}
+
+	public List<Tower> GetTowersInRange(Vector3 position, float radius) {
+		return _towers.Where(obj => Vector3.Distance(obj.transform.position, position) <= radius).ToList();
+	}
+	public List<Monster> GetMonstersInRange(Vector3 position, float radius) {
+		return _monsters.Where(obj => Vector3.Distance(obj.transform.position, position) <= radius).ToList();
 	}
 }
