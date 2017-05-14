@@ -10,6 +10,7 @@ namespace Interface.towershop {
 		}
 
 		public override void OnPress() {
+			GameManager.Instance.HandleRequest(new SellTowerRequest(_tower.name));
 		}
 	}
 }

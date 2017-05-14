@@ -9,6 +9,9 @@ public partial class GameManager : StateMachineBase {
 		TowerSelected
 	}
 
+	private static GameManager _instance;
+	public static GameManager Instance { get { return _instance; } }
+
 	[SerializeField]
 	private LayerMask _towerMask;
 	[SerializeField]
@@ -17,17 +20,25 @@ public partial class GameManager : StateMachineBase {
 	private UIManager _uiManager;
 	private InputManager _inputManager;
 	private TerrainInfo _terrain;
+	private TowerFactory _towerFactory;
+
+	private RequestDispatcher _dispatcher;
 	private Grid _grid;
 	private Pathfinder _pathfinder;
 	protected new void Awake() {
 		base.Awake();
 
+		_instance = this;
 		_uiManager = FindObjectOfType<UIManager>();
 		_inputManager = FindObjectOfType<InputManager>();
 		_terrain = FindObjectOfType<TerrainInfo>();
+		_towerFactory = FindObjectOfType<TowerFactory>();
+
+		InitializeHandlers();
 	}
 
 	void Start() {
+		_dispatcher = new RequestDispatcher();
 		_grid = new Grid(_gridNodeRadius, _terrain);
 		_pathfinder = new Pathfinder(_grid);
 
@@ -41,6 +52,8 @@ public partial class GameManager : StateMachineBase {
 			_stateMachineHandler.SetState(state, this);
 
 			_inputManager.PushContext(GenerateInputContext(state));
+
+			_dispatcher.SetHandlers(GetHandlers(state));
 		}
 	}
 
@@ -53,5 +66,16 @@ public partial class GameManager : StateMachineBase {
 		input.onKey = ConfigureDelegate<Action>(state, "HandleKey", None_HandleKey);
 
 		return input;
+	}
+
+	private ActionHandler[] GetHandlers(GameState state) {
+		return ConfigureField(state, "ActionHandlers", None_ActionHandlers);
+	}
+
+	private void InitializeHandlers() {
+		ActionHandler upgradeTower = new UpgradeTowerHandler();
+		ActionHandler sellTower = new SellTowerHandler();
+
+		Idle_ActionHandlers = new ActionHandler[] { upgradeTower, sellTower };
 	}
 }
