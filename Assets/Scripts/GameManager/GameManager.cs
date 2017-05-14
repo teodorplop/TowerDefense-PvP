@@ -6,13 +6,15 @@ public partial class GameManager : StateMachineBase {
 	public enum GameState {
 		None,
 		Idle,
-		ConstructionSelected,
 		TowerSelected
 	}
 
 	[SerializeField]
+	private LayerMask _towerMask;
+	[SerializeField]
 	private float _gridNodeRadius;
 
+	private UIManager _uiManager;
 	private InputManager _inputManager;
 	private TerrainInfo _terrain;
 	private Grid _grid;
@@ -20,6 +22,7 @@ public partial class GameManager : StateMachineBase {
 	protected new void Awake() {
 		base.Awake();
 
+		_uiManager = FindObjectOfType<UIManager>();
 		_inputManager = FindObjectOfType<InputManager>();
 		_terrain = FindObjectOfType<TerrainInfo>();
 	}

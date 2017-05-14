@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
 public class Tower : MonoBehaviour {
-	protected float _timer;
-
-	// We used fixed update to make sure towers attack at regular intervals.
-	protected virtual void FixedUpdate() {
-		_timer += Time.fixedDeltaTime;
-	}
+	[SerializeField]
+	private string[] _upgrades;
+	public string[] Upgrades { get { return _upgrades; } }
 }
