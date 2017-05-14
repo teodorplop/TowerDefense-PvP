@@ -8,7 +8,10 @@ public partial class GameManager {
 
 		public override void Execute() {
 			SellTowerRequest request = _request as SellTowerRequest;
-			Instance._towerFactory.DestroyTower(request.Tower);
+			Instance._uiManager.ShowUpgrades(null);
+
+			Player player = Instance.GetPlayer(request.Player);
+			player.TowerFactory.DestroyTower(player, request.Tower);
 		}
 	}
 }

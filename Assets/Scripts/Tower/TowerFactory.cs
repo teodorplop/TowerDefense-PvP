@@ -5,19 +5,20 @@ public class TowerFactory : MonoBehaviour {
 	[SerializeField]
 	private Tower[] _towerPrefabs;
 
-	private void ChangeTower(string tower, string upgrade) {
+	private Tower ChangeTower(Player player, string tower, string upgrade) {
 		Transform towerTr = transform.FindChild(tower);
 		if (towerTr == null) {
 			Debug.LogError("Cannot find tower " + tower, gameObject);
-			return;
+			return null;
 		}
 
 		Tower upgradePrefab = _towerPrefabs.Find(obj => obj.name == upgrade);
 		if (upgradePrefab == null) {
 			Debug.LogError("Cannot find upgrade " + upgrade, gameObject);
-			return;
+			return null;
 		}
 
+		player.Unregister(towerTr.GetComponent<Tower>());
 		Vector3 position = towerTr.position;
 		Destroy(towerTr.gameObject);
 
@@ -25,13 +26,16 @@ public class TowerFactory : MonoBehaviour {
 		upgradeTower.transform.SetParent(transform);
 		upgradeTower.transform.localScale = Vector3.one;
 		upgradeTower.transform.position = position;
+		player.Register(upgradeTower);
+
+		return upgradeTower;
 	}
 
-	public void UpgradeTower(string tower, string upgrade) {
-		ChangeTower(tower, upgrade);
+	public Tower UpgradeTower(Player player, string tower, string upgrade) {
+		return ChangeTower(player, tower, upgrade);
 	}
 
-	public void DestroyTower(string tower) {
-		ChangeTower(tower, "Tower");
+	public Tower DestroyTower(Player player, string tower) {
+		return ChangeTower(player, tower, "Tower");
 	}
 }

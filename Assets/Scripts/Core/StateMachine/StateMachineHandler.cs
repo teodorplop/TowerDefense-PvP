@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
-/// <summary>
-/// StateMachine with instant transitions. Override SetState of this to be able to animate transitions.
-/// </summary>
 public class StateMachineHandler : MonoBehaviour {
 	private class GameState {
-		public Action EnterState;
-		public Action ExitState;
+		public Func<IEnumerator> EnterState;
+		public Func<IEnumerator> ExitState;
 
-		public static void DoNothing() {}
+		public static IEnumerator DoNothing() { yield return null; }
 
-		public GameState(Action enterState, Action exitState) {
+		public GameState(Func<IEnumerator> enterState, Func<IEnumerator> exitState) {
 			EnterState = enterState;
 			ExitState = exitState;
 		}
@@ -27,10 +25,7 @@ public class StateMachineHandler : MonoBehaviour {
 		_currentState = new GameState();
 	}
 	
-	/// <summary>
-	/// Changes the state of a certain state machine.
-	/// </summary>
-	public virtual void SetState(Enum state, StateMachineBase callingObject) {
+	public void SetState(Enum state, StateMachineBase callingObject) {
 		GameState oldGameState = _currentState;
 
 		// Set object state to an empty one
@@ -38,10 +33,11 @@ public class StateMachineHandler : MonoBehaviour {
 		_currentState = _emptyState;
 
 		// Create the new state
-		Action enterState = callingObject.ConfigureDelegate<Action>(state, "EnterState", GameState.DoNothing);
-		Action exitState = callingObject.ConfigureDelegate<Action>(state, "ExitState", GameState.DoNothing);
+		Func<IEnumerator> enterState = callingObject.ConfigureDelegate<Func<IEnumerator>>(state, "EnterState", GameState.DoNothing);
+		Func<IEnumerator> exitState = callingObject.ConfigureDelegate<Func<IEnumerator>>(state, "ExitState", GameState.DoNothing);
 		GameState newGameState = new GameState(enterState, exitState);
 
+		StartCoroutine(ChangeState(state, callingObject, oldGameState, newGameState));
 		// Exit old state
 		oldGameState.ExitState();
 		// Enter new state
@@ -50,5 +46,13 @@ public class StateMachineHandler : MonoBehaviour {
 		// Current state is now the new state
 		callingObject.currentState = state;
 		_currentState = newGameState;
+	}
+
+	private IEnumerator ChangeState(Enum state, StateMachineBase callingObject, GameState oldState, GameState newState) {
+		yield return StartCoroutine(oldState.ExitState());
+		yield return StartCoroutine(newState.EnterState());
+
+		callingObject.currentState = state;
+		_currentState = newState;
 	}
 }

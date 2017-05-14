@@ -5,6 +5,7 @@ using Pathfinding;
 public partial class GameManager : StateMachineBase {
 	public enum GameState {
 		None,
+		Loading,
 		Idle,
 		TowerSelected
 	}
@@ -16,33 +17,30 @@ public partial class GameManager : StateMachineBase {
 	private LayerMask _towerMask;
 	[SerializeField]
 	private float _gridNodeRadius;
-
+	[SerializeField]
+	private Wallet _wallet;
+	
 	private UIManager _uiManager;
 	private InputManager _inputManager;
-	private TerrainInfo _terrain;
-	private TowerFactory _towerFactory;
-
 	private RequestDispatcher _dispatcher;
-	private Grid _grid;
-	private Pathfinder _pathfinder;
+
 	protected new void Awake() {
 		base.Awake();
 
 		_instance = this;
 		_uiManager = FindObjectOfType<UIManager>();
 		_inputManager = FindObjectOfType<InputManager>();
-		_terrain = FindObjectOfType<TerrainInfo>();
-		_towerFactory = FindObjectOfType<TowerFactory>();
 
 		InitializeHandlers();
+	}
+	void OnDestroy() {
+		_instance = null;
 	}
 
 	void Start() {
 		_dispatcher = new RequestDispatcher();
-		_grid = new Grid(_gridNodeRadius, _terrain);
-		_pathfinder = new Pathfinder(_grid);
 
-		SetState(GameState.Idle);
+		SetState(GameState.Loading);
 	}
 
 	private void SetState(GameState state) {
