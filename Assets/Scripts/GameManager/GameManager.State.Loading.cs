@@ -3,30 +3,27 @@ using UnityEngine;
 using Pathfinding;
 
 public partial class GameManager {
-	private Player _clientPlayer, _serverPlayer;
-	public Player ClientPlayer { get { return _clientPlayer; } }
-	public Player ServerPlayer { get { return _serverPlayer; } }
-	public Player GetPlayer(string name) {
-		if (_clientPlayer.Name == name) {
-			return _clientPlayer;
-		}
-		if (_serverPlayer.Name == name) {
-			return _serverPlayer;
-		}
-		Debug.LogError("Player with name " + name + " not found.");
-		return null;
-	}
-
 	IEnumerator Loading_EnterState() {
+		TerrainInfo terrain = FindObjectOfType<TerrainInfo>();
+		Grid grid = new Grid(_gridNodeRadius, terrain);
+		Pathfinder pathfinder = new Pathfinder(grid);
+
 		GameObject playerContainer = GameObject.Find("PlayerContainer");
-		_clientPlayer = GeneratePlayer(playerContainer, "ClientPlayer", true);
+		Player clientPlayer = GeneratePlayer(playerContainer, "ClientPlayer", true);
 
-		/*playerContainer = Instantiate(playerContainer);
-		playerContainer.transform.position = new Vector3(55.0f, 0.0f, 0.0f);
+		playerContainer = Instantiate(playerContainer);
 		playerContainer.transform.localScale = Vector3.one;
-		_serverPlayer = GeneratePlayer(playerContainer, "ServerPlayer", false);*/
+		playerContainer.transform.position = new Vector3(55.0f, 0.0f, 0.0f);
+		Player serverPlayer = GeneratePlayer(playerContainer, "ServerPlayer", false);
 
-		_uiManager.Inject(_clientPlayer.Wallet);
+		Players.Register(clientPlayer);
+		Players.Register(serverPlayer);
+
+		// We may want to have one pathfinder for each player, in case we want dynamic pathfinding.
+		PathRequestManager.Register(clientPlayer, pathfinder);
+		PathRequestManager.Register(serverPlayer, pathfinder);
+
+		_uiManager.Inject(clientPlayer.Wallet);
 
 		yield return null;
 
@@ -36,20 +33,14 @@ public partial class GameManager {
 	private Player GeneratePlayer(GameObject container, string name, bool clientPlayer) {
 		container.name = name;
 
-		Grid grid = new Grid(_gridNodeRadius, container.GetComponentInChildren<TerrainInfo>());
-		Pathfinder pathfinder = new Pathfinder(grid);
-		TowerFactory towerFactory = container.GetComponentInChildren<TowerFactory>();
-		MonsterFactory monsterFactory = container.GetComponentInChildren<MonsterFactory>();
-		PathsContainer pathsContainer = container.GetComponentInChildren<PathsContainer>();
-
-		Player player = new Player(name, clientPlayer, Wallet.Clone(_wallet), pathsContainer, pathfinder, towerFactory);
+		Player player = new Player(name, clientPlayer, Wallet.Clone(_wallet), container.transform);
 		
-		Tower[] towers = towerFactory.GetComponentsInChildren<Tower>();
+		Tower[] towers = container.GetComponentsInChildren<Tower>();
 		foreach (Tower tower in towers) {
 			player.Register(tower);
 		}
 
-		_wavesManager.Register(player, monsterFactory);
+		_wavesManager.Register(player);
 
 		return player;
 	}

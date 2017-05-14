@@ -4,6 +4,11 @@ using UnityEngine;
 public class MonsterFactory : MonoBehaviour {
 	[SerializeField]
 	private Monster[] _monsterPrefabs;
+	private PathsContainer _pathsContainer;
+
+	void Awake() {
+		_pathsContainer = FindObjectOfType<PathsContainer>();
+	}
 
 	public Monster SendMonster(Player player, string monsterName, int count, string path) {
 		Monster prefab = _monsterPrefabs.Find(obj => obj.name == monsterName);
@@ -13,10 +18,10 @@ public class MonsterFactory : MonoBehaviour {
 		}
 
 		Monster monster = Instantiate(prefab);
-		monster.transform.SetParent(transform);
+		monster.transform.SetParent(player.Transform);
 		monster.transform.localScale = Vector3.one;
-		monster.SetPath(player.PathsContainer.GetPath(path));
 		player.Register(monster);
+		monster.SetPath(_pathsContainer.GetPath(path));
 
 		return monster;
 	}

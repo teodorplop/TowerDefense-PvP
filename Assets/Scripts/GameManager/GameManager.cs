@@ -23,6 +23,7 @@ public partial class GameManager : StateMachineBase {
 	private UIManager _uiManager;
 	private InputManager _inputManager;
 	private WavesManager _wavesManager;
+	private TowerFactory _towerFactory;
 	private RequestDispatcher _dispatcher;
 
 	protected new void Awake() {
@@ -32,16 +33,18 @@ public partial class GameManager : StateMachineBase {
 		_uiManager = FindObjectOfType<UIManager>();
 		_inputManager = FindObjectOfType<InputManager>();
 		_wavesManager = FindObjectOfType<WavesManager>();
+		_towerFactory = FindObjectOfType<TowerFactory>();
+
+		_dispatcher = new RequestDispatcher();
 
 		InitializeHandlers();
 	}
 	void OnDestroy() {
+		Players.OnDestroy();
 		_instance = null;
 	}
 
 	void Start() {
-		_dispatcher = new RequestDispatcher();
-
 		SetState(GameState.Loading);
 	}
 

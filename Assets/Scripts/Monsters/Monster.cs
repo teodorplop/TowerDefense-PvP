@@ -7,20 +7,26 @@ public class Monster : MonoBehaviour {
 
 	public void SetPath(Vector3[] path) {
 		_path = path;
-		transform.position = _path[0];
+		transform.position = _path[0] + owner.WorldOffset;
 		_pathIndex = 0;
 	}
 
 	void FixedUpdate() {
-		float distanceFromTarget = Vector3.Distance(transform.position, _path[_pathIndex]);
+		Vector3 position = transform.position - owner.WorldOffset;
+
+		float distanceFromTarget = Vector3.Distance(position, _path[_pathIndex]);
 		if (distanceFromTarget <= 1.0f) {
 			++_pathIndex;
 
 			if (_pathIndex < _path.Length) {
-				//Vector3[] wayPoints = owner.Pathfinder.FindPath(transform.position, _path[_pathIndex]);
+				PathRequestManager.RequestPath(owner, position, _path[_pathIndex], FindPathCallback);
 			} else {
 				Debug.Log("Reached destination");
 			}
 		}
+	}
+
+	private void FindPathCallback(bool success, Vector3[] waypoints) {
+
 	}
 }

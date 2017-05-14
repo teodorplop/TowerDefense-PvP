@@ -8,10 +8,10 @@ public partial class GameManager {
 
 		public override void Execute() {
 			UpgradeTowerRequest request = _request as UpgradeTowerRequest;
-			Instance._uiManager.ShowUpgrades(null);
+			_instance._uiManager.ShowUpgrades(null);
 
-			Player player = Instance.GetPlayer(request.Player);
-			player.TowerFactory.UpgradeTower(player, request.Tower, request.Upgrade);
+			Player player = Players.GetPlayer(request.Player);
+			_instance._towerFactory.UpgradeTower(player, request.Tower, request.Upgrade);
 		}
 	}
 }

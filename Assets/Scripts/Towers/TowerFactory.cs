@@ -6,7 +6,7 @@ public class TowerFactory : MonoBehaviour {
 	private Tower[] _towerPrefabs;
 
 	private Tower ChangeTower(Player player, string tower, string upgrade) {
-		Transform towerTr = transform.FindChild(tower);
+		Transform towerTr = player.Transform.FindChild(tower);
 		if (towerTr == null) {
 			Debug.LogError("Cannot find tower " + tower, gameObject);
 			return null;
@@ -23,7 +23,7 @@ public class TowerFactory : MonoBehaviour {
 		Destroy(towerTr.gameObject);
 
 		Tower upgradeTower = Instantiate(upgradePrefab);
-		upgradeTower.transform.SetParent(transform);
+		upgradeTower.transform.SetParent(player.Transform);
 		upgradeTower.transform.localScale = Vector3.one;
 		upgradeTower.transform.position = position;
 		player.Register(upgradeTower);

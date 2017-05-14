@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 using Utils.Linq;
 
 namespace Pathfinding {
@@ -18,10 +19,29 @@ namespace Pathfinding {
 				return new Vector3[0];
 			}
 
-			return SimplifyPath(FindPath(startNode, targetNode));
+			bool success;
+			return SimplifyPath(FindPath(startNode, targetNode, out success));
 		}
 
-		private List<Node> FindPath(Node startNode, Node targetNode) {
+		public void FindPath(Vector3 start, Vector3 target, Action<bool, Vector3[]> callback) {
+			Node startNode = _grid.WorldPointToNode(start);
+			Node targetNode = _grid.WorldPointToNode(target);
+
+			if (!startNode.Walkable || !targetNode.Walkable) {
+				if (callback != null) {
+					callback(false, new Vector3[0]);
+				}
+				return;
+			}
+
+			bool success;
+			Vector3[] path = SimplifyPath(FindPath(startNode, targetNode, out success));
+			if (callback != null) {
+				callback(success, path);
+			}
+		}
+
+		private List<Node> FindPath(Node startNode, Node targetNode, out bool success) {
 			Heap<Node> openSet = new Heap<Node>(_grid.Size);
 			HashSet<Node> closedSet = new HashSet<Node>();
 			openSet.Add(startNode);
@@ -31,7 +51,8 @@ namespace Pathfinding {
 				closedSet.Add(currentNode);
 
 				if (currentNode == targetNode) {
-					return RetracePath(startNode, targetNode); ;
+					success = true;
+					return RetracePath(startNode, targetNode);
 				}
 
 				List<Node> neighbours = _grid.GetNeighbours(currentNode);
@@ -53,6 +74,7 @@ namespace Pathfinding {
 				}
 			}
 
+			success = false;
 			return new List<Node>();
 		}
 

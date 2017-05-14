@@ -7,7 +7,10 @@ public partial class GameManager {
 
 	private void Idle_HandleMouseDown(int mouse, Vector3 position) {
 		Tower tower = InputScanner.ScanFor<Tower>(position, _towerMask);
-		if (tower == null || tower.owner == _clientPlayer) {
+		if (tower != null && tower.owner != Players.ClientPlayer) {
+			// TODO: Show something else here.
+			_uiManager.ShowUpgrades(null);
+		} else {
 			_uiManager.ShowUpgrades(tower);
 		}
 	} 
