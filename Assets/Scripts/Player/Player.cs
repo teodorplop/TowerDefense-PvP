@@ -13,6 +13,10 @@ public class Player {
 	private Wallet _wallet;
 	public Wallet Wallet { get { return _wallet; } }
 
+	// TODO: Player does not need to retain a paths container.
+	private PathsContainer _pathsContainer;
+	public PathsContainer PathsContainer { get { return _pathsContainer; } }
+
 	// TODO: Player does not need to retain a pathfinder.
 	private Pathfinder _pathfinder;
 	public Pathfinder Pathfinder { get { return _pathfinder; } }
@@ -26,10 +30,11 @@ public class Player {
 	private List<Monster> _monsters;
 	public List<Monster> Monsters { get { return _monsters; } }
 
-	public Player(string name, bool clientPlayer, Wallet wallet, Pathfinder pathfinder, TowerFactory towerFactory) {
+	public Player(string name, bool clientPlayer, Wallet wallet, PathsContainer pathsContainer, Pathfinder pathfinder, TowerFactory towerFactory) {
 		_name = name;
 		_clientPlayer = clientPlayer;
 		_wallet = wallet;
+		_pathsContainer = pathsContainer;
 		_pathfinder = pathfinder;
 		_towerFactory = towerFactory;
 
@@ -45,14 +50,13 @@ public class Player {
 		tower.owner = null;
 		_towers.Remove(tower);
 	}
-	public Tower GetTower(string name) {
-		return _towers.Find(obj => obj.name == name);
-	}
 
 	public void Register(Monster monster) {
+		monster.owner = this;
 		_monsters.Add(monster);
 	}
 	public void Unregister(Monster monster) {
+		monster.owner = null;
 		_monsters.Remove(monster);
 	}
 

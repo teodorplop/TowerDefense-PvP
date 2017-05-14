@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 
 namespace Utils.Linq {
+	public static class ListExtensions {
+		public static void Swap<T>(this IList<T> list, int x, int y) {
+			T aux = list[x];
+			list[x] = list[y];
+			list[y] = aux;
+		}
+	}
+
 	public static class IEnumerableExtensions {
 		/// <summary>
 		/// Returns all elements of a sequence which satisfy a condition.

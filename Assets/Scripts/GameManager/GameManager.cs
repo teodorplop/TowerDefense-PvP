@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using Pathfinding;
+using Ingame.waves;
 
 public partial class GameManager : StateMachineBase {
 	public enum GameState {
@@ -22,6 +22,7 @@ public partial class GameManager : StateMachineBase {
 	
 	private UIManager _uiManager;
 	private InputManager _inputManager;
+	private WavesManager _wavesManager;
 	private RequestDispatcher _dispatcher;
 
 	protected new void Awake() {
@@ -30,6 +31,7 @@ public partial class GameManager : StateMachineBase {
 		_instance = this;
 		_uiManager = FindObjectOfType<UIManager>();
 		_inputManager = FindObjectOfType<InputManager>();
+		_wavesManager = FindObjectOfType<WavesManager>();
 
 		InitializeHandlers();
 	}

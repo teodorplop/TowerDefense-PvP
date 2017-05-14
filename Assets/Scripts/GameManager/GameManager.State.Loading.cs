@@ -39,13 +39,17 @@ public partial class GameManager {
 		Grid grid = new Grid(_gridNodeRadius, container.GetComponentInChildren<TerrainInfo>());
 		Pathfinder pathfinder = new Pathfinder(grid);
 		TowerFactory towerFactory = container.GetComponentInChildren<TowerFactory>();
+		MonsterFactory monsterFactory = container.GetComponentInChildren<MonsterFactory>();
+		PathsContainer pathsContainer = container.GetComponentInChildren<PathsContainer>();
 
-		Player player = new Player(name, clientPlayer, Wallet.Clone(_wallet), pathfinder, towerFactory);
+		Player player = new Player(name, clientPlayer, Wallet.Clone(_wallet), pathsContainer, pathfinder, towerFactory);
 		
 		Tower[] towers = towerFactory.GetComponentsInChildren<Tower>();
 		foreach (Tower tower in towers) {
 			player.Register(tower);
 		}
+
+		_wavesManager.Register(player, monsterFactory);
 
 		return player;
 	}
