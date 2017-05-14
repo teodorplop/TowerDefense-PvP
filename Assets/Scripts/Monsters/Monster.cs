@@ -27,6 +27,6 @@ public class Monster : MonoBehaviour {
 	}
 
 	private void FindPathCallback(bool success, Vector3[] waypoints) {
-
+		Debug.Log("Damn!");
 	}
 }

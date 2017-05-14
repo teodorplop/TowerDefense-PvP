@@ -38,10 +38,9 @@ public class PathRequestManager : MonoBehaviour {
 	}
 
 	public static void RequestPath(Player player, Vector3 start, Vector3 target, Action<bool, Vector3[]> callback) {
-		ThreadStart thread = delegate {
-			_instance._pathfinders[player].FindPath(start, target, (success, path) => FindPathCallback(success, path, callback));
-		};
-		thread.Invoke();
+		// TODO: Proper thread here.
+
+		_instance._pathfinders[player].FindPath(start, target, (success, path) => FindPathCallback(success, path, callback));
 	}
 
 	private static void FindPathCallback(bool success, Vector3[] path, Action<bool, Vector3[]> callback) {
