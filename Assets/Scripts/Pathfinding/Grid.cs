@@ -17,6 +17,7 @@ namespace Pathfinding {
 			_nodeRadius = nodeRadius;
 			_nodeDiameter = nodeRadius * 2;
 			CreateGrid(terrain);
+			BlurPenalties(3);
 		}
 
 		private void CreateGrid(TerrainInfo terrain) {
@@ -32,9 +33,60 @@ namespace Pathfinding {
 					float forwardOffset = y * _nodeDiameter + _nodeRadius;
 					Vector3 worldPoint = worldBottomLeft + new Vector3(rightOffset, 0, forwardOffset);
 
-					_grid[x, y] = new Node(x, y, terrain.IsWalkable(worldPoint), worldPoint);
+					_grid[x, y] = new Node(x, y, terrain.GetMovementPenalty(worldPoint), worldPoint);
 				}
 			}
+		}
+
+		private void BlurPenalties(int blurSize) {
+			int kernelSize = blurSize * 2 + 1;
+			int matrixSize = kernelSize * kernelSize;
+
+			int[,] horizontalPass = BlurHorizontal(blurSize, kernelSize);
+			int[,] verticalPass = BlurVertical(horizontalPass, blurSize, kernelSize);
+
+			for (int x = 0; x < _gridSizeX; ++x) {
+				for (int y = 0; y < _gridSizeY; ++y) {
+					_grid[x, y].movementPenalty = Mathf.RoundToInt((float)verticalPass[x, y] / matrixSize);
+				}
+			}
+		}
+
+		private int[,] BlurHorizontal(int blurSize, int kernelSize) {
+			int[,] horizontalPass = new int[_gridSizeX, _gridSizeY];
+			for (int y = 0; y < _gridSizeY; ++y) {
+				// Calculate first column value
+				horizontalPass[0, y] = (blurSize + 1) * _grid[0, y].movementPenalty;
+				for (int x = 1; x <= blurSize; ++x) {
+					horizontalPass[0, y] += _grid[x, y].movementPenalty;
+				}
+
+				for (int x = 1; x < _gridSizeX; ++x) {
+					int removeIndex = Mathf.Max(x - blurSize - 1, 0);
+					int addIndex = Mathf.Min(x + blurSize, _gridSizeX - 1);
+					horizontalPass[x, y] = horizontalPass[x - 1, y] - _grid[removeIndex, y].movementPenalty + _grid[addIndex, y].movementPenalty;
+				}
+			}
+
+			return horizontalPass;
+		}
+		private int[,] BlurVertical(int[,] horizontalPass, int blurSize, int kernelSize) {
+			int[,] verticalPass = new int[_gridSizeX, _gridSizeY];
+			for (int x = 0; x < _gridSizeX; ++x) {
+				// Calculate first row value
+				verticalPass[x, 0] = (blurSize + 1) * horizontalPass[x, 0];
+				for (int y = 1; y <= blurSize; ++y) {
+					verticalPass[x, 0] += horizontalPass[x, y];
+				}
+
+				for (int y = 1; y < _gridSizeY; ++y) {
+					int removeIndex = Mathf.Max(y - blurSize - 1, 0);
+					int addIndex = Mathf.Min(y + blurSize, _gridSizeY - 1);
+					verticalPass[x, y] = verticalPass[x, y - 1] - horizontalPass[x, removeIndex] + horizontalPass[x, addIndex];
+				}
+			}
+
+			return verticalPass;
 		}
 
 		public Node WorldPointToNode(Vector3 worldPoint) {

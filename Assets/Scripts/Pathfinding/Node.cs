@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
-using System;
 
 namespace Pathfinding {
 	public class Node : IHeapItem<Node> {
 		private int _gridX, _gridY;
-		private bool _walkable;
+		// this needs to be public so it can be modified by the grid blur algorithm
+		public int movementPenalty;
 		private Vector3 _worldPosition;
 
 		public int GridX { get { return _gridX; } }
 		public int GridY { get { return _gridY; } }
-		public bool Walkable { get { return _walkable; } }
+		public bool Walkable { get { return movementPenalty != -1; } }
 		public Vector3 WorldPosition { get { return _worldPosition; } }
 
-		public Node(int x, int y, bool walkable, Vector3 worldPosition) {
+		public Node(int x, int y, int movementPenalty, Vector3 worldPosition) {
 			_gridX = x;
 			_gridY = y;
-			_walkable = walkable;
+			this.movementPenalty = movementPenalty;
 			_worldPosition = worldPosition;
 		}
 		

@@ -46,6 +46,7 @@ public abstract class StateMachineBase : MonoBehaviour {
 	[HideInInspector] private Action DoOnMouseExit = DoNothing;
 	[HideInInspector] private Action DoOnMouseDrag = DoNothing;
 	[HideInInspector] private Action DoOnGUI = DoNothing;
+	[HideInInspector] private Action DoOnDrawGizmos = DoNothing;
 	#endregion
 
 	#region configuration
@@ -66,6 +67,7 @@ public abstract class StateMachineBase : MonoBehaviour {
 		DoOnMouseDrag = DoNothing;
 		DoOnMouseExit = DoNothing;
 		DoOnGUI = DoNothing;
+		DoOnDrawGizmos = DoNothing;
 
 		useGUILayout = false;
 	}
@@ -86,6 +88,7 @@ public abstract class StateMachineBase : MonoBehaviour {
 		DoOnMouseDrag = ConfigureDelegate<Action>(_currentState, "OnMouseDrag", DoNothing);
 		DoOnMouseExit = ConfigureDelegate<Action>(_currentState, "OnMouseExit", DoNothing);
 		DoOnGUI = ConfigureDelegate<Action>(_currentState, "OnGUI", DoNothing);
+		DoOnDrawGizmos = ConfigureDelegate<Action>(_currentState, "OnDrawGizmos", DoNothing);
 
 		useGUILayout = DoOnGUI != DoNothing;
 	}
@@ -158,6 +161,9 @@ public abstract class StateMachineBase : MonoBehaviour {
 	}
 	void OnGUI() {
 		DoOnGUI();
+	}
+	void OnDrawGizmos() {
+		DoOnDrawGizmos();
 	}
 	#endregion
 }

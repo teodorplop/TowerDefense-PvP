@@ -3,6 +3,9 @@
 public partial class Monster : StateMachineBase {
 	public enum MonsterState { Idle, Walking }
 
+	[SerializeField]
+	private bool _debug;
+
 	private int _pathIndex;
 	private Vector3[] _path;
 	public Player owner;

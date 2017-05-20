@@ -24,4 +24,19 @@ public partial class Monster {
 		Vector3 currentWaypoint = _waypoints[_waypointIndex] + owner.WorldOffset;
 		transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, _movementSpeed * Time.fixedDeltaTime);
 	}
+
+	void Walking_OnDrawGizmos() {
+		if (_debug) {
+			for (int i = _waypointIndex; i < _waypoints.Length; ++i) {
+				Gizmos.color = Color.black;
+				Gizmos.DrawCube(_waypoints[i], Vector3.one);
+
+				if (i == _waypointIndex) {
+					Gizmos.DrawLine(transform.position, _waypoints[i] + owner.WorldOffset);
+				} else {
+					Gizmos.DrawLine(_waypoints[i - 1] + owner.WorldOffset, _waypoints[i] + owner.WorldOffset);
+				}
+			}
+		}
+	}
 }

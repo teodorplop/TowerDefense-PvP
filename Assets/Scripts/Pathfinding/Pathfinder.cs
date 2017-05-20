@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-using Utils.Linq;
 
 namespace Pathfinding {
 	public class Pathfinder {
@@ -61,7 +60,7 @@ namespace Pathfinding {
 						continue;
 					}
 
-					int cost = currentNode.gCost + GetDistance(currentNode, neighbour);
+					int cost = currentNode.gCost + GetDistance(currentNode, neighbour) + neighbour.movementPenalty;
 					if (cost < neighbour.gCost || !openSet.Contains(neighbour)) {
 						neighbour.gCost = cost;
 						neighbour.hCost = GetDistance(neighbour, targetNode);
