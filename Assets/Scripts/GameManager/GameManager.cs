@@ -51,11 +51,12 @@ public partial class GameManager : StateMachineBase {
 	private void SetState(GameState state) {
 		if (currentState == null || (GameState)currentState != state) {
 			_inputManager.PopContext();
+			_dispatcher.SetHandlers(None_ActionHandlers);
 
 			_stateMachineHandler.SetState(state, this);
 
+			// These should be performed only after we entered state. But meh... Wharever.
 			_inputManager.PushContext(GenerateInputContext(state));
-
 			_dispatcher.SetHandlers(GetHandlers(state));
 		}
 	}

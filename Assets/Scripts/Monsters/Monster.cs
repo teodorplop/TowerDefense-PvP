@@ -1,32 +1,25 @@
 ﻿using UnityEngine;
 
-public class Monster : MonoBehaviour {
+public partial class Monster : StateMachineBase {
+	public enum MonsterState { Idle, Walking }
+
 	private int _pathIndex;
 	private Vector3[] _path;
 	public Player owner;
 
+	void Start() {
+		SetState(MonsterState.Idle);
+	}
+
 	public void SetPath(Vector3[] path) {
 		_path = path;
 		transform.position = _path[0] + owner.WorldOffset;
-		_pathIndex = 0;
+		_pathIndex = 1;
 	}
 
-	void FixedUpdate() {
-		Vector3 position = transform.position - owner.WorldOffset;
-
-		float distanceFromTarget = Vector3.Distance(position, _path[_pathIndex]);
-		if (distanceFromTarget <= 1.0f) {
-			++_pathIndex;
-
-			if (_pathIndex < _path.Length) {
-				PathRequestManager.RequestPath(owner, position, _path[_pathIndex], FindPathCallback);
-			} else {
-				Debug.Log("Reached destination");
-			}
+	private void SetState(MonsterState state) {
+		if (currentState == null || (MonsterState)currentState != state) {
+			_stateMachineHandler.SetState(state, this);
 		}
-	}
-
-	private void FindPathCallback(bool success, Vector3[] waypoints) {
-		Debug.Log("Damn!");
 	}
 }

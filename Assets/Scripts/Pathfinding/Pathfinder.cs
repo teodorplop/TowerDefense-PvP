@@ -89,6 +89,7 @@ namespace Pathfinding {
 				}
 				directionOld = directionNew;
 			}
+
 			return waypoints.ToArray();
 		}
 

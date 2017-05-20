@@ -38,14 +38,6 @@ public class StateMachineHandler : MonoBehaviour {
 		GameState newGameState = new GameState(enterState, exitState);
 
 		StartCoroutine(ChangeState(state, callingObject, oldGameState, newGameState));
-		// Exit old state
-		oldGameState.ExitState();
-		// Enter new state
-		newGameState.EnterState();
-
-		// Current state is now the new state
-		callingObject.currentState = state;
-		_currentState = newGameState;
 	}
 
 	private IEnumerator ChangeState(Enum state, StateMachineBase callingObject, GameState oldState, GameState newState) {
