@@ -7,6 +7,8 @@ namespace Pathfinding {
 		[SerializeField]
 		private float _nodeRadius;
 		[SerializeField]
+		private int _gridBlurSize;
+		[SerializeField]
 		private DebugType _debugType;
 
 		private TerrainInfo _terrainInfo;
@@ -23,7 +25,7 @@ namespace Pathfinding {
 		}
 
 		void Start() {
-			_grid = new Grid(_nodeRadius, _terrainInfo);
+			_grid = new Grid(_nodeRadius, _gridBlurSize, _terrainInfo);
 			_pathfinder = new Pathfinder(_grid);
 
 			_minPenalty = _maxPenalty = _grid.NodeGrid[0, 0].movementPenalty;

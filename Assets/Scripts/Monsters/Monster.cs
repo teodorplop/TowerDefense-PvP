@@ -17,6 +17,7 @@ public partial class Monster : StateMachineBase {
 	public void SetPath(Vector3[] path) {
 		_path = path;
 		transform.position = _path[0] + owner.WorldOffset;
+		transform.LookAt(_path[1] + owner.WorldOffset);
 		_pathIndex = 1;
 	}
 

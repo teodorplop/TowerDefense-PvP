@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Pathfinding;
 
 public partial class Monster {
 	private bool _pathRequested = false;
@@ -25,8 +26,8 @@ public partial class Monster {
 			return;
 		}
 
-		_waypoints = waypoints;
 		_waypointIndex = 0;
+		_waypointsPath = new Path(waypoints, transform.position - owner.WorldOffset, 5.0f);
 		SetState(MonsterState.Walking);
 	}
 }

@@ -5,7 +5,7 @@ using Pathfinding;
 public partial class GameManager {
 	IEnumerator Loading_EnterState() {
 		TerrainInfo terrain = FindObjectOfType<TerrainInfo>();
-		Grid grid = new Grid(_gridNodeRadius, terrain);
+		Grid grid = new Grid(_gridNodeRadius, _gridBlurSize, terrain);
 		Pathfinder pathfinder = new Pathfinder(grid);
 
 		GameObject playerContainer = GameObject.Find("PlayerContainer");

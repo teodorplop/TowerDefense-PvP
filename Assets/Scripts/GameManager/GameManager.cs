@@ -16,7 +16,9 @@ public partial class GameManager : StateMachineBase {
 	[SerializeField]
 	private LayerMask _towerMask;
 	[SerializeField]
-	private float _gridNodeRadius;
+	private float _gridNodeRadius = 0.75f;
+	[SerializeField]
+	private int _gridBlurSize = 3;
 	[SerializeField]
 	private Wallet _wallet;
 	

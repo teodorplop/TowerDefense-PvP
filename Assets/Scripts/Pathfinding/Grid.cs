@@ -5,6 +5,7 @@ namespace Pathfinding {
 	public class Grid {
 		private float _nodeRadius;
 		private float _nodeDiameter;
+		private int _blurSize;
 
 		private Rect _worldRectangle;
 		private int _gridSizeX, _gridSizeY;
@@ -13,11 +14,12 @@ namespace Pathfinding {
 
 		public int Size { get { return _gridSizeX * _gridSizeY; } }
 
-		public Grid(float nodeRadius, TerrainInfo terrain) {
+		public Grid(float nodeRadius, int blurSize, TerrainInfo terrain) {
 			_nodeRadius = nodeRadius;
 			_nodeDiameter = nodeRadius * 2;
+			_blurSize = blurSize;
 			CreateGrid(terrain);
-			BlurPenalties(3);
+			BlurPenalties(_blurSize);
 		}
 
 		private void CreateGrid(TerrainInfo terrain) {
