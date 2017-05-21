@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 public class OffensiveTower : Tower {
+	public enum TowerState { Construction, Active }
+
 	[SerializeField, Tooltip("Attacks per second")]
 	private float _attackSpeed;
 	[SerializeField, Tooltip("Attack radius in world units")]
@@ -15,7 +17,9 @@ public class OffensiveTower : Tower {
 	private float _timeBetweenAttacks;
 	private Monster _target;
 
-	void Awake() {
+	protected new void Awake() {
+		base.Awake();
+
 		_attackTimer = _timeBetweenAttacks = 1.0f / _attackSpeed;
 	}
 
