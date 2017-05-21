@@ -8,6 +8,8 @@ public class OffensiveTower : Tower {
 	private float _radius;
 	[SerializeField]
 	private float _attackDamage;
+	[SerializeField]
+	private bool _debug;
 
 	private float _attackTimer;
 	private float _timeBetweenAttacks;
@@ -21,8 +23,11 @@ public class OffensiveTower : Tower {
 		_attackTimer = _timeBetweenAttacks;
 	}
 
+	protected bool TargetIsStillValid() {
+		return _target != null && !_target.IsDead && Vector3.Distance(_target.transform.position, transform.position) <= _radius;
+	}
 	protected virtual void UpdateTarget() {
-		if (_target == null || Vector3.Distance(_target.transform.position, transform.position) > _radius) {
+		if (!TargetIsStillValid()) {
 			_target = null;
 
 			List<Monster> monsters = owner.GetMonstersInRange(transform.position, _radius);
@@ -46,6 +51,12 @@ public class OffensiveTower : Tower {
 			if (_target) {
 				OnAttack(_target);
 			}
+		}
+	}
+
+	void OnDrawGizmos() {
+		if (_debug) {
+			Gizmos.DrawWireSphere(transform.position, _radius);
 		}
 	}
 }

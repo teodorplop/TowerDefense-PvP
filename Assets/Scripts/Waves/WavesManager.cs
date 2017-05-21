@@ -76,8 +76,8 @@ namespace Ingame.waves {
 		}
 
 		private void SendMonsters(List<WaveMonster> monsters) {
-			for (int i = 0; i < _players.Count; ++i) {
-				foreach (WaveMonster monster in monsters) {
+			foreach (WaveMonster monster in monsters) {
+				for (int i = 0; i < _players.Count; ++i) {
 					_monsterFactory.SendMonster(_players[i], monster.name, monster.count, monster.path);
 				}
 			}

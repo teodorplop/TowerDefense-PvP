@@ -11,6 +11,11 @@ public partial class Monster {
 	private Path _waypointsPath;
 
 	void Walking_FixedUpdate() {
+		if (_waypointIndex == _waypointsPath.turnBoundaries.Length) {
+			// We passed through all our waypoints, so we finish movement here.
+			return;
+		}
+
 		Vector3 position = transform.position - owner.WorldOffset;
 		Vector2 position2D = new Vector2(position.x, position.z);
 
@@ -19,7 +24,11 @@ public partial class Monster {
 
 			if (_waypointIndex == _waypointsPath.turnBoundaries.Length) {
 				++_pathIndex;
-				SetState(MonsterState.Idle);
+				if (_pathIndex == _path.Length) {
+					SetState(MonsterState.Destination);
+				} else {
+					RequestPath();
+				}
 				return;
 			}
 		}

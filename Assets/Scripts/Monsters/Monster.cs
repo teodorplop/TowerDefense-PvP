@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public partial class Monster : StateMachineBase {
-	public enum MonsterState { Idle, Walking }
+	public enum MonsterState { Idle, Walking, Destination, Dead }
 
 	[SerializeField]
 	private bool _debug;
