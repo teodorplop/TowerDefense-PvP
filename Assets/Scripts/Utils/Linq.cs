@@ -83,6 +83,16 @@ namespace Utils.Linq {
 			return sum;
 		}
 
+		public static int Count<T>(this IEnumerable<T> source, Func<T, bool> predicate) {
+			int count = 0;
+			foreach (T t in source) {
+				if (predicate(t)) {
+					++count;
+				}
+			}
+			return count;
+		}
+
 		/// <summary>
 		/// Determines whether a sequence contains a certain item.
 		/// </summary>

@@ -7,6 +7,9 @@ public partial class Monster {
 
 	IEnumerator Destination_EnterState() {
 		_reachedDestination = true;
+
+		GameManager.Instance.ReachedDestination(this);
+
 		yield return null;
 	}
 }

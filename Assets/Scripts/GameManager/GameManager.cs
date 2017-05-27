@@ -8,7 +8,8 @@ public partial class GameManager : StateMachineBase {
 		None,
 		Loading,
 		Idle,
-		TowerSelected
+		TowerSelected,
+		GameEnded
 	}
 
 	private static GameManager _instance;
