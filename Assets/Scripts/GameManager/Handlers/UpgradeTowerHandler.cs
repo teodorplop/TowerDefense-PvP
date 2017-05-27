@@ -17,7 +17,7 @@ public partial class GameManager {
 				_instance._towerFactory.UpgradeTower(player, request.Tower, request.Upgrade, cost);
 
 				_instance._uiManager.Refresh();
-				_instance._uiManager.ShowUpgrades(null);
+				_instance._uiManager.ShowUpgrades(null, null);
 
 				_instance.SetState(GameState.Idle);
 			} else {

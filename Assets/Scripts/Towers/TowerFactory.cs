@@ -85,16 +85,14 @@ namespace Ingame.towers {
 
 		public float GetSellValue(Player player, string tower) {
 			Tower towerObj = player.Transform.FindChild(tower).GetComponent<Tower>();
-			int idx = _towerPrefabs.IndexOf(obj => obj.name == towerObj.GetType().Name);
-			return _towerAttributes[idx].sellValue;
+			return towerObj.SellValue;
 		}
 
 		public int GetSellCost(Player player, string tower) {
 			Tower towerObj = player.Transform.FindChild(tower).GetComponent<Tower>();
-			int prefabIdx = _towerPrefabs.IndexOf(obj => obj.name == towerObj.GetType().Name);
 			int spotIdx = _towerSpotsWealth.IndexOf(obj => obj.first == GetTowerSpotName(player, tower));
 
-			return Mathf.FloorToInt(_towerAttributes[prefabIdx].sellValue * _towerAttributes[spotIdx].cost);
+			return Mathf.FloorToInt(towerObj.SellValue * _towerAttributes[spotIdx].cost);
 		}
 
 		#region utils

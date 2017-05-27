@@ -16,8 +16,8 @@ public class UIManager : MonoBehaviour {
 		_walletUI.Inject(wallet);
 	}
 
-	public void ShowUpgrades(Tower tower) {
-		_towerShop.ShowUpgrades(tower);
+	public void ShowUpgrades(TowerFactory towerFactory, Tower tower) {
+		_towerShop.ShowUpgrades(towerFactory, tower);
 	}
 
 	public void Refresh() {

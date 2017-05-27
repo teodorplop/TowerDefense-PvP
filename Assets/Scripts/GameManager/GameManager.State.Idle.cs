@@ -9,13 +9,13 @@ public partial class GameManager {
 	private void Idle_HandleMouseDown(int mouse, Vector3 position) {
 		Tower tower = InputScanner.ScanFor<Tower>(position, _towerMask);
 		if (tower == null) {
-			_uiManager.ShowUpgrades(null);
+			_uiManager.ShowUpgrades(null, null);
 		} else if (tower.owner == Players.ClientPlayer) {
 			SetState(GameState.TowerSelected);
-			_uiManager.ShowUpgrades(tower);
+			_uiManager.ShowUpgrades(_towerFactory, tower);
 		} else {
 			// TODO: Show something else here.
-			_uiManager.ShowUpgrades(null);
+			_uiManager.ShowUpgrades(null, null);
 		}
 	} 
 }

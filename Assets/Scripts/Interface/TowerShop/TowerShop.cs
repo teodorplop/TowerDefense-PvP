@@ -27,7 +27,7 @@ namespace Interface.towershop {
 			obj.gameObject.SetActive(true);
 			return obj;
 		}
-		public void ShowUpgrades(Tower tower) {
+		public void ShowUpgrades(TowerFactory towerFactory, Tower tower) {
 			Clear();
 
 			if (tower == null) {
@@ -38,7 +38,7 @@ namespace Interface.towershop {
 				TowerElement prefab = _prefabs.Find(obj => obj.name == upg);
 				if (prefab != null) {
 					TowerElement obj = InstantiatePrefab(prefab);
-					obj.Inject(tower);
+					obj.Inject(towerFactory, tower);
 
 					_elements.Add(obj);
 				} else {

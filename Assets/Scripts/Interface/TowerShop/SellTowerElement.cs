@@ -3,11 +3,10 @@ using Ingame.towers;
 
 namespace Interface.towershop {
 	public class SellTowerElement : TowerElement {
-		[SerializeField]
-		private IntLabel _sellValueLabel;
+		public override void Inject(TowerFactory factory, Tower tower) {
+			base.Inject(factory, tower);
 
-		public override void Inject(Tower tower) {
-			base.Inject(tower);
+			_valueLabel.value = factory.GetSellCost(tower.owner, tower.name);
 		}
 
 		public override void OnPress() {

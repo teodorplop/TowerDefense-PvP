@@ -7,6 +7,7 @@ namespace Ingame.towers {
 
 		[SerializeField]
 		protected TowerAttributes _attributes;
+		public float SellValue { get { return _attributes.sellValue; } }
 		public string[] Upgrades { get { return _attributes.upgrades; } }
 
 		public Player owner;
