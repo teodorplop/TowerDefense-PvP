@@ -4,19 +4,8 @@ using Pathfinding;
 using Ingame.towers;
 
 public partial class GameManager {
-	private static readonly string _walletPath = "Wallet";
-
-	private Wallet LoadWallet() {
-		TextAsset asset = Resources.Load<TextAsset>(System.IO.Path.Combine(_walletPath, "Wallet"));
-		if (asset == null) {
-			Debug.LogError("Could not find wallet in Resources.");
-			return null;
-		}
-		return JsonSerializer.Deserialize<Wallet>(asset.text);
-	}
-
 	IEnumerator Loading_EnterState() {
-		Wallet wallet = LoadWallet();
+		Wallet wallet = GameResources.LoadWallet();
 
 		TerrainInfo terrain = FindObjectOfType<TerrainInfo>();
 		Grid grid = new Grid(_gridNodeRadius, _gridBlurSize, terrain);

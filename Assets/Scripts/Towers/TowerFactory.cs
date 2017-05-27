@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
 using Utils.Linq;
-using System.IO;
-using System.Collections.Generic;
 
 namespace Ingame.towers {
 	public class TowerFactory : MonoBehaviour {
-		private static readonly string _towerAttributesPath = "TowerAttributes";
-
 		[SerializeField]
 		private Tower[] _towerPrefabs;
 		private TowerAttributes[] _towerAttributes;
@@ -15,13 +11,7 @@ namespace Ingame.towers {
 		void Awake() {
 			_towerAttributes = new TowerAttributes[_towerPrefabs.Length];
 			for (int i = 0; i < _towerPrefabs.Length; ++i) {
-				TextAsset asset = Resources.Load<TextAsset>(Path.Combine(_towerAttributesPath, _towerPrefabs[i].name));
-				if (asset == null) {
-					Debug.LogError("Could not find tower attributes for " + _towerPrefabs[i].name);
-				} else {
-					_towerAttributes[i] = JsonSerializer.Deserialize<TowerAttributes>(asset.text);
-					Resources.UnloadAsset(asset);
-				}
+				_towerAttributes[i] = GameResources.LoadTowerAttributes(_towerPrefabs[i].name);
 			}
 		}
 
