@@ -21,8 +21,6 @@ public partial class GameManager : StateMachineBase {
 	private float _gridNodeRadius = 0.75f;
 	[SerializeField]
 	private int _gridBlurSize = 3;
-	[SerializeField]
-	private Wallet _wallet;
 	
 	private UIManager _uiManager;
 	private InputManager _inputManager;

@@ -4,18 +4,31 @@ using Pathfinding;
 using Ingame.towers;
 
 public partial class GameManager {
+	private static readonly string _walletPath = "Wallet";
+
+	private Wallet LoadWallet() {
+		TextAsset asset = Resources.Load<TextAsset>(System.IO.Path.Combine(_walletPath, "Wallet"));
+		if (asset == null) {
+			Debug.LogError("Could not find wallet in Resources.");
+			return null;
+		}
+		return JsonSerializer.Deserialize<Wallet>(asset.text);
+	}
+
 	IEnumerator Loading_EnterState() {
+		Wallet wallet = LoadWallet();
+
 		TerrainInfo terrain = FindObjectOfType<TerrainInfo>();
 		Grid grid = new Grid(_gridNodeRadius, _gridBlurSize, terrain);
 		Pathfinder pathfinder = new Pathfinder(grid);
 
 		GameObject playerContainer = GameObject.Find("PlayerContainer");
-		Player clientPlayer = GeneratePlayer(playerContainer, "ClientPlayer", true);
+		Player clientPlayer = GeneratePlayer(playerContainer, wallet.Clone(), "ClientPlayer", true);
 
 		playerContainer = Instantiate(playerContainer);
 		playerContainer.transform.localScale = Vector3.one;
 		playerContainer.transform.position = new Vector3(55.0f, 0.0f, 0.0f);
-		Player serverPlayer = GeneratePlayer(playerContainer, "ServerPlayer", false);
+		Player serverPlayer = GeneratePlayer(playerContainer, wallet.Clone(), "ServerPlayer", false);
 
 		// We may want to have one pathfinder for each player, in case we want dynamic pathfinding.
 		PathRequestManager.Register(clientPlayer, pathfinder);
@@ -31,10 +44,10 @@ public partial class GameManager {
 		SetState(GameState.Idle);
 	}
 
-	private Player GeneratePlayer(GameObject container, string name, bool clientPlayer) {
+	private Player GeneratePlayer(GameObject container, Wallet wallet, string name, bool clientPlayer) {
 		container.name = name;
 
-		Player player = new Player(name, clientPlayer, Wallet.Clone(_wallet), container.transform);
+		Player player = new Player(name, clientPlayer, wallet, container.transform);
 		
 		Tower[] towers = container.GetComponentsInChildren<Tower>();
 		foreach (Tower tower in towers) {
