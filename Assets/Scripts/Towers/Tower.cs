@@ -2,6 +2,8 @@
 using System;
 
 public class Tower : StateMachineBase {
+	protected static readonly float _constructionTime = 1.0f;
+
 	[SerializeField]
 	private string[] _upgrades;
 	public string[] Upgrades { get { return _upgrades; } }

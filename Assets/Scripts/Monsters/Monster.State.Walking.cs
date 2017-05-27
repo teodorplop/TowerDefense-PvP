@@ -3,9 +3,9 @@ using Pathfinding;
 
 public partial class Monster {
 	[SerializeField]
-	private float _movementSpeed;
+	private float _movementSpeed = 5.0f;
 	[SerializeField]
-	private float _turnSpeed;
+	private float _turnSpeed = 5.0f;
 	
 	private int _waypointIndex;
 	private Path _waypointsPath;

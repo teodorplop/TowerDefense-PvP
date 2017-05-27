@@ -6,8 +6,6 @@ public partial class Monster {
 	public bool ReachedDestination { get { return _reachedDestination; } }
 
 	IEnumerator Destination_EnterState() {
-		Debug.Log("Reached destination", gameObject);
-
 		_reachedDestination = true;
 		yield return null;
 	}

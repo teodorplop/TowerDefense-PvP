@@ -4,6 +4,9 @@ using UnityEngine;
 public class MonsterFactory : MonoBehaviour {
 	[SerializeField]
 	private Monster[] _monsterPrefabs;
+	[SerializeField]
+	private MonsterUI _monsterUIPrefab;
+
 	private PathsContainer _pathsContainer;
 
 	void Awake() {
@@ -22,6 +25,11 @@ public class MonsterFactory : MonoBehaviour {
 		monster.transform.localScale = Vector3.one;
 		player.Register(monster);
 		monster.SetPath(_pathsContainer.GetPath(path));
+
+		MonsterUI monsterUI = Instantiate(_monsterUIPrefab);
+		monsterUI.transform.SetParent(player.Transform);
+		monsterUI.transform.localScale = _monsterUIPrefab.transform.localScale;
+		monsterUI.Inject(monster);
 
 		return monster;
 	}

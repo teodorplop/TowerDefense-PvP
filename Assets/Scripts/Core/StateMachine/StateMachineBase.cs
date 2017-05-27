@@ -10,7 +10,7 @@ public abstract class StateMachineBase : MonoBehaviour {
 	protected void Awake() {
 		_stateMachineHandler = gameObject.AddComponent<StateMachineHandler>();
 	}
-
+	
 	private Enum _currentState;
 	public Enum currentState {
 		get { return _currentState; }
