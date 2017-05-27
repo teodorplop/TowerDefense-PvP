@@ -30,6 +30,14 @@ public partial class Monster : StateMachineBase {
 		_pathIndex = 1;
 	}
 
+	// TODO: also pass a damage type parameter, for damage calculation
+	public void ApplyDamage(int damage) {
+		_currentHealth = Mathf.Max(0, _currentHealth - damage);
+		if (_currentHealth == 0) {
+			SetState(MonsterState.Dead);
+		}
+	}
+
 	private void SetState(MonsterState state) {
 		if (currentState == null || (MonsterState)currentState != state) {
 			_stateMachineHandler.SetState(state, this);

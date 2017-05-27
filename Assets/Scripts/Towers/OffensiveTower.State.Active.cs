@@ -26,6 +26,10 @@ public partial class OffensiveTower {
 			if (monsters.Count > 0) {
 				float distance = Mathf.Infinity;
 				foreach (Monster monster in monsters) {
+					if (monster.IsDead || monster.ReachedDestination) {
+						continue;
+					}
+
 					float monsterDistance = Vector3.Distance(transform.position, monster.transform.position);
 					if (monsterDistance < distance) {
 						distance = monsterDistance;

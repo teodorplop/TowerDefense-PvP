@@ -3,12 +3,14 @@
 public partial class OffensiveTower : Tower {
 	public enum TowerState { Construction, Active }
 
+	[SerializeField]
+	protected Projectile _projectilePrefab;
 	[SerializeField, Tooltip("Attacks per second")]
 	private float _attackSpeed;
 	[SerializeField, Tooltip("Attack radius in world units")]
 	private float _radius;
 	[SerializeField]
-	private float _attackDamage;
+	protected int _attackDamage;
 	[SerializeField]
 	private bool _debug;
 
