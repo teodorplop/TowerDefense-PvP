@@ -53,6 +53,7 @@ namespace Ingame.waves {
 		[SerializeField]
 		private List<Wave> _waves;
 
+		private bool _started;
 		private float _matchTimer;
 		private MonsterFactory _monsterFactory;
 		private List<Player> _players;
@@ -65,7 +66,15 @@ namespace Ingame.waves {
 			_players.Add(player);
 		}
 
+		public void StartMatch() {
+			_started = true;
+		}
+
 		void FixedUpdate() {
+			if (!_started) {
+				return;
+			}
+
 			_matchTimer += Time.fixedDeltaTime;
 
 			foreach (Wave wave in _waves) {

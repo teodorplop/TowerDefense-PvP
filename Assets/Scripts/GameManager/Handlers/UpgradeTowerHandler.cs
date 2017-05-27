@@ -12,6 +12,8 @@ public partial class GameManager {
 
 			Player player = Players.GetPlayer(request.Player);
 			_instance._towerFactory.UpgradeTower(player, request.Tower, request.Upgrade);
+
+			_instance.SetState(GameState.Idle);
 		}
 	}
 }

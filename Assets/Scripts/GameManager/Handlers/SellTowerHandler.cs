@@ -12,6 +12,8 @@ public partial class GameManager {
 
 			Player player = Players.GetPlayer(request.Player);
 			_instance._towerFactory.DestroyTower(player, request.Tower);
+
+			_instance.SetState(GameState.Idle);
 		}
 	}
 }

@@ -81,7 +81,7 @@ public partial class GameManager : StateMachineBase {
 	private void InitializeHandlers() {
 		ActionHandler upgradeTower = new UpgradeTowerHandler();
 		ActionHandler sellTower = new SellTowerHandler();
-
-		Idle_ActionHandlers = new ActionHandler[] { upgradeTower, sellTower };
+		
+		TowerSelected_ActionHandlers = new ActionHandler[] { upgradeTower, sellTower };
 	}
 }

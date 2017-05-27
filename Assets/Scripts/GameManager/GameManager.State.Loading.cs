@@ -27,6 +27,8 @@ public partial class GameManager {
 
 		yield return null;
 
+		// we should make sure both players are connected, bla bla, and then start the match
+		_wavesManager.StartMatch();
 		SetState(GameState.Idle);
 	}
 
