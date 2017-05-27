@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Pathfinding;
+using Ingame.towers;
 
 public partial class GameManager {
 	IEnumerator Loading_EnterState() {
@@ -16,9 +17,6 @@ public partial class GameManager {
 		playerContainer.transform.position = new Vector3(55.0f, 0.0f, 0.0f);
 		Player serverPlayer = GeneratePlayer(playerContainer, "ServerPlayer", false);
 
-		Players.Register(clientPlayer);
-		Players.Register(serverPlayer);
-
 		// We may want to have one pathfinder for each player, in case we want dynamic pathfinding.
 		PathRequestManager.Register(clientPlayer, pathfinder);
 		PathRequestManager.Register(serverPlayer, pathfinder);
@@ -28,6 +26,7 @@ public partial class GameManager {
 		yield return null;
 
 		// we should make sure both players are connected, bla bla, and then start the match
+		_towerFactory.StartMatch();
 		_wavesManager.StartMatch();
 		SetState(GameState.Idle);
 	}
@@ -42,7 +41,7 @@ public partial class GameManager {
 			player.Register(tower);
 		}
 
-		_wavesManager.Register(player);
+		Players.Register(player);
 
 		return player;
 	}

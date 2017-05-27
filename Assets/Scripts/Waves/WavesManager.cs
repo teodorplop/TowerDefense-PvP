@@ -56,14 +56,8 @@ namespace Ingame.waves {
 		private bool _started;
 		private float _matchTimer;
 		private MonsterFactory _monsterFactory;
-		private List<Player> _players;
 		void Awake() {
 			_monsterFactory = FindObjectOfType<MonsterFactory>();
-			_players = new List<Player>();
-		}
-
-		public void Register(Player player) {
-			_players.Add(player);
 		}
 
 		public void StartMatch() {
@@ -86,8 +80,8 @@ namespace Ingame.waves {
 
 		private void SendMonsters(List<WaveMonster> monsters) {
 			foreach (WaveMonster monster in monsters) {
-				for (int i = 0; i < _players.Count; ++i) {
-					_monsterFactory.SendMonster(_players[i], monster.name, monster.count, monster.path);
+				foreach (Player player in Players.GetPlayers()) {
+					_monsterFactory.SendMonster(player, monster.name, monster.count, monster.path);
 				}
 			}
 		}

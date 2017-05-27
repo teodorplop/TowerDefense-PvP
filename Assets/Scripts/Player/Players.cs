@@ -29,6 +29,9 @@ public class Players {
 		Instance._players.Remove(player);
 	}
 
+	public static Player[] GetPlayers() {
+		return Instance._players.ToArray();
+	}
 	public static Player GetPlayer(string name) {
 		return Instance._players.Find(obj => obj.Name == name);
 	}

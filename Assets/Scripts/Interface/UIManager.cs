@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Interface.towershop;
 using Interface.wallet;
+using Ingame.towers;
 
 public class UIManager : MonoBehaviour {
 	private TowerShop _towerShop;
@@ -17,5 +18,9 @@ public class UIManager : MonoBehaviour {
 
 	public void ShowUpgrades(Tower tower) {
 		_towerShop.ShowUpgrades(tower);
+	}
+
+	public void Refresh() {
+		_walletUI.Refresh();
 	}
 }

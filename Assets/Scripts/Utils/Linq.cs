@@ -10,6 +10,20 @@ namespace Utils.Linq {
 		}
 	}
 
+	public static class ArrayExtensions {
+		public static int IndexOf<T>(this T[] array, Func<T, bool> predicate) {
+			for (int i = 0; i < array.Length; ++i) {
+				if (predicate(array[i])) {
+					return i;
+				}
+			}
+			return -1;
+		}
+		public static int IndexOf<T>(this T[] array, T item) {
+			return Array.IndexOf(array, item);
+		}
+	}
+
 	public static class IEnumerableExtensions {
 		/// <summary>
 		/// Returns all elements of a sequence which satisfy a condition.

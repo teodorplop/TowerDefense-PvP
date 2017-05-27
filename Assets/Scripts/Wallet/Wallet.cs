@@ -14,6 +14,9 @@ public class Wallet {
 	public int Get(Currency currency) {
 		return values[Convert.ToInt32(currency)];
 	}
+	public void Add(Currency currency, int value) {
+		values[Convert.ToInt32(currency)] += value;
+	}
 	public void Subtract(Currency currency, int value) {
 		if (!Check(currency, value)) {
 			Debug.LogError("Not enough " + currency);

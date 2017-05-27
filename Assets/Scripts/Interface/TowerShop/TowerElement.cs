@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Ingame.towers;
 
 namespace Interface.towershop {
 	public class TowerElement : MonoBehaviour {

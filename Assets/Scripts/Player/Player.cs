@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Utils.Linq;
 using UnityEngine;
+using Ingame.towers;
 
 public class Player {
+	[SerializeField]
 	private string _name;
 	public string Name { get { return _name; } }
 

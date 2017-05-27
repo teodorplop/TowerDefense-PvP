@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
 
-public partial class OffensiveTower : Tower {
-	public enum TowerState { Construction, Active }
+namespace Ingame.towers {
+	public partial class OffensiveTower : Tower {
+		public enum TowerState { Construction, Active }
 
-	[SerializeField]
-	protected Projectile _projectilePrefab;
-	[SerializeField, Tooltip("Attacks per second")]
-	private float _attackSpeed;
-	[SerializeField, Tooltip("Attack radius in world units")]
-	private float _radius;
-	[SerializeField]
-	protected int _attackDamage;
-	[SerializeField]
-	private bool _debug;
+		[SerializeField]
+		protected Projectile _projectilePrefab;
 
-	protected new void Awake() {
-		base.Awake();
-		SetState(TowerState.Construction);
+		private float _attackSpeed { get { return _attributes.attackSpeed; } }
+		private float _range { get { return _attributes.range; } }
+		protected int _attackDamage { get { return _attributes.attackDamage; } }
+
+		[SerializeField]
+		private bool _debug;
+
+		protected new void Awake() {
+			base.Awake();
+			SetState(TowerState.Construction);
+		}
 	}
 }

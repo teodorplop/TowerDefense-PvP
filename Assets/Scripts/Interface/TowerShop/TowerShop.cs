@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Utils.Linq;
+using Ingame.towers;
 
 namespace Interface.towershop {
 	public class TowerShop : MonoBehaviour {

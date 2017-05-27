@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour {
 		return _target != null && !_target.IsDead && !_target.ReachedDestination;
 	}
 
-	protected virtual void OnTargetReached(int damage, Monster target) {
+	protected virtual void OnTargetImpact(int damage, Monster target) {
 	}
 
 	void FixedUpdate() {
@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour {
 		}
 
 		if (ReachedTarget()) {
-			OnTargetReached(_damage, _target);
+			OnTargetImpact(_damage, _target);
 			_target = null;
 			_followTarget = false;
 			Destroy(gameObject);

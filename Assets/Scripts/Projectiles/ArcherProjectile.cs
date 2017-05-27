@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcherProjectile : Projectile {
-	protected override void OnTargetReached(int damage, Monster target) {
-		base.OnTargetReached(damage, target);
+	protected override void OnTargetImpact(int damage, Monster target) {
+		base.OnTargetImpact(damage, target);
 
 		target.ApplyDamage(damage);
 	}

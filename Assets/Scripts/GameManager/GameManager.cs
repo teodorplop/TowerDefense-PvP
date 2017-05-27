@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Ingame.waves;
+using Ingame.towers;
 
 public partial class GameManager : StateMachineBase {
 	public enum GameState {
