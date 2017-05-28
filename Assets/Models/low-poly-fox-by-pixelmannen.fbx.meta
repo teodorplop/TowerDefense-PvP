@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 32d1d0366c1a9414eb24e51d5566f01a
+timeCreated: 1495983327
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: animations
+    100002: b_Head
+    100004: b_Hip
+    100006: b_LeftFoot01
+    100008: b_LeftFoot02
+    100010: b_LeftForeArm
+    100012: b_LeftHand
+    100014: b_LeftLeg01
+    100016: b_LeftLeg02
+    100018: b_LeftUpperArm
+    100020: b_Neck
+    100022: b_RightFoot01
+    100024: b_RightFoot02
+    100026: b_RightForeArm
+    100028: b_RightHand
+    100030: b_RightLeg01
+    100032: b_RightLeg02
+    100034: b_RightUpperArm
+    100036: b_Root
+    100038: b_Spine01
+    100040: b_Spine02
+    100042: b_Tail01
+    100044: b_Tail02
+    100046: b_Tail03
+    100048: BackLight
+    100050: CameraPreset
+    100052: FillLight
+    100054: fox1
+    100056: KeyLight
+    100058: LightPreset
+    100060: //RootNode
+    100062: OverCamera
+    400000: animations
+    400002: b_Head
+    400004: b_Hip
+    400006: b_LeftFoot01
+    400008: b_LeftFoot02
+    400010: b_LeftForeArm
+    400012: b_LeftHand
+    400014: b_LeftLeg01
+    400016: b_LeftLeg02
+    400018: b_LeftUpperArm
+    400020: b_Neck
+    400022: b_RightFoot01
+    400024: b_RightFoot02
+    400026: b_RightForeArm
+    400028: b_RightHand
+    400030: b_RightLeg01
+    400032: b_RightLeg02
+    400034: b_RightUpperArm
+    400036: b_Root
+    400038: b_Spine01
+    400040: b_Spine02
+    400042: b_Tail01
+    400044: b_Tail02
+    400046: b_Tail03
+    400048: BackLight
+    400050: CameraPreset
+    400052: FillLight
+    400054: fox1
+    400056: KeyLight
+    400058: LightPreset
+    400060: //RootNode
+    400062: OverCamera
+    4300000: fox1
+    7400000: Base stack
+    9500000: //RootNode
+    13700000: fox1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.05
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

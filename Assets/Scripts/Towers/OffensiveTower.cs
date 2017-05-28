@@ -11,9 +11,6 @@ namespace Ingame.towers {
 		private float _range { get { return _attributes.range; } }
 		protected int _attackDamage { get { return _attributes.attackDamage; } }
 
-		[SerializeField]
-		private bool _debug;
-
 		protected new void Awake() {
 			base.Awake();
 			SetState(TowerState.Construction);

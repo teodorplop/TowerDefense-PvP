@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherProjectile : Projectile {
+public class ArcherProjectile : FollowProjectile {
 	protected override void OnTargetImpact(int damage, Monster target) {
 		base.OnTargetImpact(damage, target);
 

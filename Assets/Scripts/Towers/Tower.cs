@@ -7,6 +7,9 @@ namespace Ingame.towers {
 
 		[SerializeField]
 		protected TowerAttributes _attributes;
+		[SerializeField]
+		protected bool _debug;
+
 		public float SellValue { get { return _attributes.sellValue; } }
 		public string[] Upgrades { get { return _attributes.upgrades; } }
 

@@ -12,7 +12,8 @@ public partial class Monster {
 
 	void Walking_FixedUpdate() {
 		if (_waypointIndex == _waypointsPath.turnBoundaries.Length) {
-			// We passed through all our waypoints, so we finish movement here.
+			// We passed through all our waypoints, so request another path.
+			RequestPath();
 			return;
 		}
 

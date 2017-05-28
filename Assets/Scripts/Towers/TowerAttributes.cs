@@ -19,6 +19,11 @@ namespace Ingame.towers {
 		[SerializeField]
 		public int attackDamage;
 
+		[SerializeField]
+		public float trainTimer;
+		[SerializeField]
+		public int maxUnits;
+
 		public TowerAttributes Clone() {
 			TowerAttributes clone = new TowerAttributes();
 			clone.upgrades = new string[upgrades.Length];
@@ -30,6 +35,9 @@ namespace Ingame.towers {
 			clone.attackSpeed = attackSpeed;
 			clone.range = range;
 			clone.attackDamage = attackDamage;
+
+			clone.trainTimer = trainTimer;
+			clone.maxUnits = maxUnits;
 
 			return clone;
 		}

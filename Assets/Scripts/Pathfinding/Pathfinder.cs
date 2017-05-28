@@ -10,6 +10,35 @@ namespace Pathfinding {
 			_grid = grid;
 		}
 
+		public Vector3 FindMinimumPenaltyPoint(Vector3 center, float range) {
+			Node centerNode = _grid.WorldPointToNode(center);
+			int gridRange = Mathf.CeilToInt(range / _grid.NodeDiameter);
+
+			int xMin = Mathf.Max(0, centerNode.GridX - gridRange);
+			int xMax = Mathf.Min(_grid.GridSizeX - 1, centerNode.GridX + gridRange);
+
+			int yMin = Mathf.Max(0, centerNode.GridY - gridRange);
+			int yMax = Mathf.Min(_grid.GridSizeY - 1, centerNode.GridY + gridRange);
+
+			int minimumPenalty = int.MaxValue;
+			Vector3 position = Vector3.zero;
+			
+			for (int x = xMin; x <= xMax; ++x) {
+				for (int y = yMin; y <= yMax; ++y) {
+					int penalty = _grid.NodeGrid[x, y].movementPenalty;
+					Vector3 worldPosition = _grid.NodeGrid[x, y].WorldPosition;
+					float distance = Vector3.Distance(center, worldPosition);
+
+					if (penalty < minimumPenalty && distance <= range) {
+						minimumPenalty = penalty;
+						position = worldPosition;
+					}
+				}
+			}
+
+			return position;
+		}
+
 		public Vector3[] FindPath(Vector3 start, Vector3 target) {
 			Node startNode = _grid.WorldPointToNode(start);
 			Node targetNode = _grid.WorldPointToNode(target);

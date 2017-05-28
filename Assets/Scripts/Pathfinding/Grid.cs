@@ -4,7 +4,9 @@ using System.Collections.Generic;
 namespace Pathfinding {
 	public class Grid {
 		private float _nodeRadius;
+		public float NodeRadius { get { return _nodeRadius; } }
 		private float _nodeDiameter;
+		public float NodeDiameter { get { return _nodeDiameter; } }
 		private int _blurSize;
 
 		private Rect _worldRectangle;
@@ -12,6 +14,8 @@ namespace Pathfinding {
 		private Node[,] _grid;
 		public Node[,] NodeGrid { get { return _grid; } }
 
+		public int GridSizeX { get { return _gridSizeX; } }
+		public int GridSizeY { get { return _gridSizeY; } }
 		public int Size { get { return _gridSizeX * _gridSizeY; } }
 
 		public Grid(float nodeRadius, int blurSize, TerrainInfo terrain) {
@@ -114,14 +118,17 @@ namespace Pathfinding {
 					}
 
 					int newX = x + addX, newY = y + addY;
-
-					if (newX >= 0 && newX < _gridSizeX && newY >= 0 && newY < _gridSizeY) {
+					if (IsInGrid(newX, newY)) {
 						neighbours.Add(_grid[newX, newY]);
 					}
 				}
 			}
 
 			return neighbours;
+		}
+
+		public bool IsInGrid(int x, int y) {
+			return x >= 0 && x < _gridSizeX && y >= 0 && y < _gridSizeY;
 		}
 	}
 }
