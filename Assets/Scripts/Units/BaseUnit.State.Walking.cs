@@ -1,19 +1,16 @@
 ﻿using Pathfinding;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public partial class BaseUnit {
-	private int _waypointIndex;
-	private Path _waypointsPath;
+	protected int _waypointIndex;
+	protected Path _waypointsPath;
 
 	[SerializeField]
 	private float _movementSpeed = 5.0f;
 	[SerializeField]
 	private float _turnSpeed = 5.0f;
 
-	protected virtual void OnPathReached() {
-
+	protected virtual void OnPathReached(bool now) {
 	}
 
 	protected virtual void Walking_FixedUpdate() {
@@ -22,8 +19,8 @@ public partial class BaseUnit {
 		}
 
 		if (_waypointIndex == _waypointsPath.turnBoundaries.Length) {
-			// We passed through all our waypoints, so request another path.
-			OnPathReached();
+			// We passed through all our waypoints
+			OnPathReached(false);
 			return;
 		}
 
@@ -34,7 +31,7 @@ public partial class BaseUnit {
 			++_waypointIndex;
 
 			if (_waypointIndex == _waypointsPath.turnBoundaries.Length) {
-				OnPathReached();
+				OnPathReached(true);
 				return;
 			}
 		}
@@ -42,5 +39,20 @@ public partial class BaseUnit {
 		Quaternion targetRotation = Quaternion.LookRotation(_waypointsPath.waypoints[_waypointIndex] - position);
 		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * _turnSpeed);
 		transform.Translate(Vector3.forward * Time.fixedDeltaTime * _movementSpeed);
+	}
+
+	protected void Walking_OnDrawGizmos() {
+		if (_debug) {
+			for (int i = _waypointIndex; i < _waypointsPath.waypoints.Length; ++i) {
+				Gizmos.color = Color.black;
+				Gizmos.DrawCube(_waypointsPath.waypoints[i], Vector3.one);
+
+				if (i == _waypointIndex) {
+					Gizmos.DrawLine(transform.position, _waypointsPath.waypoints[i] + owner.WorldOffset);
+				} else {
+					Gizmos.DrawLine(_waypointsPath.waypoints[i - 1] + owner.WorldOffset, _waypointsPath.waypoints[i] + owner.WorldOffset);
+				}
+			}
+		}
 	}
 }

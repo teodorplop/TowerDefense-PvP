@@ -5,7 +5,7 @@ public class MonsterFactory : MonoBehaviour {
 	[SerializeField]
 	private Monster[] _monsterPrefabs;
 	[SerializeField]
-	private MonsterUI _monsterUIPrefab;
+	private UnitUI _monsterUIPrefab;
 
 	private PathsContainer _pathsContainer;
 
@@ -26,7 +26,7 @@ public class MonsterFactory : MonoBehaviour {
 		player.Register(monster);
 		monster.SetPath(_pathsContainer.GetPath(path));
 
-		MonsterUI monsterUI = Instantiate(_monsterUIPrefab);
+		UnitUI monsterUI = Instantiate(_monsterUIPrefab);
 		monsterUI.transform.SetParent(player.Transform);
 		monsterUI.transform.localScale = _monsterUIPrefab.transform.localScale;
 		monsterUI.Inject(monster);

@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using Interface;
 
-public class MonsterUI : MonoBehaviour {
+public class UnitUI : MonoBehaviour {
 	[SerializeField]
-	private Vector3 _offsetToMonster;
+	private Vector3 _offsetToUnit;
 	[SerializeField]
 	private RectTransform _healthBar;
 	[SerializeField]
 	private Label _label;
 
 	private float _healthBarWidth;
-	private Monster _target;
-	public void Inject(Monster monster) {
-		_target = monster;
+	private BaseUnit _target;
+	public void Inject(BaseUnit target) {
+		_target = target;
 		_healthBarWidth = _healthBar.rect.width;
 	}
 
@@ -21,7 +21,7 @@ public class MonsterUI : MonoBehaviour {
 			return;
 		}
 
-		transform.position = _target.transform.position + _offsetToMonster;
+		transform.position = _target.transform.position + _offsetToUnit;
 		float healthPercent = (float)_target.CurrentHealth / _target.MaxHealth;
 		_healthBar.sizeDelta = new Vector2((healthPercent - 1.0f) * _healthBarWidth, 0);
 
