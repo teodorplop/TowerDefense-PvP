@@ -23,7 +23,7 @@ namespace Ingame.towers {
 
 			float angle = 0;
 			for (int i = 0; i < _maxUnits; ++i) {
-				Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+				Vector3 offset = 1.75f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 				angle += Mathf.PI * 2.0f / _maxUnits;
 
 				_rallyPoints.Add(_rallyPoint + owner.WorldOffset + offset);
