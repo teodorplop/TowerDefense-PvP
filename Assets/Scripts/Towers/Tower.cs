@@ -16,7 +16,7 @@ namespace Ingame.towers {
 		public Player owner;
 
 		protected void SetState(Enum state) {
-			if (currentState == null || currentState != state) {
+			if (currentState == null || currentState.GetType() != state.GetType() || currentState.CompareTo(state) != 0) {
 				_stateMachineHandler.SetState(state, this);
 			}
 		}

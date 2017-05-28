@@ -16,6 +16,8 @@ public partial class BaseUnit : StateMachineBase {
 	public bool DebugOn { get { return _debug; } }
 	protected int _currentHealth;
 	public int CurrentHealth { get { return _currentHealth; } }
+	protected bool _isDead;
+	public bool IsDead { get { return _isDead; } }
 
 	protected new void Awake() {
 		base.Awake();
@@ -23,7 +25,7 @@ public partial class BaseUnit : StateMachineBase {
 	}
 
 	protected void SetState(Enum state) {
-		if (currentState == null || currentState.CompareTo(state) != 0) {
+		if (currentState == null || currentState.GetType() != state.GetType() || currentState.CompareTo(state) != 0) {
 			_stateMachineHandler.SetState(state, this);
 		}
 	}
@@ -67,6 +69,7 @@ public partial class BaseUnit : StateMachineBase {
 	public void ApplyDamage(int damage) {
 		_currentHealth = Mathf.Max(0, _currentHealth - damage);
 		if (_currentHealth == 0) {
+			_isDead = true;
 			SetState(BaseUnitState.Dead);
 		}
 	}
