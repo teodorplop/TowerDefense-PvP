@@ -17,5 +17,5 @@ public partial class GameManager {
 			// TODO: Show something else here.
 			_uiManager.ShowUpgrades(null, null);
 		}
-	} 
+	}
 }

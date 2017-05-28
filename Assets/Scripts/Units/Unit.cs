@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : BaseUnit {
+public partial class Unit : BaseUnit {
+	public enum UnitState { RallyPoint }
 
+	public void SetRallyPoint(Vector3 point) {
+		_rallyPoint = point;
+		SetState(UnitState.RallyPoint);
+	}
 }

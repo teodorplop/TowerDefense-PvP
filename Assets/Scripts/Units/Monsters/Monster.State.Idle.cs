@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using Pathfinding;
+using System.Collections;
 
 public partial class Monster {
 	private bool _pathRequested = false;
 
-	void Idle_FixedUpdate() {
+	IEnumerator Idle_EnterState() {
 		RequestPath();
+		yield return null;
 	}
 
 	private void RequestPath() {
@@ -26,6 +28,6 @@ public partial class Monster {
 
 		_waypointIndex = 0;
 		_waypointsPath = new Path(waypoints, transform.position - owner.WorldOffset, 5.0f);
-		SetState(UnitState.Walking);
+		SetState(BaseUnitState.Walking);
 	}
 }

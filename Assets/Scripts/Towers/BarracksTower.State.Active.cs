@@ -33,7 +33,7 @@ namespace Ingame.towers {
 		private void SpawnUnits() {
 			for (int i = 0; i < _maxUnits; ++i) {
 				Unit unit = InstantiateUnit();
-				unit.transform.position = owner.WorldOffset + _rallyPoints[i];
+				unit.SetRallyPoint(owner.WorldOffset + _rallyPoints[i]);
 				_activeUnits.Add(unit);
 			}
 		}
@@ -43,6 +43,7 @@ namespace Ingame.towers {
 			unit.transform.SetParent(transform);
 			unit.transform.localPosition = _unitPrefab.transform.localPosition;
 			unit.transform.localScale = _unitPrefab.transform.localScale;
+			unit.owner = owner;
 			unit.gameObject.SetActive(true);
 
 			return unit;

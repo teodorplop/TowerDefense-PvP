@@ -2,15 +2,19 @@
 using Pathfinding;
 
 public partial class Monster {
-	protected override void OnPathReached(bool now) {
+	private void OnPathReached(bool now) {
 		if (now) {
 			++_pathIndex;
 		}
 
 		if (_pathIndex == _path.Length) {
-			SetState(UnitState.Destination);
+			SetState(BaseUnitState.Destination);
 		} else {
 			RequestPath();
 		}
+	}
+
+	void Walking_FixedUpdate() {
+		FollowWaypoints(OnPathReached);
 	}
 }

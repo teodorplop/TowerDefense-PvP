@@ -2,7 +2,7 @@
   "cost": 90,
   "sellValue": 0.75,
 
-  "range": 10,
+  "range": 7,
 
   "trainTimer": 5.0,
   "maxUnits": 3,
