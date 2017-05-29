@@ -26,6 +26,7 @@ public partial class GameManager : StateMachineBase {
 	private InputManager _inputManager;
 	private WavesManager _wavesManager;
 	private TowerFactory _towerFactory;
+	private UnitFactory _unitFactory;
 	private RequestDispatcher _dispatcher;
 
 	protected new void Awake() {
@@ -36,6 +37,7 @@ public partial class GameManager : StateMachineBase {
 		_inputManager = FindObjectOfType<InputManager>();
 		_wavesManager = FindObjectOfType<WavesManager>();
 		_towerFactory = FindObjectOfType<TowerFactory>();
+		_unitFactory = FindObjectOfType<UnitFactory>();
 
 		_dispatcher = new RequestDispatcher();
 

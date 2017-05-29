@@ -24,6 +24,8 @@ public class Player {
 	public List<Tower> Towers { get { return _towers; } }
 	private List<Monster> _monsters;
 	public List<Monster> Monsters { get { return _monsters; } }
+	private List<Unit> _units;
+	public List<Unit> Units { get { return _units; } }
 
 	public Player(string name, bool clientPlayer, Wallet wallet, Transform transform) {
 		isActive = true;
@@ -35,11 +37,14 @@ public class Player {
 
 		_towers = new List<Tower>();
 		_monsters = new List<Monster>();
+		_units = new List<Unit>();
 	}
 
 	public void Register(Tower tower) {
 		tower.owner = this;
-		_towers.Add(tower);
+		if (!_towers.Contains(tower)) {
+			_towers.Add(tower);
+		}
 	}
 	public void Unregister(Tower tower) {
 		tower.owner = null;
@@ -48,11 +53,24 @@ public class Player {
 
 	public void Register(Monster monster) {
 		monster.owner = this;
-		_monsters.Add(monster);
+		if (!_monsters.Contains(monster)) {
+			_monsters.Add(monster);
+		}
 	}
 	public void Unregister(Monster monster) {
 		monster.owner = null;
 		_monsters.Remove(monster);
+	}
+
+	public void Register(Unit unit) {
+		unit.owner = this;
+		if (!_units.Contains(unit)) {
+			_units.Add(unit);
+		}
+	}
+	public void Unregister(Unit unit) {
+		unit.owner = null;
+		_units.Remove(unit);
 	}
 
 	public List<Tower> GetTowersInRange(Vector3 position, float radius) {

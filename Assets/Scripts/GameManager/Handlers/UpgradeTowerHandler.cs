@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Ingame.towers;
 
 public partial class GameManager {
 	private class UpgradeTowerHandler : ActionHandler {
@@ -14,7 +15,11 @@ public partial class GameManager {
 			// TODO: What if the server player did this? do we still need this check?
 			if (player.Wallet.Check(Wallet.Currency.Gold, cost)) {
 				player.Wallet.Subtract(Wallet.Currency.Gold, cost);
-				_instance._towerFactory.UpgradeTower(player, request.Tower, request.Upgrade, cost);
+				Tower tower = _instance._towerFactory.UpgradeTower(player, request.Tower, request.Upgrade, cost);
+
+				if (tower is BarracksTower) {
+					(tower as BarracksTower).Inject(_instance._unitFactory);
+				}
 
 				_instance._uiManager.Refresh();
 				_instance._uiManager.ShowUpgrades(null, null);

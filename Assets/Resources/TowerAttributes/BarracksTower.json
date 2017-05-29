@@ -4,6 +4,7 @@
 
   "range": 7,
 
+  "trainedUnit": "BarracksUnit",
   "trainTimer": 5.0,
   "maxUnits": 3,
 
