@@ -17,7 +17,7 @@ public class FollowProjectile : Projectile {
 		return _target == null ? false : Vector3.Distance(TargetPosition, transform.position) <= 0.75f;
 	}
 	private bool TargetIsStillValid() {
-		return _target != null && !_target.IsDead && !_target.ReachedDestination;
+		return _target != null && _target.CanBeAttacked();
 	}
 
 	void FixedUpdate() {

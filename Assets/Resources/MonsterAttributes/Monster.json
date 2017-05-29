@@ -1,0 +1,10 @@
+{
+  "movementSpeed": 5.0,
+  "turnSpeed": 5.0,
+
+  "maxHealth": 100,
+
+  "attackSpeed": 1.0,
+  "attackRange": 1.0,
+  "attackDamage": 10
+}

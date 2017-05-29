@@ -14,4 +14,8 @@ public partial class Monster : BaseUnit {
 		transform.LookAt(_path[1] + owner.WorldOffset);
 		_pathIndex = 1;
 	}
+
+	public override bool CanBeAttacked() {
+		return !_isDead && !_reachedDestination;
+	}
 }

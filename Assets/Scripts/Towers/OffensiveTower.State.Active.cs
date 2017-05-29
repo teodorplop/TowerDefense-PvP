@@ -27,7 +27,7 @@ namespace Ingame.towers {
 				if (monsters.Count > 0) {
 					float distance = Mathf.Infinity;
 					foreach (Monster monster in monsters) {
-						if (monster.IsDead || monster.ReachedDestination) {
+						if (!monster.CanBeAttacked()) {
 							continue;
 						}
 

@@ -3,6 +3,8 @@
 public partial class GameResources {
 	private static readonly string _walletPath = "Wallet";
 	private static readonly string _towerAttributesPath = "TowerAttributes";
+	private static readonly string _monsterAttributesPath = "MonsterAttributes";
+	private static readonly string _unitAttributesPath = "UnitAttributes";
 
 	public static Wallet LoadWallet(string level) {
 		return Load<Wallet>(level, _walletPath, "Wallet");
@@ -16,5 +18,19 @@ public partial class GameResources {
 	}
 	public static TowerAttributes LoadTowerAttributes(string tower) {
 		return LoadTowerAttributes(SceneLoader.ActiveScene, tower);
+	}
+
+	public static UnitAttributes LoadMonsterAttributes(string level, string monster) {
+		return Load<UnitAttributes>(level, _monsterAttributesPath, monster);
+	}
+	public static UnitAttributes LoadMonsterAttributes(string monster) {
+		return LoadMonsterAttributes(SceneLoader.ActiveScene, monster);
+	}
+
+	public static UnitAttributes LoadUnitAttributes(string level, string unit) {
+		return Load<UnitAttributes>(level, _unitAttributesPath, unit);
+	}
+	public static UnitAttributes LoadUnitAttributes(string unit) {
+		return LoadUnitAttributes(SceneLoader.ActiveScene, unit);
 	}
 }

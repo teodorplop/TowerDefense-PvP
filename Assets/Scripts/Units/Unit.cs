@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public partial class Unit : BaseUnit {
 	public enum UnitState { RallyPoint }
@@ -8,5 +6,9 @@ public partial class Unit : BaseUnit {
 	public void SetRallyPoint(Vector3 point) {
 		_rallyPoint = point;
 		SetState(UnitState.RallyPoint);
+	}
+
+	public override bool CanBeAttacked() {
+		return !_isDead;
 	}
 }

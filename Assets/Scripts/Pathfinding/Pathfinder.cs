@@ -107,6 +107,10 @@ namespace Pathfinding {
 		}
 
 		private Vector3[] SimplifyPath(List<Node> path) {
+			if (path.Count == 1) {
+				return new Vector3[] { path[0].WorldPosition };
+			}
+
 			List<Vector3> waypoints = new List<Vector3>();
 			Vector2 directionOld = Vector2.zero;
 

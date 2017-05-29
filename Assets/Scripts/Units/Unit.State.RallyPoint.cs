@@ -30,4 +30,15 @@ public partial class Unit {
 	void RallyPoint_FixedUpdate() {
 		FollowWaypoints(OnRallyPointReached);
 	}
+
+	private void RallyPoint_OnDrawGizmos() {
+		if (_debug) {
+			if (_waypointsPath != null) {
+				Gizmos.color = Color.black;
+				for (int i = _waypointIndex; i < _waypointsPath.waypoints.Length; ++i) {
+					Gizmos.DrawCube(_waypointsPath.waypoints[i] + owner.WorldOffset, Vector3.one);
+				}
+			}
+		}
+	}
 }
