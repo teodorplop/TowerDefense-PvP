@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using Pathfinding;
+using System.Collections.Generic;
 
 public partial class BaseUnit : StateMachineBase {
 	public enum BaseUnitState { Idle, Walking, Destination, Engaging, Fighting, Dead }
@@ -16,14 +17,17 @@ public partial class BaseUnit : StateMachineBase {
 	public bool DebugOn { get { return _debug; } }
 	protected int _currentHealth;
 	public int CurrentHealth { get { return _currentHealth; } }
-	protected bool _isDead;
-	public bool IsDead { get { return _isDead; } }
+	public bool IsDead { get { return _currentHealth == 0; } }
+	protected float AttackRange { get { return _attributes.attackRange; } }
+	protected int AttackDamage { get { return _attributes.attackDamage; } }
 
 	private float MovementSpeed { get { return _attributes.movementSpeed; } }
 	private float TurnSpeed { get { return _attributes.turnSpeed; } }
 
 	protected new void Awake() {
 		base.Awake();
+
+		_targets = new List<BaseUnit>();
 	}
 
 	protected void SetState(Enum state) {
@@ -35,6 +39,7 @@ public partial class BaseUnit : StateMachineBase {
 	public void SetAttributes(UnitAttributes attributes) {
 		_attributes = attributes;
 		_currentHealth = _attributes.maxHealth;
+		_timeBetweenAttacks = _attackTimer = 1.0f / attributes.attackSpeed;
 	}
 
 	protected int _waypointIndex;
@@ -54,7 +59,7 @@ public partial class BaseUnit : StateMachineBase {
 		Vector3 position = transform.position - owner.WorldOffset;
 		Vector2 position2D = new Vector2(position.x, position.z);
 
-		if (_waypointsPath.turnBoundaries[_waypointIndex].HasCrossedLine(position2D)) {
+		while (_waypointsPath.turnBoundaries[_waypointIndex].HasCrossedLine(position2D)) {
 			++_waypointIndex;
 
 			if (_waypointIndex == _waypointsPath.turnBoundaries.Length) {
@@ -71,8 +76,7 @@ public partial class BaseUnit : StateMachineBase {
 	// TODO: also pass a damage type parameter, for damage calculation
 	public void ApplyDamage(int damage) {
 		_currentHealth = Mathf.Max(0, _currentHealth - damage);
-		if (_currentHealth == 0) {
-			_isDead = true;
+		if (IsDead) {
 			SetState(BaseUnitState.Dead);
 		}
 	}

@@ -5,6 +5,6 @@
   "maxHealth": 100,
 
   "attackSpeed": 1.0,
-  "attackRange": 1.0,
+  "attackRange": 1.5,
   "attackDamage": 10
 }

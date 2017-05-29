@@ -6,6 +6,6 @@
 
   "engageRange": 5.0,
   "attackSpeed": 1.0,
-  "attackRange": 1.0,
+  "attackRange": 2.0,
   "attackDamage": 10
 }

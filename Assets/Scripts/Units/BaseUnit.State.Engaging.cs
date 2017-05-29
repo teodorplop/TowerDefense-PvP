@@ -1,19 +1,46 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Pathfinding;
+using System.Collections.Generic;
 
 public partial class BaseUnit {
-	protected BaseUnit _target;
-	protected Vector3 _engagePoint;
+	protected bool _isFighting;
+	public bool IsFighting { get { return _isFighting; } }
+	private List<BaseUnit> _targets;
+	public BaseUnit Target { get { return _targets.Count == 0 ? null : _targets[0]; } }
 
-	public void Engage(BaseUnit target, Vector3 engagePoint) {
-		_target = target;
-		_engagePoint = engagePoint;
-		SetState(BaseUnitState.Engaging);
+	public void Engage(BaseUnit target) {
+		bool engaging = Target == null;
+		_targets.Add(target);
+
+		if (engaging) {
+			SetState(BaseUnitState.Engaging);
+		}
+	}
+
+	public void Disengage(BaseUnit target) {
+		_targets.Remove(target);
+	}
+
+	public void RemoveTarget() {
+		if (_targets.Count > 0) {
+			if (_targets[0] != null) {
+				_targets[0].Disengage(this);
+			}
+			_targets.RemoveAt(0);
+		}
 	}
 
 	protected IEnumerator Engaging_EnterState() {
-		PathRequestManager.RequestPath(owner, transform.position - owner.WorldOffset, _engagePoint - owner.WorldOffset, EngagingPathReceived);
+		if (Target == null) {
+			OnEngageTargetLost();
+			yield break;
+		}
+
+		Vector3 start = transform.position - owner.WorldOffset;
+		Vector3 dest = Target.transform.position - owner.WorldOffset;
+		PathRequestManager.RequestPath(owner, start, dest, EngagingPathReceived);
+
 		yield return null;
 	}
 
@@ -28,14 +55,20 @@ public partial class BaseUnit {
 	}
 
 	protected void Engaging_FixedUpdate() {
-		if (_target != null && _target.CanBeAttacked()) {
-			FollowWaypoints(EngagingPathFinished);
+		if (Target != null && Target.CanBeAttacked()) {
+			float distance = Vector3.Distance(transform.position, Target.transform.position);
+			if (distance <= AttackRange) {
+				EngagingPathFinished(true);
+			} else {
+				FollowWaypoints(EngagingPathFinished);
+			}
 		} else {
-			EngageTargetLost();
+			OnEngageTargetLost();
 		}
 	}
 
-	protected virtual void EngageTargetLost() {
+	protected virtual void OnEngageTargetLost() {
+		RemoveTarget();
 	}
 
 	private void EngagingPathFinished(bool now) {

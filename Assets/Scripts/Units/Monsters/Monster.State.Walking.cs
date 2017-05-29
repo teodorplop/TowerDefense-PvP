@@ -15,6 +15,10 @@ public partial class Monster {
 	}
 
 	void Walking_FixedUpdate() {
-		FollowWaypoints(OnPathReached);
+		if (Target != null) {
+			SetState(BaseUnitState.Engaging);
+		} else {
+			FollowWaypoints(OnPathReached);
+		}
 	}
 }

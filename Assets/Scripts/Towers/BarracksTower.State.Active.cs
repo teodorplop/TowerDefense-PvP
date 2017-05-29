@@ -58,6 +58,7 @@ namespace Ingame.towers {
 					_respawnTimers[i] = Mathf.Max(0.0f, _respawnTimers[i] - Time.fixedDeltaTime);
 
 					if (_respawnTimers[i] <= 0.0f) {
+						_units[i].Respawn();
 						SpawnUnit(i);
 						_respawnTimers[i] = _respawnTimer;
 					}

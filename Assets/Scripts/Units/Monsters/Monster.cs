@@ -16,6 +16,6 @@ public partial class Monster : BaseUnit {
 	}
 
 	public override bool CanBeAttacked() {
-		return !_isDead && !_reachedDestination;
+		return !IsDead && !_reachedDestination;
 	}
 }
