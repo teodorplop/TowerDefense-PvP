@@ -8,7 +8,7 @@ public partial class Monster {
 		}
 
 		if (_pathIndex == _path.Length) {
-			SetState(BaseUnitState.Destination);
+			SetState(MonsterState.Destination);
 		} else {
 			RequestPath();
 		}

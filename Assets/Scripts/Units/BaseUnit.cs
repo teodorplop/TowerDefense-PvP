@@ -4,7 +4,7 @@ using Pathfinding;
 using System.Collections.Generic;
 
 public partial class BaseUnit : StateMachineBase {
-	public enum BaseUnitState { Idle, Walking, Destination, Engaging, Fighting, Dead }
+	public enum BaseUnitState { Idle, Walking, Engaging, Fighting, Dead }
 
 	[SerializeField]
 	protected UnitAttributes _attributes;

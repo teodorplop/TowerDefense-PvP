@@ -21,6 +21,6 @@ public partial class Unit {
 
 	protected override void OnFightingEnded() {
 		base.OnFightingEnded();
-		SetState(BaseUnitState.Idle);
+		SetState(UnitState.ReturnToRallyPoint);
 	}
 }

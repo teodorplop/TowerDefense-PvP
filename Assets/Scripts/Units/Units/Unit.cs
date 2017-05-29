@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public partial class Unit : BaseUnit {
-	public enum UnitState { RallyPoint }
+	public enum UnitState { RallyPoint, ReturnToRallyPoint }
 
 	private float EngageRange { get { return _attributes.engageRange; } }
 

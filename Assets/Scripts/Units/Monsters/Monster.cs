@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 public partial class Monster : BaseUnit {
+	public enum MonsterState { Destination }
+
 	private int _pathIndex;
 	private Vector3[] _path;
 
