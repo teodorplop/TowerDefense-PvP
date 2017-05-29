@@ -3,17 +3,22 @@ using UnityEngine;
 
 namespace Ingame.towers {
 	public partial class BarracksTower {
-		private float _spawnTimer;
-
 		private UnitFactory _unitFactory;
 		private Unit[] _units;
+		public Unit[] Units { get { return _units; } }
 		private Vector3 _spawnPoint;
 		private Vector3 _rallyPoint;
 		private Vector3[] _rallyPoints;
 
+		private float[] _respawnTimers;
+
 		protected IEnumerator Active_EnterState() {
 			_rallyPoints = new Vector3[_maxUnits];
 			_units = new Unit[_maxUnits];
+			_respawnTimers = new float[_maxUnits];
+			for (int i = 0; i < _maxUnits; ++i) {
+				_respawnTimers[i] = _respawnTimer;
+			}
 
 			Vector3 bestRallyPoint = PathRequestManager.GetConvenientPoint(owner, transform.position - owner.WorldOffset, _range) + owner.WorldOffset;
 			SetRallyPoint(bestRallyPoint);
@@ -41,13 +46,29 @@ namespace Ingame.towers {
 		private IEnumerator SpawnUnits() {
 			for (int i = 0; i < _maxUnits; ++i) {
 				_units[i] = _unitFactory.InstantiateUnit(owner, this, _trainedUnit);
-				
-				_units[i].transform.position = _spawnPoint;
-				_units[i].gameObject.SetActive(true);
-				_units[i].SetRallyPoint(owner.WorldOffset + _rallyPoints[i]);
+				SpawnUnit(i);
 
 				yield return new WaitForSeconds(0.5f);
 			}
+		}
+
+		protected void Active_FixedUpdate() {
+			for (int i = 0; i < _maxUnits; ++i) {
+				if (_units[i].IsDead) {
+					_respawnTimers[i] = Mathf.Max(0.0f, _respawnTimers[i] - Time.fixedDeltaTime);
+
+					if (_respawnTimers[i] <= 0.0f) {
+						SpawnUnit(i);
+						_respawnTimers[i] = _respawnTimer;
+					}
+				}
+			}
+		}
+
+		private void SpawnUnit(int idx) {
+			_units[idx].transform.position = _spawnPoint;
+			_units[idx].gameObject.SetActive(true);
+			_units[idx].SetRallyPoint(owner.WorldOffset + _rallyPoints[idx]);
 		}
 
 		protected void Active_OnDrawGizmos() {

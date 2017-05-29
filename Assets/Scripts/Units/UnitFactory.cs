@@ -21,7 +21,7 @@ public class UnitFactory : MonoBehaviour {
 		player.Register(unit);
 
 		UnitUI unitUI = Instantiate(_unitUIPrefab);
-		unitUI.transform.SetParent(player.Transform);
+		unitUI.transform.SetParent(barracks.transform);
 		unitUI.transform.localScale = unitUI.transform.localScale;
 		unitUI.Inject(unit);
 

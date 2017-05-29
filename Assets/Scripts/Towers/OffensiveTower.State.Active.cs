@@ -42,7 +42,7 @@ namespace Ingame.towers {
 		}
 
 		protected void Active_FixedUpdate() {
-			_attackTimer = Mathf.Max(_attackTimer - Time.deltaTime, 0.0f);
+			_attackTimer = Mathf.Max(_attackTimer - Time.fixedDeltaTime, 0.0f);
 			if (_attackTimer <= 0.0f) {
 				UpdateTarget();
 				if (_target) {

@@ -41,7 +41,15 @@ namespace Ingame.towers {
 			Tower upgradePrefab = _towerPrefabs[idx];
 			TowerAttributes attributes = _towerAttributes[idx];
 
-			player.Unregister(towerTr.GetComponent<Tower>());
+			Tower oldTower = towerTr.GetComponent<Tower>();
+			player.Unregister(oldTower);
+			if (oldTower is BarracksTower) {
+				BarracksTower oldBarracksTower = oldTower as BarracksTower;
+				for (int i = 0; i < oldBarracksTower.Units.Length; ++i) {
+					player.Unregister(oldBarracksTower.Units[i]);
+				}
+			}
+
 			Vector3 position = towerTr.position;
 			Destroy(towerTr.gameObject);
 

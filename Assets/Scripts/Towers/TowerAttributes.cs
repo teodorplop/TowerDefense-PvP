@@ -22,7 +22,7 @@ namespace Ingame.towers {
 		[SerializeField]
 		public string trainedUnit;
 		[SerializeField]
-		public float trainTimer;
+		public float respawnTimer;
 		[SerializeField]
 		public int maxUnits;
 
@@ -39,7 +39,7 @@ namespace Ingame.towers {
 			clone.attackDamage = attackDamage;
 
 			clone.trainedUnit = trainedUnit;
-			clone.trainTimer = trainTimer;
+			clone.respawnTimer = respawnTimer;
 			clone.maxUnits = maxUnits;
 
 			return clone;
