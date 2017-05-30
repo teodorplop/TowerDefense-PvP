@@ -4,8 +4,8 @@
 
   "maxHealth": 100,
 
-  "engageRange": 5.0,
+  "engageRange": 7.0,
   "attackSpeed": 1.0,
-  "attackRange": 2.0,
+  "attackRange": 2.5,
   "attackDamage": 10
 }

@@ -5,7 +5,7 @@
   "range": 7,
 
   "trainedUnit": "BarracksUnit",
-  "respawnTimer": 5.0,
+  "respawnTimer": 5,
   "maxUnits": 3,
 
   "upgrades": [ "SellTower" ]

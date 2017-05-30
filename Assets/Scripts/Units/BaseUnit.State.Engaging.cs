@@ -41,6 +41,13 @@ public partial class BaseUnit {
 		Vector3 dest = Target.transform.position - owner.WorldOffset;
 		PathRequestManager.RequestPath(owner, start, dest, EngagingPathReceived);
 
+		_animator.SetBool("IsWalking", true);
+
+		yield return null;
+	}
+
+	protected IEnumerator Engaging_ExitState() {
+		_animator.SetBool("IsWalking", false);
 		yield return null;
 	}
 

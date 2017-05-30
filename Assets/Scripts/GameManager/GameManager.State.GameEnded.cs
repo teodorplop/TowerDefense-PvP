@@ -11,6 +11,7 @@ public partial class GameManager {
 		}
 
 		monster.owner.Wallet.Subtract(Wallet.Currency.Health, 1);
+		_uiManager.Refresh();
 
 		if (monster.owner.Wallet.Get(Wallet.Currency.Health) == 0) {
 			Debug.Log("Player " + monster.owner.Name + " died.");

@@ -11,6 +11,7 @@ public partial class Unit : BaseUnit {
 	}
 
 	public void Respawn() {
+		_animator.SetBool("IsDead", false);
 		_currentHealth = MaxHealth;
 	}
 

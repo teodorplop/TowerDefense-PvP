@@ -7,6 +7,11 @@ public partial class Unit {
 
 	IEnumerator RallyPoint_EnterState() {
 		RequestPath(_rallyPoint);
+		_animator.SetBool("IsWalking", true);
+		yield return null;
+	}
+	IEnumerator RallyPoint_ExitState() {
+		_animator.SetBool("IsWalking", false);
 		yield return null;
 	}
 

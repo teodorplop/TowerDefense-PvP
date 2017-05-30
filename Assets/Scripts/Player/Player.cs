@@ -63,14 +63,18 @@ public class Player {
 	}
 
 	public void Register(Unit unit) {
-		unit.owner = this;
-		if (!_units.Contains(unit)) {
-			_units.Add(unit);
+		if (unit != null) {
+			unit.owner = this;
+			if (!_units.Contains(unit)) {
+				_units.Add(unit);
+			}
 		}
 	}
 	public void Unregister(Unit unit) {
-		unit.owner = null;
-		_units.Remove(unit);
+		if (unit != null) {
+			unit.owner = null;
+			_units.Remove(unit);
+		}
 	}
 
 	public List<Tower> GetTowersInRange(Vector3 position, float radius) {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public partial class BaseUnit : StateMachineBase {
 	public enum BaseUnitState { Idle, Walking, Engaging, Fighting, Dead }
 
+	protected Animator _animator;
 	[SerializeField]
 	protected UnitAttributes _attributes;
 	[SerializeField]
@@ -20,13 +21,15 @@ public partial class BaseUnit : StateMachineBase {
 	public bool IsDead { get { return _currentHealth == 0; } }
 	protected float AttackRange { get { return _attributes.attackRange; } }
 	protected int AttackDamage { get { return _attributes.attackDamage; } }
-
+	
+	private float AttackSpeed { get { return _attributes.attackSpeed; } }
 	private float MovementSpeed { get { return _attributes.movementSpeed; } }
 	private float TurnSpeed { get { return _attributes.turnSpeed; } }
 
 	protected new void Awake() {
 		base.Awake();
 
+		_animator = GetComponent<Animator>();
 		_targets = new List<BaseUnit>();
 	}
 
