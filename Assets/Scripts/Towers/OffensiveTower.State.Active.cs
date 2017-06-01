@@ -9,7 +9,7 @@ namespace Ingame.towers {
 		private Monster _target;
 
 		protected IEnumerator Active_EnterState() {
-			_attackTimer = _timeBetweenAttacks = 1.0f / _attackSpeed;
+			_attackTimer = _timeBetweenAttacks = 1.0f / AttackSpeed;
 			yield return null;
 		}
 
@@ -17,13 +17,13 @@ namespace Ingame.towers {
 			_attackTimer = _timeBetweenAttacks;
 		}
 		private bool TargetIsStillValid() {
-			return _target != null && !_target.IsDead && !_target.ReachedDestination && Vector3.Distance(_target.transform.position, transform.position) <= _range;
+			return _target != null && !_target.IsDead && !_target.ReachedDestination && Vector3.Distance(_target.transform.position, transform.position) <= Range;
 		}
 		protected virtual void UpdateTarget() {
 			if (!TargetIsStillValid()) {
 				_target = null;
 
-				List<Monster> monsters = owner.GetMonstersInRange(transform.position, _range);
+				List<Monster> monsters = owner.GetMonstersInRange(transform.position, Range);
 				if (monsters.Count > 0) {
 					float distance = Mathf.Infinity;
 					foreach (Monster monster in monsters) {
@@ -53,7 +53,7 @@ namespace Ingame.towers {
 
 		protected void Active_OnDrawGizmos() {
 			if (_debug) {
-				Gizmos.DrawWireSphere(transform.position, _range);
+				Gizmos.DrawWireSphere(transform.position, Range);
 			}
 		}
 	}

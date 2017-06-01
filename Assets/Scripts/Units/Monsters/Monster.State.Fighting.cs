@@ -6,7 +6,7 @@ public partial class Monster {
 		if (Target != null) {
 			SetState(BaseUnitState.Engaging);
 		} else {
-			SetState(BaseUnitState.Walking);
+			SetState(BaseUnitState.Idle);
 		}
 	}
 }

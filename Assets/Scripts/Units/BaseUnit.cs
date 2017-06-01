@@ -19,11 +19,11 @@ public partial class BaseUnit : StateMachineBase {
 	protected int _currentHealth;
 	public int CurrentHealth { get { return _currentHealth; } }
 	public bool IsDead { get { return _currentHealth == 0; } }
-	protected float AttackRange { get { return _attributes.attackRange; } }
-	protected int AttackDamage { get { return _attributes.attackDamage; } }
+	public float AttackRange { get { return _attributes.attackRange; } }
+	public int AttackDamage { get { return _attributes.attackDamage; } }
 	
-	private float AttackSpeed { get { return _attributes.attackSpeed; } }
-	private float MovementSpeed { get { return _attributes.movementSpeed; } }
+	public float AttackSpeed { get { return _attributes.attackSpeed; } }
+	public float MovementSpeed { get { return _attributes.movementSpeed; } }
 	private float TurnSpeed { get { return _attributes.turnSpeed; } }
 
 	protected new void Awake() {

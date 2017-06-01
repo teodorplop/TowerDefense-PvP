@@ -7,9 +7,9 @@ namespace Ingame.towers {
 		[SerializeField]
 		protected Projectile _projectilePrefab;
 
-		private float _attackSpeed { get { return _attributes.attackSpeed; } }
-		private float _range { get { return _attributes.range; } }
-		protected int _attackDamage { get { return _attributes.attackDamage; } }
+		public float AttackSpeed { get { return _attributes.attackSpeed; } }
+		public float Range { get { return _attributes.range; } }
+		public int AttackDamage { get { return _attributes.attackDamage; } }
 
 		protected new void Awake() {
 			base.Awake();

@@ -22,7 +22,7 @@ public partial class GameManager {
 				}
 
 				_instance._uiManager.Refresh();
-				_instance._uiManager.ShowUpgrades(null, null);
+				_instance._uiManager.ShowTower(null, null);
 
 				_instance.SetState(GameState.Idle);
 			} else {

@@ -11,9 +11,11 @@ public class UnitUI : MonoBehaviour {
 
 	private float _healthBarWidth;
 	private BaseUnit _target;
+	void Awake() {
+		_healthBarWidth = _healthBar.rect.width;
+	}
 	public void Inject(BaseUnit target) {
 		_target = target;
-		_healthBarWidth = _healthBar.rect.width;
 	}
 
 	void LateUpdate() {

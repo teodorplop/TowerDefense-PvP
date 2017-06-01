@@ -6,7 +6,7 @@ namespace Ingame.towers {
 
 		private string _trainedUnit { get { return _attributes.trainedUnit; } }
 		private int _maxUnits { get { return _attributes.maxUnits; } }
-		private float _respawnTimer { get { return _attributes.respawnTimer; } }
+		public float RespawnTimer { get { return _attributes.respawnTimer; } }
 		private float _range { get { return _attributes.range; } }
 
 		protected new void Awake() {

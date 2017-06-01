@@ -3,7 +3,7 @@ using UnityEngine;
 using Utils.Linq;
 using Ingame.towers;
 
-namespace Interface.towershop {
+namespace Interface.towerShop {
 	public class TowerShop : MonoBehaviour {
 		[SerializeField]
 		private TowerElement[] _prefabs;

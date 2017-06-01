@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Ingame.towers;
 
-namespace Interface.towershop {
+namespace Interface.towerShop {
 	public class TowerElement : MonoBehaviour {
 		[SerializeField]
 		protected IntLabel _valueLabel;

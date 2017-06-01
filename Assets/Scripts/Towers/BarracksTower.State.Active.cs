@@ -17,7 +17,7 @@ namespace Ingame.towers {
 			_units = new Unit[_maxUnits];
 			_respawnTimers = new float[_maxUnits];
 			for (int i = 0; i < _maxUnits; ++i) {
-				_respawnTimers[i] = _respawnTimer;
+				_respawnTimers[i] = RespawnTimer;
 			}
 
 			Vector3 bestRallyPoint = PathRequestManager.GetConvenientPoint(owner, transform.position - owner.WorldOffset, _range) + owner.WorldOffset;
@@ -60,7 +60,7 @@ namespace Ingame.towers {
 					if (_respawnTimers[i] <= 0.0f) {
 						_units[i].Respawn();
 						SpawnUnit(i);
-						_respawnTimers[i] = _respawnTimer;
+						_respawnTimers[i] = RespawnTimer;
 					}
 				}
 			}

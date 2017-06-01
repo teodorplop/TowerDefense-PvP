@@ -10,7 +10,7 @@ namespace Ingame.towers {
 			projectile.transform.localPosition = _projectilePrefab.transform.localPosition;
 			projectile.transform.localScale = _projectilePrefab.transform.localScale;
 
-			projectile.Inject(_attackDamage, target);
+			projectile.Inject(AttackDamage, target);
 			projectile.gameObject.SetActive(true);
 		}
 	}

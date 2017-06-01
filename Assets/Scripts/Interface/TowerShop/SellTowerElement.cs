@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Ingame.towers;
 
-namespace Interface.towershop {
+namespace Interface.towerShop {
 	public class SellTowerElement : TowerElement {
 		public override void Inject(TowerFactory factory, Tower tower) {
 			base.Inject(factory, tower);

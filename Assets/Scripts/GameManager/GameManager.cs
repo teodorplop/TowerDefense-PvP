@@ -18,6 +18,8 @@ public partial class GameManager : StateMachineBase {
 	[SerializeField]
 	private LayerMask _towerMask;
 	[SerializeField]
+	private LayerMask _unitMask;
+	[SerializeField]
 	private float _gridNodeRadius = 0.75f;
 	[SerializeField]
 	private int _gridBlurSize = 3;
@@ -28,6 +30,8 @@ public partial class GameManager : StateMachineBase {
 	private TowerFactory _towerFactory;
 	private UnitFactory _unitFactory;
 	private RequestDispatcher _dispatcher;
+
+	private HighlightManager _highlightManager;
 
 	protected new void Awake() {
 		base.Awake();
@@ -40,6 +44,8 @@ public partial class GameManager : StateMachineBase {
 		_unitFactory = FindObjectOfType<UnitFactory>();
 
 		_dispatcher = new RequestDispatcher();
+
+		_highlightManager = FindObjectOfType<HighlightManager>();
 
 		InitializeHandlers();
 	}

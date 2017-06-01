@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ingame.towers;
 
-namespace Interface.towershop {
+namespace Interface.towerShop {
 	public class BarracksTowerElement : TowerElement {
 		public override void Inject(TowerFactory factory, Tower tower) {
 			base.Inject(factory, tower);
