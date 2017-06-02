@@ -6,6 +6,8 @@ namespace Ingame.towers {
 
 		[SerializeField]
 		protected Projectile _projectilePrefab;
+		[SerializeField]
+		private GameObject _rangeSprite;
 
 		public float AttackSpeed { get { return _attributes.attackSpeed; } }
 		public float Range { get { return _attributes.range; } }
@@ -14,6 +16,16 @@ namespace Ingame.towers {
 		protected new void Awake() {
 			base.Awake();
 			SetState(TowerState.Construction);
+		}
+		void Start() {
+			Vector3 scale = _rangeSprite.transform.localScale;
+			scale.x *= Range;
+			scale.y *= Range;
+			_rangeSprite.transform.localScale = scale;
+		}
+
+		public override void Select(bool selected) {
+			_rangeSprite.SetActive(selected);
 		}
 	}
 }

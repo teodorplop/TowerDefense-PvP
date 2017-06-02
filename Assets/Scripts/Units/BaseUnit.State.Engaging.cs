@@ -61,7 +61,7 @@ public partial class BaseUnit {
 		_waypointsPath = new Path(waypoints, transform.position - owner.WorldOffset, 5.0f);
 	}
 
-	protected void Engaging_FixedUpdate() {
+	protected virtual void Engaging_FixedUpdate() {
 		if (Target != null && Target.CanBeAttacked()) {
 			float distance = Vector3.Distance(transform.position, Target.transform.position);
 			if (distance <= AttackRange) {

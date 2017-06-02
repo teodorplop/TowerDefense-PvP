@@ -6,7 +6,10 @@ public partial class Unit : BaseUnit {
 	private float EngageRange { get { return _attributes.engageRange; } }
 
 	public void SetRallyPoint(Vector3 point) {
+		RemoveTarget();
+
 		_rallyPoint = point;
+		_refreshRallyPoint = true;
 		SetState(UnitState.RallyPoint);
 	}
 

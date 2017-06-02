@@ -34,6 +34,7 @@ public partial class GameManager {
 
 		if (_selectedTower != null) {
 			_highlightManager.Disable(_selectedTower.gameObject);
+			_selectedTower.Select(false);
 			_selectedTower = null;
 		}
 
@@ -50,6 +51,9 @@ public partial class GameManager {
 		}
 
 		_selectedTower = tower;
+		if (_selectedTower != null) {
+			_selectedTower.Select(true);
+		}
 	}
 
 	private BaseUnit _selectedUnit;

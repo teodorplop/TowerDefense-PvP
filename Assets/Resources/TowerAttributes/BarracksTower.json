@@ -8,5 +8,5 @@
   "respawnTimer": 8,
   "maxUnits": 3,
 
-  "upgrades": [ "SellTower" ]
+  "upgrades": [ "RallyPoint", "SellTower" ]
 }

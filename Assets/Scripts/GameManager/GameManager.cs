@@ -9,6 +9,7 @@ public partial class GameManager : StateMachineBase {
 		Loading,
 		Idle,
 		TowerSelected,
+		RallyPoint,
 		GameEnded
 	}
 
@@ -97,6 +98,10 @@ public partial class GameManager : StateMachineBase {
 	public void MonsterDied(Monster monster) {
 		monster.owner.Wallet.Add(Wallet.Currency.Gold, monster.GoldAwarded);
 		_uiManager.Refresh();
+	}
+	public void SetRallyPoint(Tower tower) {
+		_rallyPointTower = tower;
+		SetState(GameState.RallyPoint);
 	}
 	#endregion
 }

@@ -28,6 +28,10 @@ namespace Ingame.towers {
 			yield return null;
 		}
 
+		private bool IsValidRallyPoint(Vector3 point) {
+			float distance = Vector3.Distance(point, transform.position);
+			return distance <= _range;
+		}
 		private void SetRallyPoint(Vector3 point) {
 			_rallyPoint = point;
 			
@@ -69,7 +73,7 @@ namespace Ingame.towers {
 		private void SpawnUnit(int idx) {
 			_units[idx].transform.position = _spawnPoint;
 			_units[idx].gameObject.SetActive(true);
-			_units[idx].SetRallyPoint(owner.WorldOffset + _rallyPoints[idx]);
+			_units[idx].SetRallyPoint(_rallyPoints[idx]);
 		}
 
 		protected void Active_OnDrawGizmos() {

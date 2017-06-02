@@ -15,6 +15,23 @@ public static class InputScanner {
 		return hit.collider.gameObject.GetComponent<T>();
 	}
 
+	public static bool PlanePosition(Vector3 mousePosition, out Vector3 hitPosition) {
+		hitPosition = Vector3.zero;
+		if (CheckForUI(mousePosition)) {
+			return false;
+		}
+
+		Plane plane = new Plane(Vector3.up, Vector3.zero);
+		Ray inputRay = Camera.main.ScreenPointToRay(mousePosition);
+		float distance;
+
+		if (plane.Raycast(inputRay, out distance)) {
+			hitPosition = inputRay.GetPoint(distance);
+			return true;
+		}
+		return false;
+	}
+
 	public static bool CheckForUI(Vector3 mousePosition) {
 		return EventSystem.current == null ? false : EventSystem.current.IsPointerOverGameObject();
 	}

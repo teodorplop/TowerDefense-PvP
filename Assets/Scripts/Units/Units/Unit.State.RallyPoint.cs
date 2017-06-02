@@ -3,10 +3,11 @@ using UnityEngine;
 using Pathfinding;
 
 public partial class Unit {
+	private bool _refreshRallyPoint;
 	private Vector3 _rallyPoint;
 
 	IEnumerator RallyPoint_EnterState() {
-		RequestPath(_rallyPoint);
+		_refreshRallyPoint = true;
 		_animator.SetBool("IsWalking", true);
 		yield return null;
 	}
@@ -33,7 +34,12 @@ public partial class Unit {
 	}
 
 	void RallyPoint_FixedUpdate() {
-		FollowWaypoints(OnRallyPointReached);
+		if (_refreshRallyPoint) {
+			_refreshRallyPoint = false;
+			RequestPath(_rallyPoint);
+		} else {
+			FollowWaypoints(OnRallyPointReached);
+		}
 	}
 
 	private void RallyPoint_OnDrawGizmos() {

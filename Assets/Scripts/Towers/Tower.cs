@@ -24,5 +24,9 @@ namespace Ingame.towers {
 		public void SetAttributes(TowerAttributes attributes) {
 			_attributes = attributes;
 		}
+
+		public virtual void Select(bool selected) {
+
+		}
 	}
 }
