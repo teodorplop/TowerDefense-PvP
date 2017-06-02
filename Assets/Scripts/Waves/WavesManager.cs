@@ -41,8 +41,6 @@ namespace Ingame.waves {
 		[SerializeField]
 		public string name;
 		[SerializeField]
-		public int count;
-		[SerializeField]
 		public string path;
 
 		[NonSerialized]
@@ -51,12 +49,14 @@ namespace Ingame.waves {
 
 	public class WavesManager : MonoBehaviour {
 		[SerializeField]
-		private List<Wave> _waves;
+		private float _displacement = 2.5f;
 
+		private List<Wave> _waves;
 		private bool _started;
 		private float _matchTimer;
 		private MonsterFactory _monsterFactory;
 		void Awake() {
+			_waves = GameResources.LoadWaves();
 			_monsterFactory = FindObjectOfType<MonsterFactory>();
 		}
 
@@ -79,9 +79,14 @@ namespace Ingame.waves {
 		}
 
 		private void SendMonsters(List<WaveMonster> monsters) {
+			System.Random random = new System.Random(0);
 			foreach (WaveMonster monster in monsters) {
+				Vector2 offset = Vector2.zero;
+				offset.x = ((float)random.NextDouble() * 2 - 1) * _displacement;
+				offset.y = ((float)random.NextDouble() * 2 - 1) * _displacement;
+
 				foreach (Player player in Players.GetPlayers()) {
-					_monsterFactory.SendMonster(player, monster.name, monster.count, monster.path);
+					_monsterFactory.SendMonster(player, monster.name, monster.path, offset);
 				}
 			}
 		}

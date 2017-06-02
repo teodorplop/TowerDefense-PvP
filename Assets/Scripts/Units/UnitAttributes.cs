@@ -20,6 +20,9 @@ public class UnitAttributes {
 	[SerializeField]
 	public int attackDamage;
 
+	[SerializeField]
+	public int awardedGold;
+
 	public UnitAttributes Clone() {
 		UnitAttributes clone = new UnitAttributes();
 		clone.movementSpeed = movementSpeed;
@@ -31,6 +34,8 @@ public class UnitAttributes {
 		clone.attackSpeed = attackSpeed;
 		clone.attackRange = attackRange;
 		clone.attackDamage = attackDamage;
+
+		clone.awardedGold = awardedGold;
 
 		return clone;
 	}

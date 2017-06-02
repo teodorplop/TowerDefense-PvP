@@ -10,9 +10,9 @@ public partial class Monster : BaseUnit {
 		SetState(BaseUnitState.Idle);
 	}
 
-	public void SetPath(Vector3[] path) {
+	public void SetPath(Vector3[] path, Vector2 offset) {
 		_path = path;
-		transform.position = _path[0] + owner.WorldOffset;
+		transform.position = _path[0] + owner.WorldOffset + new Vector3(offset.x, 0, offset.y);
 		transform.LookAt(_path[1] + owner.WorldOffset);
 		_pathIndex = 1;
 	}

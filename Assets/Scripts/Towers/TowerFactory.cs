@@ -90,7 +90,7 @@ namespace Ingame.towers {
 			Tower towerObj = player.Transform.FindChild(tower).GetComponent<Tower>();
 			int spotIdx = _towerSpotsWealth.IndexOf(obj => obj.first == GetTowerSpotName(player, tower));
 
-			return Mathf.FloorToInt(towerObj.SellValue * _towerAttributes[spotIdx].cost);
+			return Mathf.FloorToInt(towerObj.SellValue * _towerSpotsWealth[spotIdx].second);
 		}
 
 		#region utils

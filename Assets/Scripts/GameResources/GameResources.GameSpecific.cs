@@ -1,10 +1,13 @@
 ﻿using Ingame.towers;
+using Ingame.waves;
+using System.Collections.Generic;
 
 public partial class GameResources {
 	private static readonly string _walletPath = "Wallet";
 	private static readonly string _towerAttributesPath = "TowerAttributes";
 	private static readonly string _monsterAttributesPath = "MonsterAttributes";
 	private static readonly string _unitAttributesPath = "UnitAttributes";
+	private static readonly string _wavesPath = "Waves";
 
 	public static Wallet LoadWallet(string level) {
 		return Load<Wallet>(level, _walletPath, "Wallet");
@@ -32,5 +35,12 @@ public partial class GameResources {
 	}
 	public static UnitAttributes LoadUnitAttributes(string unit) {
 		return LoadUnitAttributes(SceneLoader.ActiveScene, unit);
+	}
+
+	public static List<Wave> LoadWaves(string level) {
+		return Load<List<Wave>>(_wavesPath + '/' + level);
+	}
+	public static List<Wave> LoadWaves() {
+		return LoadWaves(SceneLoader.ActiveScene);
 	}
 }

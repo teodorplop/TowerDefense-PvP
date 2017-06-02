@@ -1,0 +1,17 @@
+[
+  {
+    "spawnTime": 5.0,
+    "monsters": [
+      {
+        "spawnTime": 0.0,
+        "name": "Monster",
+        "path": "Path0"
+      },
+      {
+        "spawnTime": 0.5,
+        "name": "Monster",
+        "path": "Path0"
+      }
+    ]
+  }
+]

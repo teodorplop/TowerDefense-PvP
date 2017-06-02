@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 namespace SFX.Glow {
-	[ExecuteInEditMode]
 	public class GlowComposite : MonoBehaviour {
 		private Material compositeMaterial;
 		[SerializeField, Range(0, 10)]

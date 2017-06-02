@@ -11,8 +11,8 @@ public partial class GameManager {
 			_instance._uiManager.ShowTower(null, null);
 			
 			Player player = Players.GetPlayer(request.Player);
-			_instance._towerFactory.DestroyTower(player, request.Tower);
 			player.Wallet.Add(Wallet.Currency.Gold, _instance._towerFactory.GetSellCost(player, request.Tower));
+			_instance._towerFactory.DestroyTower(player, request.Tower);
 
 			_instance._uiManager.Refresh();
 

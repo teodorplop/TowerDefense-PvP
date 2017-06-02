@@ -19,7 +19,7 @@ public class MonsterFactory : MonoBehaviour {
 		}
 	}
 
-	public Monster SendMonster(Player player, string monsterName, int count, string path) {
+	public Monster SendMonster(Player player, string monsterName, string path, Vector2 offset) {
 		int idx = _monsterPrefabs.IndexOf(obj => obj.name == monsterName);
 		if (idx == -1) {
 			Debug.LogError("Monster " + monsterName + " not found.");
@@ -34,7 +34,7 @@ public class MonsterFactory : MonoBehaviour {
 		monster.transform.localScale = Vector3.one;
 		player.Register(monster);
 		monster.SetAttributes(attributes.Clone());
-		monster.SetPath(_pathsContainer.GetPath(path));
+		monster.SetPath(_pathsContainer.GetPath(path), offset);
 
 		UnitUI monsterUI = Instantiate(_monsterUIPrefab);
 		monsterUI.transform.SetParent(player.Transform);

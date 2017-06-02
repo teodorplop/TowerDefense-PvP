@@ -23,6 +23,9 @@ public partial class BaseUnit {
 			return;
 		}
 
+		Quaternion targetRotation = Quaternion.LookRotation(Target.transform.position - transform.position);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * TurnSpeed);
+
 		_attackTimer = Mathf.Max(0.0f, _attackTimer - Time.fixedDeltaTime);
 		if (_attackTimer <= 0.0f) {
 			_attackTimer = _timeBetweenAttacks;

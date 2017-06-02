@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 namespace SFX.Glow {
-	[ExecuteInEditMode]
 	[RequireComponent(typeof(Camera))]
 	public class GlowPrePass : MonoBehaviour {
 		[SerializeField]
