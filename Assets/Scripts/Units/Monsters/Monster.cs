@@ -3,6 +3,9 @@
 public partial class Monster : BaseUnit {
 	public enum MonsterState { Destination }
 
+	public int GoldAwarded { get { return _attributes.awardedGold; } }
+	public int LifeTaken { get { return _attributes.lifeTaken; } }
+
 	private int _pathIndex;
 	private Vector3[] _path;
 

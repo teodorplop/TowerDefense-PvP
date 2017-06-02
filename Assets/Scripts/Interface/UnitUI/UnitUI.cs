@@ -27,8 +27,13 @@ namespace Interface.units {
 			_elements[1].gameObject.SetActive(true);
 			_elements[1].Set("Attack Speed", unit.AttackSpeed.ToString());
 
-			_elements[2].gameObject.SetActive(true);
-			_elements[2].Set("Range", unit.AttackRange.ToString());
+			if (unit is Monster) {
+				Monster m = unit as Monster;
+				_elements[2].gameObject.SetActive(true);
+				_elements[2].Set("Life Penalty", m.LifeTaken.ToString());
+			} else {
+				_elements[2].gameObject.SetActive(false);
+			}
 		}
 	}
 }

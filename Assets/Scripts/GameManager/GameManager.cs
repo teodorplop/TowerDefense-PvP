@@ -92,4 +92,11 @@ public partial class GameManager : StateMachineBase {
 		
 		TowerSelected_ActionHandlers = new ActionHandler[] { upgradeTower, sellTower };
 	}
+
+	#region PUBLICS
+	public void MonsterDied(Monster monster) {
+		monster.owner.Wallet.Add(Wallet.Currency.Gold, monster.GoldAwarded);
+		_uiManager.Refresh();
+	}
+	#endregion
 }

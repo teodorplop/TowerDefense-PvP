@@ -78,6 +78,10 @@ public partial class BaseUnit : StateMachineBase {
 
 	// TODO: also pass a damage type parameter, for damage calculation
 	public void ApplyDamage(int damage) {
+		if (_currentHealth == 0) {
+			return;
+		}
+
 		_currentHealth = Mathf.Max(0, _currentHealth - damage);
 		if (IsDead) {
 			SetState(BaseUnitState.Dead);

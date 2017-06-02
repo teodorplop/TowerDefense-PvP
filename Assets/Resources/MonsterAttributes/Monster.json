@@ -8,5 +8,6 @@
   "attackRange": 2.5,
   "attackDamage": 3,
 
-  "awardedGold": 3
+  "awardedGold": 3,
+  "lifeTaken": 1
 }

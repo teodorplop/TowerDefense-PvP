@@ -5,13 +5,13 @@ public partial class BaseUnit {
 	private float _timeBetweenAttacks;
 	private float _attackTimer;
 
-	protected virtual IEnumerator Fighting_EnterState() {
+	protected IEnumerator Fighting_EnterState() {
 		_attackTimer = _timeBetweenAttacks;
 		_animator.SetBool("IsFighting", true);
 		_animator.speed = AttackSpeed;
 		yield return null;
 	}
-	protected virtual IEnumerator Fighting_ExitState() {
+	protected IEnumerator Fighting_ExitState() {
 		_animator.SetBool("IsFighting", false);
 		_animator.speed = 1.0f;
 		yield return null;

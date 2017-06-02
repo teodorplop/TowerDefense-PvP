@@ -10,7 +10,7 @@ public partial class GameManager {
 			return;
 		}
 
-		monster.owner.Wallet.Subtract(Wallet.Currency.Health, 1);
+		monster.owner.Wallet.Subtract(Wallet.Currency.Health, monster.LifeTaken);
 		_uiManager.Refresh();
 
 		if (monster.owner.Wallet.Get(Wallet.Currency.Health) == 0) {

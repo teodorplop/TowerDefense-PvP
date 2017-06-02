@@ -22,6 +22,8 @@ public class UnitAttributes {
 
 	[SerializeField]
 	public int awardedGold;
+	[SerializeField]
+	public int lifeTaken;
 
 	public UnitAttributes Clone() {
 		UnitAttributes clone = new UnitAttributes();
@@ -36,6 +38,7 @@ public class UnitAttributes {
 		clone.attackDamage = attackDamage;
 
 		clone.awardedGold = awardedGold;
+		clone.lifeTaken = lifeTaken;
 
 		return clone;
 	}
