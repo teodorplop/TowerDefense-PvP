@@ -18,6 +18,9 @@ public class UnitUI : MonoBehaviour {
 		_target = target;
 	}
 
+	void FixedUpdate() {
+		gameObject.SetActive(_target != null && !_target.IsDead);
+	}
 	void LateUpdate() {
 		if (_target == null) {
 			return;
