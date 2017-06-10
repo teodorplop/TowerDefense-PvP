@@ -2,6 +2,9 @@
 
 namespace Ingame.towers {
 	public class ArcherTower : OffensiveTower {
+		[SerializeField]
+		private Transform _launcher;
+
 		protected override void OnAttack(Monster target) {
 			base.OnAttack(target);
 
@@ -12,6 +15,13 @@ namespace Ingame.towers {
 
 			projectile.Inject(AttackDamage, target);
 			projectile.gameObject.SetActive(true);
+		}
+
+		protected void Active_Update() {
+			if (_target != null) {
+				Quaternion targetRotation = Quaternion.LookRotation(_target.transform.position - transform.position);
+				_launcher.rotation = Quaternion.Lerp(_launcher.rotation, targetRotation, Time.deltaTime * 15.0f);
+			}
 		}
 	}
 }

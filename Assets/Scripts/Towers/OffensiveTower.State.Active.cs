@@ -6,7 +6,7 @@ namespace Ingame.towers {
 	public partial class OffensiveTower {
 		private float _attackTimer;
 		private float _timeBetweenAttacks;
-		private Monster _target;
+		protected Monster _target;
 
 		protected IEnumerator Active_EnterState() {
 			_attackTimer = _timeBetweenAttacks = 1.0f / AttackSpeed;
