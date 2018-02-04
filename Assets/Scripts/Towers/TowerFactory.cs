@@ -26,7 +26,7 @@ namespace Ingame.towers {
 		}
 
 		private Tower ChangeTower(Player player, string tower, string upgrade) {
-			Transform towerTr = player.Transform.FindChild(tower);
+			Transform towerTr = player.Transform.Find(tower);
 			if (towerTr == null) {
 				Debug.LogError("Cannot find tower " + tower, gameObject);
 				return null;
@@ -82,12 +82,12 @@ namespace Ingame.towers {
 		}
 
 		public float GetSellValue(Player player, string tower) {
-			Tower towerObj = player.Transform.FindChild(tower).GetComponent<Tower>();
+			Tower towerObj = player.Transform.Find(tower).GetComponent<Tower>();
 			return towerObj.SellValue;
 		}
 
 		public int GetSellCost(Player player, string tower) {
-			Tower towerObj = player.Transform.FindChild(tower).GetComponent<Tower>();
+			Tower towerObj = player.Transform.Find(tower).GetComponent<Tower>();
 			int spotIdx = _towerSpotsWealth.IndexOf(obj => obj.first == GetTowerSpotName(player, tower));
 
 			return Mathf.FloorToInt(towerObj.SellValue * _towerSpotsWealth[spotIdx].second);

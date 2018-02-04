@@ -2,6 +2,7 @@
 using UnityEngine;
 using Pathfinding;
 using Ingame.towers;
+using Grid = Pathfinding.Grid;
 
 public partial class GameManager {
 	IEnumerator Loading_EnterState() {
@@ -16,7 +17,7 @@ public partial class GameManager {
 
 		playerContainer = Instantiate(playerContainer);
 		playerContainer.transform.localScale = Vector3.one;
-		playerContainer.transform.position = new Vector3(55.0f, 0.0f, 0.0f);
+		playerContainer.transform.position = new Vector3(160.0f, 0.0f, 0.0f);
 		Player serverPlayer = GeneratePlayer(playerContainer, wallet.Clone(), "ServerPlayer", false);
 
 		// We may want to have one pathfinder for each player, in case we want dynamic pathfinding.

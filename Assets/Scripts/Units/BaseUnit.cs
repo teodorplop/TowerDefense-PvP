@@ -60,6 +60,7 @@ public partial class BaseUnit : StateMachineBase {
 		}
 
 		Vector3 position = transform.position - owner.WorldOffset;
+		position.y = 0;
 		Vector2 position2D = new Vector2(position.x, position.z);
 
 		while (_waypointsPath.turnBoundaries[_waypointIndex].HasCrossedLine(position2D)) {
@@ -74,6 +75,9 @@ public partial class BaseUnit : StateMachineBase {
 		Quaternion targetRotation = Quaternion.LookRotation(_waypointsPath.waypoints[_waypointIndex] - position);
 		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * TurnSpeed);
 		transform.Translate(Vector3.forward * Time.fixedDeltaTime * MovementSpeed);
+
+		float height = owner.Terrain.SampleHeight(transform.position);
+		transform.position = new Vector3(transform.position.x, height, transform.position.z);
 	}
 
 	// TODO: also pass a damage type parameter, for damage calculation

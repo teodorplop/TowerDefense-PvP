@@ -11,7 +11,7 @@ public partial class Unit {
 				continue;
 			}
 
-			float monsterDistance = Vector3.Distance(transform.position, monster.transform.position);
+			float monsterDistance = Vector3Utils.PlanarDistance(transform.position, monster.transform.position);
 
 			if (monster.Target == this) {
 				// If the monster is currently targetting us, keep it as a target!

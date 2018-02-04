@@ -17,7 +17,7 @@ namespace Ingame.towers {
 			base.Awake();
 			SetState(TowerState.Construction);
 		}
-		void Start() {
+		protected void Start() {
 			Vector3 scale = _rangeSprite.transform.localScale;
 			scale.x *= Range;
 			scale.y *= Range;

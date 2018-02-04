@@ -17,7 +17,7 @@ namespace Ingame.towers {
 			_attackTimer = _timeBetweenAttacks;
 		}
 		private bool TargetIsStillValid() {
-			return _target != null && !_target.IsDead && !_target.ReachedDestination && Vector3.Distance(_target.transform.position, transform.position) <= Range;
+			return _target != null && !_target.IsDead && !_target.ReachedDestination && Vector3Utils.PlanarDistance(_target.transform.position, transform.position) <= Range;
 		}
 		protected virtual void UpdateTarget() {
 			if (!TargetIsStillValid()) {
@@ -31,7 +31,7 @@ namespace Ingame.towers {
 							continue;
 						}
 
-						float monsterDistance = Vector3.Distance(transform.position, monster.transform.position);
+						float monsterDistance = Vector3Utils.PlanarDistance(transform.position, monster.transform.position);
 						if (monsterDistance < distance) {
 							distance = monsterDistance;
 							_target = monster;

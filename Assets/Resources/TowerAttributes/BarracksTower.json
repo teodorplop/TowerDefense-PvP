@@ -2,7 +2,7 @@
   "cost": 70,
   "sellValue": 0.75,
 
-  "range": 7,
+  "range": 30,
 
   "trainedUnit": "BarracksUnit",
   "respawnTimer": 8,

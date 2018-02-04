@@ -1,10 +1,10 @@
 {
-  "movementSpeed": 5.0,
+  "movementSpeed": 10.0,
   "turnSpeed": 10.0,
 
   "maxHealth": 55,
 
-  "engageRange": 7.0,
+  "engageRange": 20.0,
   "attackSpeed": 1.0,
   "attackRange": 2.5,
   "attackDamage": 2

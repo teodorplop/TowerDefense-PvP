@@ -29,7 +29,7 @@ namespace Ingame.towers {
 		}
 
 		private bool IsValidRallyPoint(Vector3 point) {
-			float distance = Vector3.Distance(point, transform.position);
+			float distance = Vector3Utils.PlanarDistance(point, transform.position);
 			return distance <= _range;
 		}
 		private void SetRallyPoint(Vector3 point) {
@@ -37,7 +37,7 @@ namespace Ingame.towers {
 			
 			float angle = 0;
 			for (int i = 0; i < _maxUnits; ++i) {
-				Vector3 offset = 1.75f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+				Vector3 offset = 3.5f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 				angle += Mathf.PI * 2.0f / _maxUnits;
 
 				_rallyPoints[i] = _rallyPoint + offset;

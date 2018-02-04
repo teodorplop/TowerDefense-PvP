@@ -1,0 +1,10 @@
+{
+  "cost": 90,
+  "sellValue": 0.75,
+
+  "attackSpeed": 0.5,
+  "range": 40,
+  "attackDamage": 25,
+
+  "upgrades": [ "SellTower" ]
+}

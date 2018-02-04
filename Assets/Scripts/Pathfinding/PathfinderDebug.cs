@@ -20,8 +20,8 @@ namespace Pathfinding {
 
 		void Awake() {
 			_terrainInfo = FindObjectOfType<TerrainInfo>();
-			_start = transform.FindChild("Start");
-			_destination = transform.FindChild("Destination");
+			_start = transform.Find("Start");
+			_destination = transform.Find("Destination");
 		}
 
 		void Start() {

@@ -20,6 +20,9 @@ public class Player {
 	public Transform Transform { get { return _transform; } }
 	public Vector3 WorldOffset { get { return _transform.position; } }
 
+	private Terrain _terrain;
+	public Terrain Terrain { get { return _terrain; } }
+
 	private List<Tower> _towers;
 	public List<Tower> Towers { get { return _towers; } }
 	private List<Monster> _monsters;
@@ -34,6 +37,7 @@ public class Player {
 		_clientPlayer = clientPlayer;
 		_wallet = wallet;
 		_transform = transform;
+		_terrain = _transform.GetComponentInChildren<Terrain>();
 
 		_towers = new List<Tower>();
 		_monsters = new List<Monster>();
@@ -78,9 +82,9 @@ public class Player {
 	}
 
 	public List<Tower> GetTowersInRange(Vector3 position, float radius) {
-		return _towers.Where(obj => Vector3.Distance(obj.transform.position, position) <= radius).ToList();
+		return _towers.Where(obj => Vector3Utils.PlanarDistance(obj.transform.position, position) <= radius).ToList();
 	}
 	public List<Monster> GetMonstersInRange(Vector3 position, float radius) {
-		return _monsters.Where(obj => Vector3.Distance(obj.transform.position, position) <= radius).ToList();
+		return _monsters.Where(obj => Vector3Utils.PlanarDistance(obj.transform.position, position) <= radius).ToList();
 	}
 }

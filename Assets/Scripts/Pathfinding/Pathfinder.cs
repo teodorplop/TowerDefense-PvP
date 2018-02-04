@@ -27,7 +27,7 @@ namespace Pathfinding {
 				for (int y = yMin; y <= yMax; ++y) {
 					int penalty = _grid.NodeGrid[x, y].movementPenalty;
 					Vector3 worldPosition = _grid.NodeGrid[x, y].WorldPosition;
-					float distance = Vector3.Distance(center, worldPosition);
+					float distance = Vector3Utils.PlanarDistance(center, worldPosition);
 
 					if (penalty < minimumPenalty && distance <= range) {
 						minimumPenalty = penalty;

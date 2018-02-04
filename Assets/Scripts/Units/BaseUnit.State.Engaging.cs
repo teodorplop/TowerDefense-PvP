@@ -63,7 +63,7 @@ public partial class BaseUnit {
 
 	protected virtual void Engaging_FixedUpdate() {
 		if (Target != null && Target.CanBeAttacked()) {
-			float distance = Vector3.Distance(transform.position, Target.transform.position);
+			float distance = Vector3Utils.PlanarDistance(transform.position, Target.transform.position);
 			if (distance <= AttackRange) {
 				EngagingPathFinished(true);
 			} else {
