@@ -34,6 +34,8 @@ public partial class Unit {
 	}
 
 	void RallyPoint_Update() {
+		UpdateIdleTime(Time.deltaTime);
+
 		if (_refreshRallyPoint) {
 			_refreshRallyPoint = false;
 			RequestPath(_rallyPoint);

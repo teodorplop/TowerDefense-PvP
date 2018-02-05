@@ -10,10 +10,6 @@ namespace SFX.Glow {
 
 		[SerializeField]
 		private Color glowColor = Color.black;
-		[SerializeField]
-		private float lerpFactor = 10.0f;
-
-		private Color currentColor, targetColor;
 
 		private void Awake() {
 			renderers = GetComponentsInChildren<Renderer>();
@@ -26,18 +22,9 @@ namespace SFX.Glow {
 			this.glowColor = glowColor;
 		}
 		public void Enable(bool enabled) {
-			targetColor = enabled ? glowColor : Color.black;
-			this.enabled = true;
-		}
-
-		void Update() {
-			currentColor = Color.Lerp(currentColor, targetColor, Time.deltaTime * lerpFactor);
-
+			Color col = enabled ? glowColor : Color.black;
 			foreach (Material mat in materials)
-				mat.SetColor("_GlowColor", currentColor);
-
-			if (currentColor.Equals(targetColor))
-				enabled = false;
+				mat.SetColor("_GlowColor", col);
 		}
 	}
 }

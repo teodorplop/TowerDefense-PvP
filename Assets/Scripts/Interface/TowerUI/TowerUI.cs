@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using Ingame.towers;
 
 namespace Interface.towers {
 	public class TowerUI : MonoBehaviour {
 		[SerializeField]
 		private UIInformation[] _elements;
+
+		private HorizontalLayoutGroup layoutGroup;
+
+		void Awake() {
+			layoutGroup = GetComponent<HorizontalLayoutGroup>();
+		}
 
 		public void Show(Tower tower) {
 			if (tower is OffensiveTower) {
@@ -31,6 +38,9 @@ namespace Interface.towers {
 				_elements[1].gameObject.SetActive(false);
 				_elements[2].gameObject.SetActive(false);
 			}
+
+			layoutGroup.enabled = false;
+			layoutGroup.enabled = true;
 		}
 	}
 }

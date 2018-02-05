@@ -45,6 +45,8 @@ public partial class Unit {
 	}
 
 	void Idle_Update() {
+		UpdateIdleTime(Time.deltaTime);
+
 		Monster target = GetMonsterInRange();
 
 		if (target != null) {

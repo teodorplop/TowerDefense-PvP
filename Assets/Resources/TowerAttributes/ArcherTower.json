@@ -6,5 +6,5 @@
   "range": 40,
   "attackDamage": 5,
 
-  "upgrades": [ "SellTower" ]
+  "upgrades": [ "MarksmenTower", "SellTower" ]
 }

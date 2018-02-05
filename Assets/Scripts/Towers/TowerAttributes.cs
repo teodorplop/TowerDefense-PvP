@@ -25,24 +25,5 @@ namespace Ingame.towers {
 		public float respawnTimer;
 		[SerializeField]
 		public int maxUnits;
-
-		public TowerAttributes Clone() {
-			TowerAttributes clone = new TowerAttributes();
-			clone.upgrades = new string[upgrades.Length];
-			upgrades.CopyTo(clone.upgrades, 0);
-
-			clone.cost = cost;
-			clone.sellValue = sellValue;
-
-			clone.attackSpeed = attackSpeed;
-			clone.range = range;
-			clone.attackDamage = attackDamage;
-
-			clone.trainedUnit = trainedUnit;
-			clone.respawnTimer = respawnTimer;
-			clone.maxUnits = maxUnits;
-
-			return clone;
-		}
 	}
 }

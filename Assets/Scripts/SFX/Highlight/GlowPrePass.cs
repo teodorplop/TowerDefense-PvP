@@ -66,7 +66,6 @@ namespace SFX.Glow {
 
 		private void OnPostRender() {
 			if (glowingObject != null) {
-				glowingObjectLayer = glowingObject.gameObject.layer;
 				foreach (Renderer rend in glowingObject.Renderers)
 					rend.gameObject.layer = glowingObjectLayer;
 			}

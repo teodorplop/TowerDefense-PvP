@@ -48,47 +48,68 @@ namespace Ingame.waves {
 	}
 
 	public class WavesManager : MonoBehaviour {
+		private struct MonsterToSend {
+			public string name;
+			public string path;
+			public MonsterToSend(string name, string path) {
+				this.name = name;
+				this.path = path;
+			}
+		}
+
 		[SerializeField]
 		private float _displacement = 2.5f;
 
 		private List<Wave> _waves;
+		private Dictionary<Player, List<MonsterToSend>> _queuedMonsters;
+
 		private bool _started;
 		private float _matchTimer;
 		private MonsterFactory _monsterFactory;
 		void Awake() {
 			_waves = GameResources.LoadWaves();
+			_queuedMonsters = new Dictionary<Player, List<MonsterToSend>>();
 			_monsterFactory = FindObjectOfType<MonsterFactory>();
 		}
 
 		public void StartMatch() {
 			_started = true;
 		}
+		public void QueueMonster(Player player, string monster, string path) {
+			if (!_queuedMonsters.ContainsKey(player))
+				_queuedMonsters.Add(player, new List<MonsterToSend>());
+			_queuedMonsters[player].Add(new MonsterToSend(monster, path));
+		}
 
 		void Update() {
-			if (!_started) {
-				return;
-			}
+			if (!_started) return;
 
 			_matchTimer += Time.deltaTime;
 
-			foreach (Wave wave in _waves) {
-				if (_matchTimer >= wave.spawnTime && !wave.finished) {
+			foreach (Wave wave in _waves)
+				if (_matchTimer >= wave.spawnTime && !wave.finished)
 					SendMonsters(wave.Advance(Time.deltaTime));
-				}
+
+			foreach (Player player in _queuedMonsters.Keys) {
+				foreach (MonsterToSend monster in _queuedMonsters[player])
+					_monsterFactory.SendMonster(player, monster.name, monster.path, GetRandomOffset());
+				_queuedMonsters[player].Clear();
 			}
 		}
 
 		private void SendMonsters(List<WaveMonster> monsters) {
-			System.Random random = new System.Random(0);
 			foreach (WaveMonster monster in monsters) {
-				Vector2 offset = Vector2.zero;
-				offset.x = ((float)random.NextDouble() * 2 - 1) * _displacement;
-				offset.y = ((float)random.NextDouble() * 2 - 1) * _displacement;
-
-				foreach (Player player in Players.GetPlayers()) {
-					_monsterFactory.SendMonster(player, monster.name, monster.path, offset);
-				}
+				foreach (Player player in Players.GetPlayers())
+					_monsterFactory.SendMonster(player, monster.name, monster.path, GetRandomOffset());
 			}
+		}
+
+		private Vector2 GetRandomOffset() {
+			System.Random random = new System.Random(0);
+			Vector2 offset = Vector2.zero;
+			offset.x = ((float)random.NextDouble() * 2 - 1) * _displacement;
+			offset.y = ((float)random.NextDouble() * 2 - 1) * _displacement;
+			return offset;
 		}
 	}
 }

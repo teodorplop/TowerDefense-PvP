@@ -10,6 +10,8 @@ public class UnitAttributes {
 
 	[SerializeField]
 	public int maxHealth;
+	[SerializeField]
+	public float regenTime;
 
 	[SerializeField]
 	public float engageRange;
@@ -24,22 +26,4 @@ public class UnitAttributes {
 	public int awardedGold;
 	[SerializeField]
 	public int lifeTaken;
-
-	public UnitAttributes Clone() {
-		UnitAttributes clone = new UnitAttributes();
-		clone.movementSpeed = movementSpeed;
-		clone.turnSpeed = turnSpeed;
-
-		clone.maxHealth = maxHealth;
-
-		clone.engageRange = engageRange;
-		clone.attackSpeed = attackSpeed;
-		clone.attackRange = attackRange;
-		clone.attackDamage = attackDamage;
-
-		clone.awardedGold = awardedGold;
-		clone.lifeTaken = lifeTaken;
-
-		return clone;
-	}
 }

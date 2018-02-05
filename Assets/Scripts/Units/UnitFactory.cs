@@ -30,7 +30,7 @@ public class UnitFactory : MonoBehaviour {
 		unit.transform.SetParent(barracks.transform);
 		unit.transform.localScale = prefab.transform.localScale;
 		player.Register(unit);
-		unit.SetAttributes(attributes.Clone());
+		unit.SetAttributes(attributes);
 
 		UnitUI unitUI = Instantiate(_unitUIPrefab);
 		unitUI.transform.SetParent(barracks.transform);

@@ -11,6 +11,8 @@ public partial class Unit {
 	}
 
 	void ReturnToRallyPoint_Update() {
+		UpdateIdleTime(Time.deltaTime);
+
 		Monster target = GetMonsterInRange();
 		if (target != null) {
 			Engage(target);

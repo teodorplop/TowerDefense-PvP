@@ -26,6 +26,7 @@ public partial class GameManager {
 	}
 	private void SelectTower(Tower tower) {
 		DeselectUnit();
+		DeselectSendMonsters();
 		_uiManager.ShowTower(null, null);
 
 		if (_selectedTower == tower) {
@@ -66,6 +67,7 @@ public partial class GameManager {
 	}
 	private void SelectUnit(BaseUnit unit) {
 		DeselectTower();
+		DeselectSendMonsters();
 		_uiManager.ShowUnit(null);
 
 		if (_selectedUnit == unit) {
@@ -85,5 +87,21 @@ public partial class GameManager {
 		}
 
 		_selectedUnit = unit;
+	}
+	
+	private bool _sendMonstersSelected;
+	private void DeselectSendMonsters() {
+		if (_sendMonstersSelected)
+			_uiManager.ShowSendMonsters(_sendMonstersSelected = false);
+	}
+	private void SelectSendMonsters() {
+		if (_sendMonstersSelected) {
+			DeselectSendMonsters();
+			return;
+		}
+
+		DeselectTower();
+		DeselectUnit();
+		_uiManager.ShowSendMonsters(_sendMonstersSelected = true);
 	}
 }

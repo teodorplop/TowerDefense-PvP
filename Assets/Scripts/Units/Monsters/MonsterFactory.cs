@@ -33,7 +33,7 @@ public class MonsterFactory : MonoBehaviour {
 		monster.transform.SetParent(player.Transform);
 		monster.transform.localScale = Vector3.one;
 		player.Register(monster);
-		monster.SetAttributes(attributes.Clone());
+		monster.SetAttributes(attributes);
 		monster.SetPath(_pathsContainer.GetPath(path), offset);
 
 		UnitUI monsterUI = Instantiate(_monsterUIPrefab);

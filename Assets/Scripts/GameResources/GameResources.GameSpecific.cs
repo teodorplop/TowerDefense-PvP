@@ -8,6 +8,15 @@ public partial class GameResources {
 	private static readonly string _monsterAttributesPath = "MonsterAttributes";
 	private static readonly string _unitAttributesPath = "UnitAttributes";
 	private static readonly string _wavesPath = "Waves";
+	private static readonly string _sendMonstersPath = "SendMonsters";
+
+	public static SendMonstersList LoadSendMonsters(string level) {
+		return Load<SendMonstersList>(level, _sendMonstersPath, "SendMonsters");
+	}
+
+	public static SendMonstersList LoadSendMonsters() {
+		return LoadSendMonsters(SceneLoader.ActiveScene);
+	}
 
 	public static Wallet LoadWallet(string level) {
 		return Load<Wallet>(level, _walletPath, "Wallet");

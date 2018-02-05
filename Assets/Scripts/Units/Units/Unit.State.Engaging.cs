@@ -4,6 +4,8 @@ using UnityEngine;
 
 public partial class Unit {
 	protected override void Engaging_Update() {
+		ResetIdleTime();
+
 		Monster monster = GetMonsterInRange();
 		if (monster != Target && monster != null) {
 			RemoveTarget();

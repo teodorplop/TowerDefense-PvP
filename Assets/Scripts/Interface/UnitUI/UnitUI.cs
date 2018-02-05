@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Interface.units {
 	public class UnitUI : MonoBehaviour {
@@ -8,6 +9,12 @@ namespace Interface.units {
 		private HealthBarUI _healthBar;
 		[SerializeField]
 		private UIInformation[] _elements;
+
+		private HorizontalLayoutGroup layoutGroup;
+
+		void Awake() {
+			layoutGroup = GetComponent<HorizontalLayoutGroup>();
+		}
 
 		public void Show(BaseUnit unit) {
 			if (unit == null) {
@@ -34,6 +41,9 @@ namespace Interface.units {
 			} else {
 				_elements[2].gameObject.SetActive(false);
 			}
+
+			layoutGroup.enabled = false;
+			layoutGroup.enabled = true;
 		}
 	}
 }

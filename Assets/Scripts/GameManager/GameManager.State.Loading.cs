@@ -7,6 +7,7 @@ using Grid = Pathfinding.Grid;
 public partial class GameManager {
 	IEnumerator Loading_EnterState() {
 		Wallet wallet = GameResources.LoadWallet();
+		SendMonstersList sendMonsters = GameResources.LoadSendMonsters();
 
 		TerrainInfo terrain = FindObjectOfType<TerrainInfo>();
 		Grid grid = new Grid(_gridNodeRadius, _gridBlurSize, terrain);
@@ -24,7 +25,7 @@ public partial class GameManager {
 		PathRequestManager.Register(clientPlayer, pathfinder);
 		PathRequestManager.Register(serverPlayer, pathfinder);
 
-		_uiManager.Inject(clientPlayer.Wallet);
+		_uiManager.Inject(clientPlayer.Wallet, sendMonsters);
 
 		yield return null;
 

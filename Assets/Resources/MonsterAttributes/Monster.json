@@ -5,7 +5,7 @@
   "maxHealth": 20,
 
   "attackSpeed": 1.0,
-  "attackRange": 2.5,
+  "attackRange": 5,
   "attackDamage": 3,
 
   "awardedGold": 3,

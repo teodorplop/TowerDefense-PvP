@@ -4,6 +4,8 @@ using UnityEngine;
 
 public partial class Unit {
 	protected override void Fighting_Update() {
+		ResetIdleTime();
+
 		if (Target != null && Target.Target == this) {
 			base.Fighting_Update();
 			return;

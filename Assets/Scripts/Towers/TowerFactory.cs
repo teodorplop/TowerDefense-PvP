@@ -58,7 +58,7 @@ namespace Ingame.towers {
 			upgradeTower.transform.SetParent(player.Transform);
 			upgradeTower.transform.localScale = Vector3.one;
 			upgradeTower.transform.position = position;
-			upgradeTower.SetAttributes(attributes.Clone());
+			upgradeTower.SetAttributes(attributes);
 			player.Register(upgradeTower);
 
 			return upgradeTower;

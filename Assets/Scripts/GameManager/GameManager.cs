@@ -32,6 +32,7 @@ public partial class GameManager : StateMachineBase {
 	private WavesManager _wavesManager;
 	private TowerFactory _towerFactory;
 	private UnitFactory _unitFactory;
+	private PathsContainer _pathsContainer;
 	private RequestDispatcher _dispatcher;
 
 	private HighlightManager _highlightManager;
@@ -44,6 +45,7 @@ public partial class GameManager : StateMachineBase {
 		_wavesManager = FindObjectOfType<WavesManager>();
 		_towerFactory = FindObjectOfType<TowerFactory>();
 		_unitFactory = FindObjectOfType<UnitFactory>();
+		_pathsContainer = FindObjectOfType<PathsContainer>();
 
 		_dispatcher = new RequestDispatcher();
 
@@ -95,10 +97,13 @@ public partial class GameManager : StateMachineBase {
 	}
 
 	private void InitializeHandlers() {
+		ActionHandler sendMonsters = new SendMonstersHandler();
+		ActionHandler sendMonster = new SendMonsterHandler();
 		ActionHandler upgradeTower = new UpgradeTowerHandler();
 		ActionHandler sellTower = new SellTowerHandler();
-		
-		TowerSelected_ActionHandlers = new ActionHandler[] { upgradeTower, sellTower };
+
+		Idle_ActionHandlers = new ActionHandler[] { sendMonsters, sendMonster };
+		TowerSelected_ActionHandlers = new ActionHandler[] { sendMonsters, upgradeTower, sellTower };
 	}
 
 	#region PUBLICS

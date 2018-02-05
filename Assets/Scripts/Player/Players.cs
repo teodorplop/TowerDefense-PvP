@@ -35,6 +35,7 @@ public class Players {
 	public static Player GetPlayer(string name) {
 		return Instance._players.Find(obj => obj.Name == name);
 	}
+
 	public static Player ClientPlayer {
 		get { return Instance._players.Find(obj => obj.ClientPlayer); }
 	}
