@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SFX.Glow {
 	[RequireComponent(typeof(Camera))]
@@ -7,6 +8,11 @@ namespace SFX.Glow {
 		private int blurIterations = 4;
 		[SerializeField, Tooltip("Will not update in play mode.")]
 		private int blurDownsample = 1;
+		[SerializeField, Range(0, 31)]
+		private int glowableLayer;
+		
+		private GlowObject glowingObject;
+		private int glowingObjectLayer;
 
 		private new Camera camera;
 		private Shader glowShader;
@@ -29,7 +35,19 @@ namespace SFX.Glow {
 			blurMaterial.SetVector("_BlurSize", new Vector2(blur.texelSize.x * 1.5f, blur.texelSize.y * 1.5f));
 
 			camera.targetTexture = prePass;
-			camera.SetReplacementShader(glowShader, "Glowable");
+			camera.SetReplacementShader(glowShader, "");
+		}
+
+		public void SetGlowObject(GlowObject obj) {
+			glowingObject = obj;
+		}
+
+		private void OnPreCull() {
+			if (glowingObject != null) {
+				glowingObjectLayer = glowingObject.gameObject.layer;
+				foreach (Renderer rend in glowingObject.Renderers)
+					rend.gameObject.layer = glowableLayer;
+			}
 		}
 
 		private void OnRenderImage(RenderTexture src, RenderTexture dst) {
@@ -44,6 +62,14 @@ namespace SFX.Glow {
 			// src is texture returned by the rendering process, dst is texture we can modify and return
 			// Render without modifying to our dst texture, which is actually the prePass texture
 			Graphics.Blit(src, dst);
+		}
+
+		private void OnPostRender() {
+			if (glowingObject != null) {
+				glowingObjectLayer = glowingObject.gameObject.layer;
+				foreach (Renderer rend in glowingObject.Renderers)
+					rend.gameObject.layer = glowingObjectLayer;
+			}
 		}
 	}
 }

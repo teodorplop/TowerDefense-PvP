@@ -2,7 +2,7 @@
   "cost": 70,
   "sellValue": 0.75,
 
-  "attackSpeed": 1.5,
+  "attackSpeed": 1,
   "range": 40,
   "attackDamage": 5,
 

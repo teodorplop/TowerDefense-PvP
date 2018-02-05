@@ -2,6 +2,8 @@
 using UnityEngine;
 using Ingame.waves;
 using Ingame.towers;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public partial class GameManager : StateMachineBase {
 	public enum GameState {
@@ -38,7 +40,6 @@ public partial class GameManager : StateMachineBase {
 		base.Awake();
 
 		_instance = this;
-		_uiManager = FindObjectOfType<UIManager>();
 		_inputManager = FindObjectOfType<InputManager>();
 		_wavesManager = FindObjectOfType<WavesManager>();
 		_towerFactory = FindObjectOfType<TowerFactory>();
@@ -55,7 +56,13 @@ public partial class GameManager : StateMachineBase {
 		_instance = null;
 	}
 
-	void Start() {
+	IEnumerator Start() {
+		if (SceneManager.sceneCount == 1) {
+			AsyncOperation ui = SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+			while (!ui.isDone) yield return null;
+		}
+		_uiManager = FindObjectOfType<UIManager>();
+
 		SetState(GameState.Loading);
 	}
 

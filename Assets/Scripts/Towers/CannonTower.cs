@@ -32,7 +32,6 @@ namespace Ingame.towers {
 				p2.y = 0;
 
 				targetRotation = Quaternion.LookRotation(p1 - p2);
-				//targetRotation *= Quaternion.Euler(0, 90, 0);
 			}
 
 			_launcher.rotation = Quaternion.Lerp(_launcher.rotation, targetRotation, Time.deltaTime * 15.0f);

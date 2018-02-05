@@ -4,7 +4,7 @@
 
   "attackSpeed": 0.5,
   "range": 40,
-  "attackDamage": 25,
+  "attackDamage": 12,
 
   "upgrades": [ "SellTower" ]
 }

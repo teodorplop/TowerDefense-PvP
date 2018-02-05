@@ -3,7 +3,11 @@ using System.Collections.Generic;
 
 namespace SFX.Glow {
 	public class GlowObject : MonoBehaviour {
+		private Renderer[] renderers;
 		private List<Material> materials;
+
+		public Renderer[] Renderers { get { return renderers; } }
+
 		[SerializeField]
 		private Color glowColor = Color.black;
 		[SerializeField]
@@ -12,10 +16,10 @@ namespace SFX.Glow {
 		private Color currentColor, targetColor;
 
 		private void Awake() {
+			renderers = GetComponentsInChildren<Renderer>();
 			materials = new List<Material>();
-			foreach (Renderer renderer in GetComponentsInChildren<Renderer>()) {
-				materials.AddRange(renderer.materials);
-			}
+			foreach (Renderer renderer in renderers)
+				materials.AddRange(renderer.sharedMaterials);
 		}
 
 		public void SetGlowColor(Color glowColor) {
@@ -29,13 +33,11 @@ namespace SFX.Glow {
 		void Update() {
 			currentColor = Color.Lerp(currentColor, targetColor, Time.deltaTime * lerpFactor);
 
-			for (int i = 0; i < materials.Count; ++i) {
-				materials[i].SetColor("_GlowColor", currentColor);
-			}
+			foreach (Material mat in materials)
+				mat.SetColor("_GlowColor", currentColor);
 
-			if (currentColor.Equals(targetColor)) {
+			if (currentColor.Equals(targetColor))
 				enabled = false;
-			}
 		}
 	}
 }
