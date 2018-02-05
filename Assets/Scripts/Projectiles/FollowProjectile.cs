@@ -16,9 +16,10 @@ public class FollowProjectile : Projectile {
 	public override void Inject(int damage, Monster monster) {
 		base.Inject(damage, monster);
 		_targetOffset = new Vector3(0, _offset, 0);
+
 		transform.LookAt(TargetPosition + _targetOffset);
 	}
-
+	
 	private bool ReachedTarget() {
 		return _target == null ? false : Vector3Utils.PlanarDistance(TargetPosition, transform.position) <= 0.75f;
 	}
