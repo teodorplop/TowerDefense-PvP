@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public partial class Unit {
-	protected override void Engaging_FixedUpdate() {
+	protected override void Engaging_Update() {
 		Monster monster = GetMonsterInRange();
 		if (monster != Target && monster != null) {
 			RemoveTarget();
 			Engage(monster);
 			monster.Engage(this);
 		} else {
-			base.Engaging_FixedUpdate();
+			base.Engaging_Update();
 		}
 	}
 

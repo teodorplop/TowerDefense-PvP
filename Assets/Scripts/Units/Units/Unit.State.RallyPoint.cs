@@ -33,7 +33,7 @@ public partial class Unit {
 		SetState(BaseUnitState.Idle);
 	}
 
-	void RallyPoint_FixedUpdate() {
+	void RallyPoint_Update() {
 		if (_refreshRallyPoint) {
 			_refreshRallyPoint = false;
 			RequestPath(_rallyPoint);

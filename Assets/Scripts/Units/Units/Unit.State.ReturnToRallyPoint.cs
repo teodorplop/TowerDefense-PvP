@@ -10,7 +10,7 @@ public partial class Unit {
 		return RallyPoint_ExitState();
 	}
 
-	void ReturnToRallyPoint_FixedUpdate() {
+	void ReturnToRallyPoint_Update() {
 		Monster target = GetMonsterInRange();
 		if (target != null) {
 			Engage(target);

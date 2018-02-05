@@ -5,19 +5,17 @@ namespace Ingame.towers {
 		public enum TowerState { Construction, Active }
 
 		[SerializeField]
-		protected Projectile _projectilePrefab;
-		[SerializeField]
 		private GameObject _rangeSprite;
 
 		public float AttackSpeed { get { return _attributes.attackSpeed; } }
 		public float Range { get { return _attributes.range; } }
 		public int AttackDamage { get { return _attributes.attackDamage; } }
 
-		protected new void Awake() {
+		protected override void Awake() {
 			base.Awake();
 			SetState(TowerState.Construction);
 		}
-		protected void Start() {
+		protected virtual void Start() {
 			Vector3 scale = _rangeSprite.transform.localScale;
 			scale.x *= Range;
 			scale.y *= Range;

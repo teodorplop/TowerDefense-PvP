@@ -24,7 +24,7 @@ public partial class Monster {
 		}
 	}
 
-	void Walking_FixedUpdate() {
+	void Walking_Update() {
 		if (Target != null) {
 			SetState(BaseUnitState.Engaging);
 		} else {

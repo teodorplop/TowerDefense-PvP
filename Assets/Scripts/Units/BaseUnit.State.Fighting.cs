@@ -17,16 +17,16 @@ public partial class BaseUnit {
 		yield return null;
 	}
 
-	protected virtual void Fighting_FixedUpdate() {
+	protected virtual void Fighting_Update() {
 		if (Target == null || !Target.CanBeAttacked()) {
 			OnFightingEnded();
 			return;
 		}
 
 		Quaternion targetRotation = Quaternion.LookRotation(Target.transform.position - transform.position);
-		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * TurnSpeed);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * TurnSpeed);
 
-		_attackTimer = Mathf.Max(0.0f, _attackTimer - Time.fixedDeltaTime);
+		_attackTimer = Mathf.Max(0.0f, _attackTimer - Time.deltaTime);
 		if (_attackTimer <= 0.0f) {
 			_attackTimer = _timeBetweenAttacks;
 		}

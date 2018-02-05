@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public partial class Unit {
-	protected override void Fighting_FixedUpdate() {
+	protected override void Fighting_Update() {
 		if (Target != null && Target.Target == this) {
-			base.Fighting_FixedUpdate();
+			base.Fighting_Update();
 			return;
 		}
 
@@ -15,7 +15,7 @@ public partial class Unit {
 			Engage(newTarget);
 			newTarget.Engage(this);
 		} else {
-			base.Fighting_FixedUpdate();
+			base.Fighting_Update();
 		}
 	}
 

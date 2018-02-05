@@ -56,10 +56,10 @@ namespace Ingame.towers {
 			}
 		}
 
-		protected void Active_FixedUpdate() {
+		protected void Active_Update() {
 			for (int i = 0; i < _maxUnits; ++i) {
 				if (_units[i].IsDead) {
-					_respawnTimers[i] = Mathf.Max(0.0f, _respawnTimers[i] - Time.fixedDeltaTime);
+					_respawnTimers[i] = Mathf.Max(0.0f, _respawnTimers[i] - Time.deltaTime);
 
 					if (_respawnTimers[i] <= 0.0f) {
 						_units[i].Respawn();

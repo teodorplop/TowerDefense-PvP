@@ -26,7 +26,7 @@ public partial class BaseUnit : StateMachineBase {
 	public float MovementSpeed { get { return _attributes.movementSpeed; } }
 	private float TurnSpeed { get { return _attributes.turnSpeed; } }
 
-	protected new void Awake() {
+	protected override void Awake() {
 		base.Awake();
 
 		_animator = GetComponent<Animator>();
@@ -73,8 +73,8 @@ public partial class BaseUnit : StateMachineBase {
 		}
 
 		Quaternion targetRotation = Quaternion.LookRotation(_waypointsPath.waypoints[_waypointIndex] - position);
-		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * TurnSpeed);
-		transform.Translate(Vector3.forward * Time.fixedDeltaTime * MovementSpeed);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * TurnSpeed);
+		transform.Translate(Vector3.forward * Time.deltaTime * MovementSpeed);
 
 		float height = owner.Terrain.SampleHeight(transform.position);
 		transform.position = new Vector3(transform.position.x, height, transform.position.z);

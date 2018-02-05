@@ -36,7 +36,7 @@ public partial class GameManager : StateMachineBase {
 
 	private HighlightManager _highlightManager;
 
-	protected new void Awake() {
+	protected override void Awake() {
 		base.Awake();
 
 		_instance = this;

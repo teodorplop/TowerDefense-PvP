@@ -1,5 +1,5 @@
 {
-  "movementSpeed": 10.0,
+  "movementSpeed": 7.0,
   "turnSpeed": 5.0,
 
   "maxHealth": 20,

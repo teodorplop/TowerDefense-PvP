@@ -3,7 +3,7 @@
   "sellValue": 0.75,
 
   "attackSpeed": 0.5,
-  "range": 40,
+  "range": 30,
   "attackDamage": 12,
 
   "upgrades": [ "SellTower" ]

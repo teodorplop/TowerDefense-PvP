@@ -7,9 +7,10 @@ using System.Reflection;
 /// </summary>
 public abstract class StateMachineBase : MonoBehaviour {
 	protected StateMachineHandler _stateMachineHandler;
-	protected void Awake() {
+	protected virtual void Awake() {
 		_stateMachineHandler = gameObject.AddComponent<StateMachineHandler>();
 	}
+	protected virtual void Start() { }
 	
 	private Enum _currentState;
 	public Enum currentState {

@@ -12,7 +12,7 @@ namespace Ingame.towers {
 		[SerializeField]
 		private GameObject _rangeSprite;
 
-		protected new void Awake() {
+		protected override void Awake() {
 			base.Awake();
 			
 			SetState(TowerState.Construction);

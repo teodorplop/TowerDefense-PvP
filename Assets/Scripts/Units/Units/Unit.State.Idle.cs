@@ -44,7 +44,7 @@ public partial class Unit {
 		return target;
 	}
 
-	void Idle_FixedUpdate() {
+	void Idle_Update() {
 		Monster target = GetMonsterInRange();
 
 		if (target != null) {

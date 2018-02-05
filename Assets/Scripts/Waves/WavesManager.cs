@@ -64,16 +64,16 @@ namespace Ingame.waves {
 			_started = true;
 		}
 
-		void FixedUpdate() {
+		void Update() {
 			if (!_started) {
 				return;
 			}
 
-			_matchTimer += Time.fixedDeltaTime;
+			_matchTimer += Time.deltaTime;
 
 			foreach (Wave wave in _waves) {
 				if (_matchTimer >= wave.spawnTime && !wave.finished) {
-					SendMonsters(wave.Advance(Time.fixedDeltaTime));
+					SendMonsters(wave.Advance(Time.deltaTime));
 				}
 			}
 		}

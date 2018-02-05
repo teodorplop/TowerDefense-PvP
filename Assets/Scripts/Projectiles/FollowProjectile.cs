@@ -13,8 +13,8 @@ public class FollowProjectile : Projectile {
 	private Vector3 _targetOffset;
 	private Vector3 TargetPosition { get { return _target.transform.position + new Vector3(0, 0.5f); } }
 
-	public override void Inject(int damage, Monster monster) {
-		base.Inject(damage, monster);
+	public override void Inject(int damage, Monster monster, Player owner) {
+		base.Inject(damage, monster, owner);
 		_targetOffset = new Vector3(0, _offset, 0);
 
 		transform.LookAt(TargetPosition + _targetOffset);
@@ -27,7 +27,7 @@ public class FollowProjectile : Projectile {
 		return _target != null && _target.CanBeAttacked();
 	}
 
-	void FixedUpdate() {
+	void Update() {
 		if (_target == null) {
 			// We do not have a target yet
 			return;
@@ -46,11 +46,11 @@ public class FollowProjectile : Projectile {
 			return;
 		}
 
-		_targetOffset.y -= _gravity * Time.fixedDeltaTime;
+		_targetOffset.y -= _gravity * Time.deltaTime;
 
 		Quaternion targetRotation = Quaternion.LookRotation(TargetPosition + _targetOffset - transform.position);
-		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * _turnSpeed);
-		transform.Translate(Vector3.forward * Time.fixedDeltaTime * _speed);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * _turnSpeed);
+		transform.Translate(Vector3.forward * Time.deltaTime * _speed);
 
 		if (transform.position.y < 0.0f)
 			Destroy(gameObject);
