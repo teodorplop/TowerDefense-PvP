@@ -62,7 +62,7 @@ public class ExternalResources : IResourcesLoader {
 	public T LoadJSON<T>(string path) where T : IGameResource {
 		string fullPath = Path.Combine(Application.streamingAssetsPath, path + ".txt");
 		if (!File.Exists(fullPath)) {
-			Debug.LogWarning("LoadFile(" + path + ") failed.");
+			Debug.LogWarning("LoadFile(" + path + ") failed. Full path: " + fullPath);
 			return default(T);
 		}
 
@@ -74,7 +74,7 @@ public class ExternalResources : IResourcesLoader {
 	public T LoadCSV<T>(string path) where T : CSVLoader, IGameResource {
 		string fullPath = Path.Combine(Application.streamingAssetsPath, path + ".txt");
 		if (!File.Exists(fullPath)) {
-			Debug.LogWarning("LoadCSV(" + path + ") failed.");
+			Debug.LogWarning("LoadCSV(" + path + ") failed. Full path: " + fullPath);
 			return default(T);
 		}
 
@@ -86,7 +86,7 @@ public class ExternalResources : IResourcesLoader {
 	public T LoadFile<T>(string path) where T : ILoadableFile, new() {
 		string fullPath = Path.Combine(Application.streamingAssetsPath, path + ".txt");
 		if (!File.Exists(fullPath)) {
-			Debug.LogWarning("LoadFile(" + path + ") failed.");
+			Debug.LogWarning("LoadFile(" + path + ") failed. Full path: " + fullPath);
 			return default(T);
 		}
 
@@ -94,16 +94,6 @@ public class ExternalResources : IResourcesLoader {
 		resource.Name = path;
 		resource.Load(File.ReadAllText(fullPath));
 		return resource;
-	}
-
-	public Hashtable LoadHashtable(string path) {
-		string fullPath = Path.Combine(Application.streamingAssetsPath, path + ".txt");
-		if (!File.Exists(fullPath)) {
-			Debug.LogWarning("LoadHashtable(" + path + ") failed.");
-			return new Hashtable();
-		}
-
-		return JsonSerializer.Deserialize<Hashtable>(File.ReadAllText(fullPath));
 	}
 }
 

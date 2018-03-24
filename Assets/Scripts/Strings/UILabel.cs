@@ -5,10 +5,10 @@ using Interface;
 public class UILabel : Label {
     [SerializeField] private bool macro;
 	[SerializeField] private string id;
-    [SerializeField] private string macroText;
+    private string macroText;
 
     void Awake() {
-		macroText = Strings.GetText(id = label.text);
+		macroText = Strings.GetText(id);
         if (macro) MacroSystem.Register(UpdateText, macroText);
     }
     void Start() {

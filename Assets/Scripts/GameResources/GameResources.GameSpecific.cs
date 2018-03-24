@@ -11,11 +11,12 @@ public partial class GameResources {
 	private const string UNIT_ATTRIBUTES_PATH = "UnitAttributes";
 	private const string WAVES_PATH = "Waves";
 	private const string SEND_MONSTERS_PATH = "SendMonsters";
+	private const string STRINGS_PATH = "Strings";
 
 	private static string GetPath(string root, string level, string file) {
 		return Path.Combine(Path.Combine(DEFAULT_MOD_PATH, root), string.Format("{0}_{1}", file, level));
 	}
-	private static string GetDefaultPath(string root, string level, string file) {
+	private static string GetDefaultPath(string root, string file) {
 		return Path.Combine(Path.Combine(DEFAULT_MOD_PATH, root), file);
 	}
 
@@ -23,7 +24,7 @@ public partial class GameResources {
 		string path = GetPath(root, level, file);
 		T t = LoadJSON<T>(path);
 		if (t == null) {
-			path = GetDefaultPath(root, level, file);
+			path = GetDefaultPath(root, file);
 			t = LoadJSON<T>(path);
 		}
 		return t;
@@ -32,7 +33,7 @@ public partial class GameResources {
 		string path = GetPath(root, level, file);
 		T t = LoadCSV<T>(path);
 		if (t == null) {
-			path = GetDefaultPath(root, level, file);
+			path = GetDefaultPath(root, file);
 			t = LoadCSV<T>(path);
 		}
 		return t;
@@ -41,7 +42,7 @@ public partial class GameResources {
 		string path = GetPath(root, level, file);
 		T t = LoadFile<T>(path);
 		if (t == null) {
-			path = GetDefaultPath(root, level, file);
+			path = GetDefaultPath(root, file);
 			t = LoadFile<T>(path);
 		}
 		return t;
@@ -88,5 +89,9 @@ public partial class GameResources {
 	}
 	public static Waves_Data LoadWaves() {
 		return LoadWaves(SceneLoader.ActiveScene);
+	}
+
+	public static Strings_Data LoadStrings(string language) {
+		return LoadJSON<Strings_Data>(GetDefaultPath(STRINGS_PATH, language));
 	}
 }
