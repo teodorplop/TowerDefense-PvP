@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace Ingame.towers {
 	[Serializable]
-	public class TowerAttributes {
+	public class TowerAttributes : IGameResource {
+		public string Name { get; set; }
+
 		[SerializeField]
 		public string[] upgrades;
 

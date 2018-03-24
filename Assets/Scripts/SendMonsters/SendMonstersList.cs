@@ -8,7 +8,9 @@ public struct MonsterToSend {
 }
 
 [Serializable]
-public class SendMonstersList {
+public class SendMonstersList : IGameResource {
+	public string Name { get; set; }
+
 	[SerializeField] private List<MonsterToSend> _monsters;
 	public List<MonsterToSend> Monsters { get { return _monsters; } }
 }

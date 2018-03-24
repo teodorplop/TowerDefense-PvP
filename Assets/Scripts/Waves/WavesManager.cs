@@ -5,103 +5,113 @@ using UnityEngine;
 namespace Ingame.waves {
 	[Serializable]
 	public class Wave {
-		[SerializeField, Tooltip("Time from start of match until this wave spawn")]
-		public float spawnTime;
-		[SerializeField]
-		public List<WaveMonster> monsters;
-
-		[NonSerialized]
-		private float _timer;
-		[NonSerialized]
-		public bool finished;
-
-		public List<WaveMonster> Advance(float time) {
-			_timer += time;
-
-			finished = true;
-			List<WaveMonster> monstersToSend = new List<WaveMonster>();
-			foreach (WaveMonster monster in monsters) {
-				if (!monster.sent) {
-					finished = false;
-					if (_timer >= monster.spawnTime) {
-						monster.sent = true;
-						monstersToSend.Add(monster);
-					}
-				}
-			}
-
-			return monstersToSend;
-		}
+		/// <summary>
+		/// Time from start of the game to this wave spawn
+		/// </summary>
+		[SerializeField] public float spawnTime;
+		[SerializeField] public List<WaveMonster> monsters;
+		[NonSerialized] public bool finished;
 	}
 
 	[Serializable]
 	public class WaveMonster {
-		[SerializeField, Tooltip("Time from start of wave until these monsters spawn")]
-		public float spawnTime;
-		[SerializeField]
-		public string name;
-		[SerializeField]
-		public string path;
+		/// <summary>
+		/// Time from start of the wave to this minion spawn
+		/// </summary>
+		[SerializeField] public float spawnTime;
+		[SerializeField] public string name;
+		[SerializeField] public string path;
+		[NonSerialized] public bool sent;
 
-		[NonSerialized]
-		public bool sent;
+		public WaveMonster(string name, float spawnTime, string path) {
+			this.name = name;
+			this.spawnTime = spawnTime;
+			this.path = path;
+		}
 	}
 
 	public class WavesManager : MonoBehaviour {
-		private struct MonsterToSend {
-			public string name;
-			public string path;
-			public MonsterToSend(string name, string path) {
-				this.name = name;
-				this.path = path;
-			}
-		}
-
 		[SerializeField]
 		private float _displacement = 2.5f;
 
-		private List<Wave> _waves;
-		private Dictionary<Player, List<MonsterToSend>> _queuedMonsters;
-
-		private bool _started;
+		private Waves_Data _waves;
+		private Wave _currentWave, _nextWave;
 		private float _matchTimer;
+		
+		private Dictionary<Player, Wave> _queuedWaves;
+		
 		private MonsterFactory _monsterFactory;
 		void Awake() {
 			_waves = GameResources.LoadWaves();
-			_queuedMonsters = new Dictionary<Player, List<MonsterToSend>>();
+			_queuedWaves = new Dictionary<Player, Wave>();
 			_monsterFactory = FindObjectOfType<MonsterFactory>();
 		}
 
 		public void StartMatch() {
-			_started = true;
+			_currentWave = _waves.GetNextWave();
+			_nextWave = _waves.GetNextWave();
 		}
 		public void QueueMonster(Player player, string monster, string path) {
-			if (!_queuedMonsters.ContainsKey(player))
-				_queuedMonsters.Add(player, new List<MonsterToSend>());
-			_queuedMonsters[player].Add(new MonsterToSend(monster, path));
+			if (_nextWave == null) {
+				Debug.Log("This is the last wave. Cannot queue more monsters.");
+				return;
+			}
+
+			Wave wave;
+			if (!_queuedWaves.TryGetValue(player, out wave)) {
+				_queuedWaves.Add(player, wave = new Wave());
+				wave.spawnTime = _nextWave.spawnTime;
+			}
+			wave.monsters.Add(new WaveMonster(monster, 0.0f, path));
 		}
 
 		void Update() {
-			if (!_started) return;
+			if (_currentWave == null) return;
 
 			_matchTimer += Time.deltaTime;
+			
+			if (_matchTimer >= _currentWave.spawnTime) {
+				ManageWave(_currentWave);
+				foreach (var entry in _queuedWaves)
+					ManageWave(entry.Value, entry.Key);
 
-			foreach (Wave wave in _waves)
-				if (_matchTimer >= wave.spawnTime && !wave.finished)
-					SendMonsters(wave.Advance(Time.deltaTime));
-
-			foreach (Player player in _queuedMonsters.Keys) {
-				foreach (MonsterToSend monster in _queuedMonsters[player])
-					_monsterFactory.SendMonster(player, monster.name, monster.path, GetRandomOffset());
-				_queuedMonsters[player].Clear();
+				if (_currentWave.finished) ManageNextWave();
 			}
 		}
 
+		private void ManageWave(Wave wave, Player player = null) {
+			if (wave.finished) return;
+
+			float currentWaveTimer = _matchTimer - wave.spawnTime;
+			List<WaveMonster> toSend = new List<WaveMonster>();
+			wave.finished = true;
+			foreach (WaveMonster monster in wave.monsters)
+				if (!monster.sent) {
+					wave.finished = false;
+					if (currentWaveTimer >= monster.spawnTime) {
+						toSend.Add(monster);
+						monster.sent = true;
+					}
+				}
+
+			if (player == null) SendMonsters(toSend);
+			else SendMonsters(toSend, player);
+		}
+
+		private void ManageNextWave() {
+			_currentWave = _nextWave;
+			_nextWave = _waves.GetNextWave();
+			_queuedWaves.Clear();
+		}
+		
 		private void SendMonsters(List<WaveMonster> monsters) {
-			foreach (WaveMonster monster in monsters) {
-				foreach (Player player in Players.GetPlayers())
-					_monsterFactory.SendMonster(player, monster.name, monster.path, GetRandomOffset());
-			}
+			foreach (Player player in Players.GetPlayers())
+				SendMonsters(monsters, player);
+		}
+
+		private void SendMonsters(List<WaveMonster> monsters, Player player) {
+			foreach (WaveMonster monster in monsters)
+				_monsterFactory.SendMonster(player, monster.name, monster.path, GetRandomOffset());
 		}
 
 		private Vector2 GetRandomOffset() {

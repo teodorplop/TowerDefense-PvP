@@ -2,7 +2,9 @@
 using UnityEngine;
 
 [Serializable]
-public class Wallet {
+public class Wallet : IGameResource {
+	public string Name { get; set; }
+
 	public enum Currency { Health, Gold }
 
 	[SerializeField, Header("Health, Gold")]

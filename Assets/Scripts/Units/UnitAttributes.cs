@@ -2,7 +2,9 @@
 using UnityEngine;
 
 [Serializable]
-public class UnitAttributes {
+public class UnitAttributes : IGameResource {
+	public string Name { get; set; }
+
 	[SerializeField]
 	public float movementSpeed;
 	[SerializeField]
