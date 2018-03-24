@@ -9,7 +9,7 @@ namespace Ingame.waves {
 		/// Time from start of the game to this wave spawn
 		/// </summary>
 		[SerializeField] public float spawnTime;
-		[SerializeField] public List<WaveMonster> monsters;
+		[SerializeField] public List<WaveMonster> monsters = new List<WaveMonster>();
 		[NonSerialized] public bool finished;
 	}
 

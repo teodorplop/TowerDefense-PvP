@@ -42,7 +42,6 @@ namespace Ingame.waves {
 
 			Wave wave = new Wave();
 			wave.spawnTime = spawnTime;
-			wave.monsters = new List<WaveMonster>();
 			
 			string[] monsterSplit;
 			for (; i < lines.Length && !string.IsNullOrEmpty(lines[i]) && lines[i][0] != '{'; ++i) {

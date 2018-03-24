@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// First line is skipped!
 /// </summary>
-public abstract class CSVLoader : IGameResource {
+public abstract class CSVLoader {
 	private string[] lines;
 	public string[] Lines { get { return lines; } }
 

@@ -27,7 +27,7 @@ public partial class GameResources {
 		}
 		return t;
 	}
-	private static T LoadCSV<T>(string root, string level, string file) where T : CSVLoader {
+	private static T LoadCSV<T>(string root, string level, string file) where T : CSVLoader, IGameResource {
 		string path = GetPath(root, level, file);
 		T t = LoadCSV<T>(path);
 		if (t == null) {
