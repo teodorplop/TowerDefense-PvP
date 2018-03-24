@@ -2,24 +2,14 @@
 using UnityEngine;
 
 namespace Interface {
-	[RequireComponent(typeof(TextMeshProUGUI))]
+	[RequireComponent(typeof(TMP_Text))]
 	public class Label : MonoBehaviour {
-		protected TextMeshProUGUI _label;
-		protected void Awake() {
-			_label = GetComponent<TextMeshProUGUI>();
-		}
-
-		public delegate void OnChangeHandler();
-		public event OnChangeHandler OnChangeEvent;
+		private TMP_Text _label;
+		protected TMP_Text label {  get { return _label ?? (_label = GetComponent<TMP_Text>()); } }
 
 		public virtual string text {
-			get { return _label.text; }
-			set {
-				_label.text = value;
-				if (OnChangeEvent != null) {
-					OnChangeEvent();
-				}
-			}
+			get { return label.text; }
+			set { label.text = value; }
 		}
 	}
 }

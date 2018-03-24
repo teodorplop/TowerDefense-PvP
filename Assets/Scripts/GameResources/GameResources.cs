@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using UnityEngine;
 
@@ -93,6 +94,16 @@ public class ExternalResources : IResourcesLoader {
 		resource.Name = path;
 		resource.Load(File.ReadAllText(fullPath));
 		return resource;
+	}
+
+	public Hashtable LoadHashtable(string path) {
+		string fullPath = Path.Combine(Application.streamingAssetsPath, path + ".txt");
+		if (!File.Exists(fullPath)) {
+			Debug.LogWarning("LoadHashtable(" + path + ") failed.");
+			return new Hashtable();
+		}
+
+		return JsonSerializer.Deserialize<Hashtable>(File.ReadAllText(fullPath));
 	}
 }
 

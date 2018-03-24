@@ -10,31 +10,25 @@ namespace Interface {
 		public int value {
 			get {
 				int val;
-				int.TryParse(base.text, out val);
+				int.TryParse(label.text, out val);
 				return val;
 			}
 			set {
 				value = Mathf.Clamp(value, _minimumValue, _maximumValue);
-				base.text = value.ToString();
+				label.text = value.ToString();
 			}
 		}
 
 		public override string text {
-			get {
-				return base.text;
-			}
+			get { return label.text; }
 			set {
 				int val;
 				if (!int.TryParse(value, out val)) {
-					Debug.LogError("Cannot set IntLabel " + name + " value to " + value);
+					Debug.LogError("Cannot set IntLabel " + name + " value to " + value, this);
 				} else {
 					this.value = val;
 				}
 			}
-		}
-
-		public void Add(int add) {
-			value += add;
 		}
 	}
 }

@@ -1,21 +1,22 @@
 ﻿using Ingame.towers;
 using Ingame.waves;
-using System.Collections.Generic;
 using System.IO;
 
 public partial class GameResources {
-	private static readonly string _walletPath = "Wallet";
-	private static readonly string _towerAttributesPath = "TowerAttributes";
-	private static readonly string _monsterAttributesPath = "MonsterAttributes";
-	private static readonly string _unitAttributesPath = "UnitAttributes";
-	private static readonly string _wavesPath = "Waves";
-	private static readonly string _sendMonstersPath = "SendMonsters";
+	private const string DEFAULT_MOD_PATH = "Contents";
+
+	private const string WALLET_PATH = "Wallet";
+	private const string TOWER_ATTRIBUTES_PATH = "TowerAttributes";
+	private const string MONSTER_ATTRIBUTES_PATH = "MonsterAttributes";
+	private const string UNIT_ATTRIBUTES_PATH = "UnitAttributes";
+	private const string WAVES_PATH = "Waves";
+	private const string SEND_MONSTERS_PATH = "SendMonsters";
 
 	private static string GetPath(string root, string level, string file) {
-		return Path.Combine(root, string.Format("{0}_{1}", file, level));
+		return Path.Combine(Path.Combine(DEFAULT_MOD_PATH, root), string.Format("{0}_{1}", file, level));
 	}
 	private static string GetDefaultPath(string root, string level, string file) {
-		return Path.Combine(root, file);
+		return Path.Combine(Path.Combine(DEFAULT_MOD_PATH, root), file);
 	}
 
 	private static T LoadJSON<T>(string root, string level, string file) where T : IGameResource {
@@ -47,7 +48,7 @@ public partial class GameResources {
 	}
 
 	public static SendMonstersList LoadSendMonsters(string level) {
-		return LoadJSON<SendMonstersList>(_sendMonstersPath, level, "SendMonsters");
+		return LoadJSON<SendMonstersList>(SEND_MONSTERS_PATH, level, "SendMonsters");
 	}
 
 	public static SendMonstersList LoadSendMonsters() {
@@ -55,35 +56,35 @@ public partial class GameResources {
 	}
 
 	public static Wallet LoadWallet(string level) {
-		return LoadJSON<Wallet>(_walletPath, level, "Wallet");
+		return LoadJSON<Wallet>(WALLET_PATH, level, "Wallet");
 	}
 	public static Wallet LoadWallet() {
 		return LoadWallet(SceneLoader.ActiveScene);
 	}
 
 	public static TowerAttributes LoadTowerAttributes(string level, string tower) {
-		return LoadJSON<TowerAttributes>(_towerAttributesPath, level, tower);
+		return LoadJSON<TowerAttributes>(TOWER_ATTRIBUTES_PATH, level, tower);
 	}
 	public static TowerAttributes LoadTowerAttributes(string tower) {
 		return LoadTowerAttributes(SceneLoader.ActiveScene, tower);
 	}
 
 	public static UnitAttributes LoadMonsterAttributes(string level, string monster) {
-		return LoadJSON<UnitAttributes>(_monsterAttributesPath, level, monster);
+		return LoadJSON<UnitAttributes>(MONSTER_ATTRIBUTES_PATH, level, monster);
 	}
 	public static UnitAttributes LoadMonsterAttributes(string monster) {
 		return LoadMonsterAttributes(SceneLoader.ActiveScene, monster);
 	}
 
 	public static UnitAttributes LoadUnitAttributes(string level, string unit) {
-		return LoadJSON<UnitAttributes>(_unitAttributesPath, level, unit);
+		return LoadJSON<UnitAttributes>(UNIT_ATTRIBUTES_PATH, level, unit);
 	}
 	public static UnitAttributes LoadUnitAttributes(string unit) {
 		return LoadUnitAttributes(SceneLoader.ActiveScene, unit);
 	}
 
 	public static Waves_Data LoadWaves(string level) {
-		return LoadFile<Waves_Data>(_wavesPath, level, "Waves");
+		return LoadFile<Waves_Data>(WAVES_PATH, level, "Waves");
 	}
 	public static Waves_Data LoadWaves() {
 		return LoadWaves(SceneLoader.ActiveScene);
