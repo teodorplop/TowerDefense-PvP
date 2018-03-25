@@ -1,11 +1,10 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using Interface;
 
 public class UILabel : Label {
     [SerializeField] private bool macro;
 	[SerializeField] private string id;
-    private string macroText;
+    private string macroText = "";
 
     void Awake() {
 		macroText = Strings.GetText(id);
@@ -23,14 +22,12 @@ public class UILabel : Label {
 		set {
 			if (id != value) {
 				if (macro) MacroSystem.Unregister(UpdateText, macroText);
-				
+
 				macroText = Strings.GetText(id = value);
 				UpdateText();
 
 				if (macro) MacroSystem.Register(UpdateText, macroText);
 			}
-			macroText = Strings.GetText(value);
-			base.text = value;
 		}
 	}
 

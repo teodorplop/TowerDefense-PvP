@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -7,12 +8,12 @@ public class Strings_Data : IGameResource {
 	public string Name { get; set; }
 
 	[SerializeField]
-	private Hashtable hashtable;
+	private Dictionary<string, string> hashtable;
 
 	public string this[string id] {
 		get {
-			object obj = hashtable[id];
-			return obj == null ? id : obj as string;
+			string value = null;
+			return hashtable.TryGetValue(id, out value) ? value : id;
 		}
 	}
 }

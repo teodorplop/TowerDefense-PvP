@@ -1,5 +1,11 @@
 {
 	"hashtable": {
-	
+		"STR_registerInProgress": "Register",
+		"STR_registerFailed": "Register failed.",
+		"STR_registerSuccess": "Success! You may now login.",
+		
+		"STR_loginInProgress": "Logging in",
+		"STR_loginFailed": "Login failed.",
+		"STR_loginSuccess": "Success!"
 	}
 }
