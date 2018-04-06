@@ -17,6 +17,7 @@ public class App : MonoBehaviour {
 	private static App instance;
 	private App_Data appData;
 	private GameServer server;
+	private MatchmakingServer mmServer;
 
 	void Awake() {
 		if (instance != null) {
@@ -73,6 +74,23 @@ public class App : MonoBehaviour {
 				UserPrefs.Username = username;
 				UserPrefs.Password = password;
 			}
+
+			mmServer = new MatchmakingServer(profile);
+
+			MacroSystem.SetMacroValue("USERNAME", username);
+			SceneLoader.LoadScene("Menu");
 		}
+	}
+
+	public static void FindMatch() {
+		instance.mmServer.FindMatch(delegate(bool success) {
+			EventManager.Raise(new FindMatchStartedEvent());
+		});
+	}
+
+	public static void CancelFindMatch() {
+		instance.mmServer.CancelFindMatch(delegate(bool success) {
+			EventManager.Raise(new FindMatchCanceledEvent());
+		});
 	}
 }

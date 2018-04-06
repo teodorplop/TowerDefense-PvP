@@ -32,4 +32,7 @@ public class LoggedInEvent : OneElementEvent<UserProfile> {
 	public LoggedInEvent(UserProfile profile) : base(profile) { }
 }
 public class LoggedOutEvent : GameEvent { }
+
+public class FindMatchStartedEvent : GameEvent { }
+public class FindMatchCanceledEvent : GameEvent { }
 #endregion

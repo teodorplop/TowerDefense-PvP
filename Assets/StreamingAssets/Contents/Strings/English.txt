@@ -6,6 +6,8 @@
 		
 		"STR_loginInProgress": "Logging in",
 		"STR_loginFailed": "Login failed.",
-		"STR_loginSuccess": "Success!"
+		"STR_loginSuccess": "Success!",
+		
+		"STR_welcomeLabel": "Hello, {USERNAME}!"
 	}
 }
