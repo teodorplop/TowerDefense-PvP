@@ -23,7 +23,7 @@ public class MatchmakingServer {
 	}
 
 	public void FindMatch(Action<bool> callback) {
-		new MatchmakingRequest().SetMatchShortCode("rankedMatch").SetSkill(profile.Skill).Send((response) => FindMatchCallback(response, callback));
+		new MatchmakingRequest().SetMatchShortCode("rankedMatch").SetSkill(profile.MMR).Send((response) => FindMatchCallback(response, callback));
 	}
 	private void FindMatchCallback(MatchmakingResponse response, Action<bool> callback) {
 		if (response.HasErrors)

@@ -27,6 +27,7 @@ public class App : MonoBehaviour {
 		
 		instance = this;
 		DontDestroyOnLoad(gameObject);
+		
 		InitAppData();
 		InitServer();
 	}
@@ -54,6 +55,10 @@ public class App : MonoBehaviour {
 		server = new GameServer();
 	}
 
+	public static void Exit() {
+		Application.Quit();
+	}
+
 	public static void Register(string username, string email, string password) {
 		EventManager.Raise(new ServerRequestEvent("STR_registerInProgress"));
 		instance.server.Register(username, username, password, instance.RegisterCallback);
@@ -78,8 +83,16 @@ public class App : MonoBehaviour {
 			mmServer = new MatchmakingServer(profile);
 
 			MacroSystem.SetMacroValue("USERNAME", username);
+			MacroSystem.SetMacroValue("MMR", profile.MMR);
 			SceneLoader.LoadScene("Menu");
 		}
+	}
+
+	public static void Logout() {
+		UserPrefs.RememberMe = false;
+		SceneLoader.LoadScene("Login");
+		instance.server.Logout();
+		EventManager.Raise(new LoggedOutEvent());
 	}
 
 	public static void FindMatch() {
