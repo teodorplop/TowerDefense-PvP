@@ -58,14 +58,9 @@ public partial class GameManager : StateMachineBase {
 		_instance = null;
 	}
 
-	IEnumerator Start() {
-		if (SceneManager.sceneCount == 1) {
-			AsyncOperation ui = SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
-			while (!ui.isDone) yield return null;
-		}
-		_uiManager = FindObjectOfType<UIManager>();
-
-		SetState(GameState.Loading);
+	void Start() {
+		if (SceneManager.sceneCount == 1)
+			StartLoading(StartMatch);
 	}
 
 	private void SetState(GameState state) {

@@ -1,11 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Pathfinding;
 using Ingame.towers;
 using Grid = Pathfinding.Grid;
+using UnityEngine.SceneManagement;
 
 public partial class GameManager {
+	private Action loadingCallback;
+
+	public void StartLoading(Action callback) {
+		loadingCallback = callback;
+		SetState(GameState.Loading);
+	}
+	public void StartMatch() {
+		_towerFactory.StartMatch();
+		_wavesManager.StartMatch();
+		SetState(GameState.Idle);
+	}
+
 	IEnumerator Loading_EnterState() {
+		AsyncOperation ui = SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+		while (!ui.isDone) yield return null;
+		_uiManager = FindObjectOfType<UIManager>();
+
 		Wallet wallet = GameResources.LoadWallet();
 		SendMonstersList sendMonsters = GameResources.LoadSendMonsters();
 
@@ -29,10 +47,7 @@ public partial class GameManager {
 
 		yield return null;
 
-		// we should make sure both players are connected, bla bla, and then start the match
-		_towerFactory.StartMatch();
-		_wavesManager.StartMatch();
-		SetState(GameState.Idle);
+		if (loadingCallback != null) loadingCallback();
 	}
 
 	private Player GeneratePlayer(GameObject container, Wallet wallet, string name, bool clientPlayer) {

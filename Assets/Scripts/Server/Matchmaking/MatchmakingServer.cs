@@ -25,7 +25,10 @@ public class MatchmakingServer {
 	}
 
 	private void OnMatchNotFound(MatchNotFoundMessage msg) {
-		Debug.Log(msg.JSONString);
+		if (onMatchFound != null) {
+			onMatchFound(null);
+			onMatchFound = null;
+		}
 	}
 
 	public void FindMatch(Action<bool> callback, Action<MatchInfo> onMatchFound) {

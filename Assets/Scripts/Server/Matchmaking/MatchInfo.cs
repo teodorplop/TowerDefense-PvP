@@ -24,12 +24,15 @@ public class PlayerInfo {
 }
 
 public class MatchInfo {
+	private string map = "Map0";
+
 	private string hostURL;
 	private int portId;
 	private string accessToken;
 	private string matchId;
 	private List<PlayerInfo> players;
 
+	public string Map { get { return map; } }
 	public string HostURL { get { return hostURL; } }
 	public int PortId { get { return portId; } }
 	public string AccessToken { get { return accessToken; } }

@@ -18,6 +18,7 @@ public class App : MonoBehaviour {
 	private App_Data appData;
 	private GameServer server;
 	private MatchmakingServer mmServer;
+	private RTServer rtServer;
 
 	void Awake() {
 		if (instance != null) {
@@ -110,13 +111,32 @@ public class App : MonoBehaviour {
 	}
 
 	private void OnMatchFound(MatchInfo matchInfo) {
+		if (matchInfo == null) {
+			Debug.Log("Match not found.");
+			EventManager.Raise(new FindMatchCanceledEvent());
+			EventManager.Raise(new ServerResponseEvent("STR_matchNotFound"));
+			return;
+		}
+
 		for (int i = 0; i < matchInfo.Players.Count; ++i) {
 			MacroSystem.SetMacroValue(string.Format("PLAYER{0}_DISPLAYNAME", i), matchInfo.Players[i].DisplayName);
-			MacroSystem.SetMacroValue(string.Format("PLAYER{0}_MMR", i), 1000);
+			MacroSystem.SetMacroValue(string.Format("PLAYER{0}_MMR", i), matchInfo.Players[i].MMR);
 		}
 
 		EventManager.Raise(new MatchFoundEvent());
 
-		SceneLoader.LoadScene("Splash");
+		SceneLoader.LoadScene("Splash", delegate { OnSplashLoaded(matchInfo); });
+	}
+	private void OnSplashLoaded(MatchInfo matchInfo) {
+		SceneLoader.LoadSceneAdditive(matchInfo.Map, delegate { OnMapLoaded(matchInfo); });
+	}
+	private void OnMapLoaded(MatchInfo matchInfo) {
+		SceneLoader.SetActiveScene(GameManager.Instance.gameObject.scene);
+		GameManager.Instance.StartLoading(OnGameLoaded);
+	}
+	private void OnGameLoaded() {
+		SceneLoader.UnloadScene("Splash", delegate {
+			GameManager.Instance.StartMatch();
+		});
 	}
 }
