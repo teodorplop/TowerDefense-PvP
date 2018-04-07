@@ -6,6 +6,7 @@ using GameSparks.Api.Messages;
 
 public class MatchmakingServer {
 	private UserProfile profile;
+	private Action<MatchInfo> onMatchFound;
 
 	public MatchmakingServer(UserProfile profile) {
 		this.profile = profile;
@@ -15,22 +16,30 @@ public class MatchmakingServer {
 	}
 
 	private void OnMatchFound(MatchFoundMessage msg) {
-		Debug.Log(msg.JSONString);
+		MatchInfo matchInfo = new MatchInfo(msg);
+
+		if (onMatchFound != null) {
+			onMatchFound(matchInfo);
+			onMatchFound = null;
+		}
 	}
 
 	private void OnMatchNotFound(MatchNotFoundMessage msg) {
 		Debug.Log(msg.JSONString);
 	}
 
-	public void FindMatch(Action<bool> callback) {
+	public void FindMatch(Action<bool> callback, Action<MatchInfo> onMatchFound) {
+		this.onMatchFound = onMatchFound;
 		new MatchmakingRequest().SetMatchShortCode("rankedMatch").SetSkill(profile.MMR).Send((response) => FindMatchCallback(response, callback));
 	}
 	private void FindMatchCallback(MatchmakingResponse response, Action<bool> callback) {
-		if (response.HasErrors)
+		if (response.HasErrors) {
 			Debug.Log(response.Errors.JSON);
+			onMatchFound = null;
+		}
 
 		if (callback != null)
-			callback(response.HasErrors);
+			callback(!response.HasErrors);
 	}
 
 	public void CancelFindMatch(Action<bool> callback) {
@@ -39,8 +48,10 @@ public class MatchmakingServer {
 	private void CancelFindMatchCallback(MatchmakingResponse response, Action<bool> callback) {
 		if (response.HasErrors)
 			Debug.Log(response.Errors.JSON);
+		else
+			onMatchFound = null;
 
 		if (callback != null)
-			callback(response.HasErrors);
+			callback(!response.HasErrors);
 	}
 }

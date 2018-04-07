@@ -8,6 +8,9 @@
 		"STR_loginFailed": "Login failed.",
 		"STR_loginSuccess": "Success!",
 		
-		"STR_welcomeLabel": "Hello, {USERNAME}!"
+		"STR_welcomeLabel": "Hello, {USERNAME}!",
+		
+		"STR_loadingScreenTip0": "Struggling with a tough foe? Remember, just keep your Health above 0 while lowering your enemy's Health to 0. Works every time!",
+		"STR_loadingScreenTip1": "Random loading screen tip? Yes!"
 	}
 }

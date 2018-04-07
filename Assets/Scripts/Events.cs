@@ -35,4 +35,5 @@ public class LoggedOutEvent : GameEvent { }
 
 public class FindMatchStartedEvent : GameEvent { }
 public class FindMatchCanceledEvent : GameEvent { }
+public class MatchFoundEvent : GameEvent { }
 #endregion

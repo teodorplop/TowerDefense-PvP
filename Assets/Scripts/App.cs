@@ -97,13 +97,26 @@ public class App : MonoBehaviour {
 
 	public static void FindMatch() {
 		instance.mmServer.FindMatch(delegate(bool success) {
-			EventManager.Raise(new FindMatchStartedEvent());
-		});
+			Debug.Log("FindMatch: " + success);
+			if (success) EventManager.Raise(new FindMatchStartedEvent());
+		}, instance.OnMatchFound);
 	}
 
 	public static void CancelFindMatch() {
 		instance.mmServer.CancelFindMatch(delegate(bool success) {
-			EventManager.Raise(new FindMatchCanceledEvent());
+			Debug.Log("CancelMatch: " + success);
+			if (success) EventManager.Raise(new FindMatchCanceledEvent());
 		});
+	}
+
+	private void OnMatchFound(MatchInfo matchInfo) {
+		for (int i = 0; i < matchInfo.Players.Count; ++i) {
+			MacroSystem.SetMacroValue(string.Format("PLAYER{0}_DISPLAYNAME", i), matchInfo.Players[i].DisplayName);
+			MacroSystem.SetMacroValue(string.Format("PLAYER{0}_MMR", i), 1000);
+		}
+
+		EventManager.Raise(new MatchFoundEvent());
+
+		SceneLoader.LoadScene("Splash");
 	}
 }

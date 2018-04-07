@@ -16,6 +16,10 @@ public class Strings_Data : IGameResource {
 			return hashtable.TryGetValue(id, out value) ? value : id;
 		}
 	}
+
+	public bool HasText(string id) {
+		return hashtable.ContainsKey(id);
+	}
 }
 
 public class Strings {
@@ -32,4 +36,8 @@ public class Strings {
     public static string GetText(string id) {
 		return Instance.container[id];
     }
+
+	public static bool HasText(string id) {
+		return Instance.container.HasText(id);
+	}
 }
