@@ -16,6 +16,10 @@ public class App : MonoBehaviour {
 
 	private static App instance;
 	private App_Data appData;
+
+	private UserProfile profile;
+	private MatchInfo matchInfo;
+
 	private GameServer server;
 	private MatchmakingServer mmServer;
 	private RTServer rtServer;
@@ -75,6 +79,8 @@ public class App : MonoBehaviour {
 	private void LoginCallback(string username, string password, UserProfile profile) {
 		EventManager.Raise(new ServerResponseEvent(profile != null ? "STR_loginSuccess" : "STR_loginFailed"));
 
+		this.profile = profile;
+
 		if (profile != null) {
 			if (UserPrefs.RememberMe) {
 				UserPrefs.Username = username;
@@ -111,6 +117,8 @@ public class App : MonoBehaviour {
 	}
 
 	private void OnMatchFound(MatchInfo matchInfo) {
+		this.matchInfo = matchInfo;
+
 		if (matchInfo == null) {
 			Debug.Log("Match not found.");
 			EventManager.Raise(new FindMatchCanceledEvent());
@@ -125,18 +133,27 @@ public class App : MonoBehaviour {
 
 		EventManager.Raise(new MatchFoundEvent());
 
-		SceneLoader.LoadScene("Splash", delegate { OnSplashLoaded(matchInfo); });
+		SceneLoader.LoadScene("Splash", OnSplashLoaded);
 	}
-	private void OnSplashLoaded(MatchInfo matchInfo) {
-		SceneLoader.LoadSceneAdditive(matchInfo.Map, delegate { OnMapLoaded(matchInfo); });
+	private void OnSplashLoaded() {
+		SceneLoader.LoadSceneAdditive(matchInfo.Map, OnMapLoaded);
 	}
-	private void OnMapLoaded(MatchInfo matchInfo) {
+	private void OnMapLoaded() {
+		// mini hack so new GameObjects will be parented to Game scene
 		SceneLoader.SetActiveScene(GameManager.Instance.gameObject.scene);
 		GameManager.Instance.StartLoading(OnGameLoaded);
 	}
 	private void OnGameLoaded() {
-		SceneLoader.UnloadScene("Splash", delegate {
-			GameManager.Instance.StartMatch();
-		});
+		rtServer = new RTServer(matchInfo);
+		rtServer.SetOnReady(OnRTReady);
+		rtServer.Connect();
+	}
+	private void OnRTReady(bool ready) {
+		if (ready) {
+			matchInfo.GetPlayer(rtServer.PeerId).clientPlayer = true;
+			SceneLoader.UnloadScene("Splash", delegate {
+				GameManager.Instance.StartMatch();
+			});
+		}
 	}
 }

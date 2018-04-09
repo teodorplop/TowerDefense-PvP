@@ -7,13 +7,14 @@ public class PlayerInfo {
 	private int mmr;
 	private string id;
 	private int peerId;
-	private bool online;
+	
+	public bool clientPlayer = false;
+	public bool online = true;
 
 	public string DisplayName { get { return displayName; } }
 	public int MMR { get { return mmr; } }
 	public string Id { get { return id; } }
 	public int PeerId { get { return peerId; } }
-	public bool Online { get { return online; } }
 
 	public PlayerInfo(string displayName, string id, int peerId, int mmr) {
 		this.displayName = displayName;
@@ -51,11 +52,20 @@ public class MatchInfo {
 		}
 	}
 
+	public void SetClientPlayer(string displayName) {
+		PlayerInfo clientPlayer = players.Find(obj => obj.DisplayName == displayName);
+		clientPlayer.clientPlayer = true;
+	}
+
+	public PlayerInfo GetPlayer(int peerId) {
+		return players.Find(obj => obj.PeerId == peerId);
+	}
+
 	public override string ToString() {
 		StringBuilder sb = new StringBuilder("MatchInfo\n");
 		sb.AppendFormat("HostURL {0}\nPortId {1}\nAccessToken {2}\nMatchId {3}\nPlayers\n", hostURL, portId, accessToken, matchId);
 		foreach (PlayerInfo p in players)
-			sb.AppendFormat("DisplayName {0} Id {1} PeerId {2} Online {3}\n", p.DisplayName, p.Id, p.PeerId, p.Online);
+			sb.AppendFormat("DisplayName {0} Id {1} PeerId {2} Online {3}\n", p.DisplayName, p.Id, p.PeerId, p.online);
 		return sb.ToString();
 	}
 }
