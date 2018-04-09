@@ -6,7 +6,9 @@ using Ingame.towers;
 public class Player {
 	public bool isActive;
 
-	[SerializeField]
+	private string _id;
+	public string Id { get { return _id; } }
+
 	private string _name;
 	public string Name { get { return _name; } }
 
@@ -30,9 +32,10 @@ public class Player {
 	private List<Unit> _units;
 	public List<Unit> Units { get { return _units; } }
 
-	public Player(string name, bool clientPlayer, Wallet wallet, Transform transform) {
+	public Player(string id, string name, bool clientPlayer, Wallet wallet, Transform transform) {
 		isActive = true;
 
+		_id = id;
 		_name = name;
 		_clientPlayer = clientPlayer;
 		_wallet = wallet;

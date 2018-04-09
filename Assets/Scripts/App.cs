@@ -136,24 +136,21 @@ public class App : MonoBehaviour {
 		SceneLoader.LoadScene("Splash", OnSplashLoaded);
 	}
 	private void OnSplashLoaded() {
-		SceneLoader.LoadSceneAdditive(matchInfo.Map, OnMapLoaded);
+		rtServer = new RTServer(matchInfo);
+		rtServer.Connect(OnRTReady);
+	}
+	private void OnRTReady(bool ready) {
+		if (ready)
+			SceneLoader.LoadSceneAdditive(matchInfo.Map, OnMapLoaded);
 	}
 	private void OnMapLoaded() {
 		// mini hack so new GameObjects will be parented to Game scene
 		SceneLoader.SetActiveScene(GameManager.Instance.gameObject.scene);
-		GameManager.Instance.StartLoading(OnGameLoaded);
+		GameManager.Instance.StartLoading(matchInfo, OnGameLoaded);
 	}
 	private void OnGameLoaded() {
-		rtServer = new RTServer(matchInfo);
-		rtServer.SetOnReady(OnRTReady);
-		rtServer.Connect();
-	}
-	private void OnRTReady(bool ready) {
-		if (ready) {
-			matchInfo.GetPlayer(rtServer.PeerId).clientPlayer = true;
-			SceneLoader.UnloadScene("Splash", delegate {
-				GameManager.Instance.StartMatch();
-			});
-		}
+		SceneLoader.UnloadScene("Splash", delegate {
+			GameManager.Instance.StartMatch();
+		});
 	}
 }

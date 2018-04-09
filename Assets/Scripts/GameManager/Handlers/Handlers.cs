@@ -15,6 +15,8 @@ public partial class GameManager {
 			player.Wallet.Add(Wallet.Currency.Gold, _instance._towerFactory.GetSellCost(player, request.Tower));
 			_instance._towerFactory.DestroyTower(player, request.Tower);
 
+			EventManager.Raise(new SellTowerEvent(request));
+
 			_instance._uiManager.Refresh();
 
 			_instance.SetState(GameState.Idle);
@@ -35,10 +37,10 @@ public partial class GameManager {
 			if (player.Wallet.Check(Wallet.Currency.Gold, cost)) {
 				player.Wallet.Subtract(Wallet.Currency.Gold, cost);
 				Tower tower = _instance._towerFactory.UpgradeTower(player, request.Tower, request.Upgrade, cost);
-
-				if (tower is BarracksTower) {
+				if (tower is BarracksTower)
 					(tower as BarracksTower).Inject(_instance._unitFactory);
-				}
+
+				EventManager.Raise(new UpgradeTowerEvent(request));
 
 				_instance._uiManager.Refresh();
 				_instance._uiManager.ShowTower(null, null);

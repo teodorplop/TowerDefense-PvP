@@ -37,3 +37,12 @@ public class FindMatchStartedEvent : GameEvent { }
 public class FindMatchCanceledEvent : GameEvent { }
 public class MatchFoundEvent : GameEvent { }
 #endregion
+
+#region Ingame
+public class UpgradeTowerEvent : OneElementEvent<UpgradeTowerRequest> {
+	public UpgradeTowerEvent(UpgradeTowerRequest towerRequest) : base(towerRequest) { }
+}
+public class SellTowerEvent : OneElementEvent<SellTowerRequest> {
+	public SellTowerEvent(SellTowerRequest towerRequest) : base(towerRequest) { }
+}
+#endregion

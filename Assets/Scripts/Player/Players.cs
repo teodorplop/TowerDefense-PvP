@@ -32,8 +32,8 @@ public class Players {
 	public static Player[] GetPlayers() {
 		return Instance._players.ToArray();
 	}
-	public static Player GetPlayer(string name) {
-		return Instance._players.Find(obj => obj.Name == name);
+	public static Player GetPlayer(string id) {
+		return Instance._players.Find(obj => obj.Id == id);
 	}
 
 	public static Player ClientPlayer {

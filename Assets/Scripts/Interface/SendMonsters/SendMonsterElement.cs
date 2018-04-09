@@ -14,7 +14,7 @@ namespace Interface.sendMonsters {
 		}
 
 		public virtual void OnPress() {
-			GameManager.Instance.HandleRequest(new SendMonsterRequest(Players.ClientPlayer.Name, monster));
+			GameManager.Instance.HandleRequest(new SendMonsterRequest(Players.ClientPlayer.Id, monster));
 		}
 	}
 }

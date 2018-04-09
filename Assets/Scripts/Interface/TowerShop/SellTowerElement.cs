@@ -11,7 +11,7 @@ namespace Interface.towerShop {
 
 		public override void OnPress() {
 			GameManager.Instance.HandleRequest(
-				new SellTowerRequest(Players.ClientPlayer.Name, _tower.name));
+				new SellTowerRequest(Players.ClientPlayer.Id, _tower.name));
 		}
 	}
 }

@@ -40,6 +40,13 @@ public class MatchInfo {
 	public string MatchId { get { return matchId; } }
 	public List<PlayerInfo> Players { get { return players; } }
 
+	public MatchInfo() {
+		players = new List<PlayerInfo>() {
+			new PlayerInfo("Manthril", "0", 0, 1000),
+			new PlayerInfo("Hetamess", "1", 1, 1000)
+		};
+	}
+
 	public MatchInfo(MatchFoundMessage msg) {
 		portId = (int)msg.Port;
 		hostURL = msg.Host;
@@ -52,9 +59,8 @@ public class MatchInfo {
 		}
 	}
 
-	public void SetClientPlayer(string displayName) {
-		PlayerInfo clientPlayer = players.Find(obj => obj.DisplayName == displayName);
-		clientPlayer.clientPlayer = true;
+	public PlayerInfo GetClientPlayer() {
+		return players.Find(obj => obj.clientPlayer);
 	}
 
 	public PlayerInfo GetPlayer(int peerId) {
