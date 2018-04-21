@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour {
 	private WalletUI _walletUI;
 	private SendMonstersShop _sendMonstersShop;
 
+	private EndGameUI _endGameUI;
+
 	void Awake() {
 		_towerShop = FindObjectOfType<TowerShop>();
 
@@ -22,6 +24,8 @@ public class UIManager : MonoBehaviour {
 
 		_walletUI = FindObjectOfType<WalletUI>();
 		_sendMonstersShop = FindObjectOfType<SendMonstersShop>();
+
+		_endGameUI = FindObjectOfType<EndGameUI>();
 	}
 
 	public void Inject(Wallet wallet, SendMonstersList sendMonsters) {
@@ -44,5 +48,9 @@ public class UIManager : MonoBehaviour {
 
 	public void Refresh() {
 		_walletUI.Refresh();
+	}
+
+	public void GameEnded(bool win) {
+		_endGameUI.Show(win);
 	}
 }

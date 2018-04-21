@@ -45,6 +45,7 @@ public class MatchInfo {
 			new PlayerInfo("Manthril", "0", 0, 1000),
 			new PlayerInfo("Hetamess", "1", 1, 1000)
 		};
+		players[0].clientPlayer = true;
 	}
 
 	public MatchInfo(MatchFoundMessage msg) {

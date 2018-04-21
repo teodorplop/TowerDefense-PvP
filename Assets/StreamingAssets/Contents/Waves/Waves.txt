@@ -1,15 +1,15 @@
 {WAVE_0}
 5.0
-Monster, Path0, 0.0
-Monster, Path0, 0.5
-Monster, Path1, 0.0
-Monster, Path1, 0.5
+OrcWolfRider, Path0, 0.0
+OrcInfantry, Path0, 0.5
+OrcInfantry, Path1, 0.0
+OrcInfantry, Path1, 0.5
 
 {WAVE_1}
 15.0
-Monster, Path0, 0.0
-Monster, Path0, 2.0
-Monster, Path0, 3.5
-Monster, Path1, 1.0
-Monster, Path1, 5.0
-Monster, Path1, 6.0
+OrcInfantry, Path0, 0.0
+OrcInfantry, Path0, 2.0
+OrcInfantry, Path0, 3.5
+OrcInfantry, Path1, 1.0
+OrcInfantry, Path1, 5.0
+OrcInfantry, Path1, 6.0

@@ -1,5 +1,6 @@
 {
   "_monsters": [
-    { "name": "Monster", "cost": 50 }
+	{ "name": "Skeleton", "cost": 40 },
+    { "name": "GoblinWarrior", "cost": 50 }
   ]
 }

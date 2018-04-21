@@ -20,7 +20,7 @@ public class TwoElementsEvent<T, U> : GameEvent {
 }
 #endregion
 
-#region Login
+#region Multiplayer
 public class ServerRequestEvent : OneElementEvent<string> {
 	public ServerRequestEvent(string msg) : base(msg) { }
 }
@@ -44,5 +44,11 @@ public class UpgradeTowerEvent : OneElementEvent<UpgradeTowerRequest> {
 }
 public class SellTowerEvent : OneElementEvent<SellTowerRequest> {
 	public SellTowerEvent(SellTowerRequest towerRequest) : base(towerRequest) { }
+}
+public class SendMonsterEvent : OneElementEvent<SendMonsterRequest> {
+	public SendMonsterEvent(SendMonsterRequest sendRequest) : base(sendRequest) { }
+}
+public class MatchOverEvent : OneElementEvent<string> {
+	public MatchOverEvent(string winnerId) : base(winnerId) { }
 }
 #endregion

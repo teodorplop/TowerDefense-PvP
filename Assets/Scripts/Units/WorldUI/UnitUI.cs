@@ -16,6 +16,7 @@ public class UnitUI : MonoBehaviour {
 	}
 	public void Inject(BaseUnit target) {
 		_target = target;
+		_offsetToUnit.y += target.Height;
 	}
 
 	void Update() {

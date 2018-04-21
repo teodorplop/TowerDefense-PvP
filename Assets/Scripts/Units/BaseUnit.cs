@@ -11,6 +11,8 @@ public partial class BaseUnit : StateMachineBase {
 	protected UnitAttributes _attributes;
 	[SerializeField]
 	protected bool _debug;
+	[SerializeField]
+	private float _height;
 
 	public Player owner;
 
@@ -25,6 +27,8 @@ public partial class BaseUnit : StateMachineBase {
 	public float AttackSpeed { get { return _attributes.attackSpeed; } }
 	public float MovementSpeed { get { return _attributes.movementSpeed; } }
 	private float TurnSpeed { get { return _attributes.turnSpeed; } }
+
+	public float Height { get { return _height; } }
 
 	protected override void Awake() {
 		base.Awake();
