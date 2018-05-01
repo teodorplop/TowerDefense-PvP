@@ -43,4 +43,9 @@ public class MonsterFactory : MonoBehaviour {
 
 		return monster;
 	}
+	
+	public string GetMonsterUISprite(string name) {
+		int idx = _monsterPrefabs.IndexOf(obj => obj.name == name);
+		return idx != -1 ? _monsterAttributes[idx].uiSprite : "";
+	}
 }

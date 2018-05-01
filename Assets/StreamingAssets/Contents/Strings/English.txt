@@ -21,7 +21,9 @@
 		"STR_healthTooltip": "Health",
 		"STR_goldTooltip": "Gold",
 		
-		"STR_attackDamageTooltip": "Damage per Attack",
+		"STR_sendMonsterButtonTooltip": "Send monsters to your opponent's lane, starting next wave.",
+		
+		"STR_attackDamageTooltip": "Attack Damage",
 		"STR_attackSpeedTooltip": "Attacks per second",
 		"STR_movementSpeedTooltip": "Movement units per second",
 		"STR_lifePenaltyTooltip": "Life penalty",

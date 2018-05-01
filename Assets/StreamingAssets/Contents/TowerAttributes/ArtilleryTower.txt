@@ -6,5 +6,7 @@
   "range": 30,
   "attackDamage": 33,
 
-  "upgrades": [ "SellTower" ]
+  "upgrades": [ "SellTower" ],
+  
+  "uiSprite": "ArcherTowerUI_Tex"
 }

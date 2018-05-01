@@ -12,6 +12,7 @@ namespace Ingame.towers {
 
 		public float SellValue { get { return _attributes.sellValue; } }
 		public string[] Upgrades { get { return _attributes.upgrades; } }
+		public string UISprite { get { return _attributes.uiSprite; } }
 
 		public Player owner;
 

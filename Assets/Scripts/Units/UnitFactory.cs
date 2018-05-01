@@ -39,4 +39,9 @@ public class UnitFactory : MonoBehaviour {
 
 		return unit;
 	}
+
+	public string GetUnitUISprite(string name) {
+		int idx = _unitPrefabs.IndexOf(obj => obj.name == name);
+		return idx != -1 ? _unitAttributes[idx].uiSprite : "";
+	}
 }

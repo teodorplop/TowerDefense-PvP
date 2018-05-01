@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Utils.Linq;
 using Ingame.towers;
 
 namespace Interface.towerShop {
 	public class TowerShop : MonoBehaviour {
-		[SerializeField]
-		private TowerElement[] _prefabs;
+		[SerializeField] private BuyTowerElement _buyTowerPrefab;
+		[SerializeField] private RallyPointElement _rallyPointPrefab;
+		[SerializeField] private SellTowerElement _sellTowerPrefab;
 
 		private List<TowerElement> _elements;
 		void Awake() {
 			_elements = new List<TowerElement>();
 		}
 		void Start() {
-			foreach (var prf in _prefabs)
-				prf.gameObject.SetActive(false);
+			_buyTowerPrefab.gameObject.SetActive(false);
+			_sellTowerPrefab.gameObject.SetActive(false);
+			_rallyPointPrefab.gameObject.SetActive(false);
 		}
 
 		private void Clear() {
@@ -38,16 +39,18 @@ namespace Interface.towerShop {
 				return;
 			}
 
+			TowerElement elm;
 			foreach (string upg in tower.Upgrades) {
-				TowerElement prefab = _prefabs.Find(obj => obj.name == upg);
-				if (prefab != null) {
-					TowerElement obj = InstantiatePrefab(prefab);
-					obj.Inject(towerFactory, tower);
+				if (upg == "SellTower")
+					elm = _sellTowerPrefab;
+				else if (upg == "RallyPoint")
+					elm = _rallyPointPrefab;
+				else
+					elm = _buyTowerPrefab;
 
-					_elements.Add(obj);
-				} else {
-					Debug.LogError("Could not find TowerShopElement for " + upg, gameObject);
-				}
+				elm = InstantiatePrefab(elm);
+				elm.Inject(towerFactory, tower, upg);
+				_elements.Add(elm);
 			}
 		}
 	}

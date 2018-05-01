@@ -5,7 +5,8 @@ using System.Collections.Generic;
 namespace Interface.sendMonsters {
 	public class SendMonstersShop : MonoBehaviour {
 		[SerializeField] private SendMonsterElement sendMonsterPrefab;
-		
+
+		private MonsterFactory monsterFactory;
 		private SendMonstersList sendMonsters;
 		private List<SendMonsterElement> elements;
 
@@ -16,7 +17,8 @@ namespace Interface.sendMonsters {
 			sendMonsterPrefab.gameObject.SetActive(false);
 		}
 
-		public void Inject(SendMonstersList sendMonsters) {
+		public void Inject(MonsterFactory monsterFactory, SendMonstersList sendMonsters) {
+			this.monsterFactory = monsterFactory;
 			this.sendMonsters = sendMonsters;
 		}
 
@@ -27,7 +29,7 @@ namespace Interface.sendMonsters {
 				elm.transform.SetParent(transform);
 				elm.transform.localScale = Vector3.one;
 				elm.gameObject.SetActive(true);
-				elm.Inject(monster);
+				elm.Inject(monsterFactory, monster);
 
 				elements.Add(elm);
 			}

@@ -31,6 +31,7 @@ public partial class GameManager : StateMachineBase {
 	private InputManager _inputManager;
 	private WavesManager _wavesManager;
 	private TowerFactory _towerFactory;
+	private MonsterFactory _monsterFactory;
 	private UnitFactory _unitFactory;
 	private PathsContainer _pathsContainer;
 	private RequestDispatcher _dispatcher;
@@ -44,6 +45,7 @@ public partial class GameManager : StateMachineBase {
 		_inputManager = FindObjectOfType<InputManager>();
 		_wavesManager = FindObjectOfType<WavesManager>();
 		_towerFactory = FindObjectOfType<TowerFactory>();
+		_monsterFactory = FindObjectOfType<MonsterFactory>();
 		_unitFactory = FindObjectOfType<UnitFactory>();
 		_pathsContainer = FindObjectOfType<PathsContainer>();
 

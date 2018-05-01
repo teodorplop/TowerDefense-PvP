@@ -93,6 +93,11 @@ namespace Ingame.towers {
 			return Mathf.FloorToInt(towerObj.SellValue * _towerSpotsWealth[spotIdx].second);
 		}
 
+		public string GetTowerUISprite(string name) {
+			int idx = _towerPrefabs.IndexOf(obj => obj.name == name);
+			return idx != -1 ? _towerAttributes[idx].uiSprite : "";
+		}
+
 		#region utils
 		private static string GetTowerSpotName(Player player, string tower) {
 			return player.Name + '_' + tower;

@@ -28,9 +28,9 @@ public class UIManager : MonoBehaviour {
 		_endGameUI = FindObjectOfType<EndGameUI>();
 	}
 
-	public void Inject(Wallet wallet, SendMonstersList sendMonsters) {
+	public void Inject(Wallet wallet, MonsterFactory monsterFactory, SendMonstersList sendMonsters) {
 		_walletUI.Inject(wallet);
-		_sendMonstersShop.Inject(sendMonsters);
+		_sendMonstersShop.Inject(monsterFactory, sendMonsters);
 	}
 
 	public void ShowTower(TowerFactory towerFactory, Tower tower) {

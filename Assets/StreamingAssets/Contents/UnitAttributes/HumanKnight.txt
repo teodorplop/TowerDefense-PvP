@@ -8,5 +8,7 @@
   "engageRange": 20.0,
   "attackSpeed": 1.0,
   "attackRange": 5,
-  "attackDamage": 2
+  "attackDamage": 2,
+  
+  "uiSprite": "HumanKnightUI_Tex"
 }

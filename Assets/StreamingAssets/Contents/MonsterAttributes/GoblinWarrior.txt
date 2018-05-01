@@ -9,5 +9,7 @@
   "attackDamage": 3,
 
   "awardedGold": 3,
-  "lifeTaken": 1
+  "lifeTaken": 1,
+  
+  "uiSprite": "GoblinWarriorUI_Tex"
 }

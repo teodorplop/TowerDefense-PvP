@@ -28,4 +28,7 @@ public class UnitAttributes : IGameResource {
 	public int awardedGold;
 	[SerializeField]
 	public int lifeTaken;
+
+	[SerializeField]
+	public string uiSprite;
 }

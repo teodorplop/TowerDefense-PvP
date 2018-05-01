@@ -26,6 +26,11 @@ public partial class GameManager {
 	}
 
 	IEnumerator Loading_EnterState() {
+		bool texturesLoaded = false;
+		StreamingAssets.LoadTextures(delegate { texturesLoaded = true; });
+
+		while (!texturesLoaded) yield return null;
+
 		AsyncOperation ui = SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
 		while (!ui.isDone) yield return null;
 		_uiManager = FindObjectOfType<UIManager>();
@@ -43,7 +48,7 @@ public partial class GameManager {
 		PlayerInfo clientPlayerInfo = matchInfo.GetClientPlayer();
 		Player clientPlayer = GeneratePlayer(playerContainer, wallet.Clone(), clientPlayerInfo.Id, clientPlayerInfo.DisplayName, true);
 		PathRequestManager.Register(clientPlayer, pathfinder);
-		_uiManager.Inject(clientPlayer.Wallet, sendMonsters);
+		_uiManager.Inject(clientPlayer.Wallet, _monsterFactory, sendMonsters);
 
 		// Generate other players
 		Player serverPlayer = null;

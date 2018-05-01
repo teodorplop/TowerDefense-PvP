@@ -9,5 +9,7 @@
   "attackDamage": 3,
 
   "awardedGold": 2,
-  "lifeTaken": 1
+  "lifeTaken": 1,
+  
+  "uiSprite": "SkeletonUI_Tex"
 }

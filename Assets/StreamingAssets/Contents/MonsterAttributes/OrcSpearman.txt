@@ -9,5 +9,7 @@
   "attackDamage": 5,
 
   "awardedGold": 3,
-  "lifeTaken": 1
+  "lifeTaken": 1,
+  
+  "uiSprite": "OrcSpearmanUI_Tex"
 }

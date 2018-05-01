@@ -6,5 +6,7 @@
   "range": 30,
   "attackDamage": 13,
 
-  "upgrades": [ "ArtilleryTower", "SellTower" ]
+  "upgrades": [ "ArtilleryTower", "SellTower" ],
+  
+  "uiSprite": "CannonTowerUI_Tex"
 }

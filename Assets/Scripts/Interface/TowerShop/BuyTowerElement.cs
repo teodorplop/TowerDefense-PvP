@@ -3,14 +3,14 @@ using Ingame.towers;
 
 namespace Interface.towerShop {
 	public class BuyTowerElement : TowerElement {
-		[SerializeField]
 		private string towerName;
-
 		public string TowerName { get { return towerName; } }
 
-		public override void Inject(TowerFactory factory, Tower tower) {
-			base.Inject(factory, tower);
-			
+		public override void Inject(TowerFactory factory, Tower tower, string upgrade) {
+			base.Inject(factory, tower, upgrade);
+
+			this.towerName = upgrade;
+			_texture.sprite = StreamingAssets.GetSprite(factory.GetTowerUISprite(towerName));
 			_valueLabel.value = factory.GetUpgradeCost(tower.owner, towerName);
 		}
 

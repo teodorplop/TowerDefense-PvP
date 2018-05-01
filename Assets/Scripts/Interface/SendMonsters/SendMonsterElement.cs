@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Interface.sendMonsters {
 	public class SendMonsterElement : MonoBehaviour {
-		[SerializeField] private Label nameLabel;
+		[SerializeField] private Image texture;
 		[SerializeField] private IntLabel costLabel;
 		
 		private MonsterToSend monster;
 
 		public MonsterToSend Monster { get { return monster; } }
 
-		public virtual void Inject(MonsterToSend monster) {
+		public virtual void Inject(MonsterFactory monsterFactory, MonsterToSend monster) {
 			this.monster = monster;
-			nameLabel.text = monster.name;
+
+			texture.sprite = StreamingAssets.GetSprite(monster.name + "UI_Tex");
 			costLabel.value = monster.cost;
 		}
 

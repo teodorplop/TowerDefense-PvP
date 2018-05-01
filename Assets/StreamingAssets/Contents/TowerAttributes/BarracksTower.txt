@@ -8,5 +8,7 @@
   "respawnTimer": 8,
   "maxUnits": 3,
 
-  "upgrades": [ "RallyPoint", "SellTower" ]
+  "upgrades": [ "RallyPoint", "SellTower" ],
+  
+  "uiSprite": "BarracksTowerUI_Tex"
 }

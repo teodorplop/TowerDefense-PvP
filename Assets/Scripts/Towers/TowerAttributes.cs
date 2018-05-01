@@ -27,5 +27,8 @@ namespace Ingame.towers {
 		public float respawnTimer;
 		[SerializeField]
 		public int maxUnits;
+
+		[SerializeField]
+		public string uiSprite;
 	}
 }

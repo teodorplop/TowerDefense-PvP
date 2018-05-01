@@ -9,5 +9,7 @@
   "attackDamage": 7,
 
   "awardedGold": 5,
-  "lifeTaken": 1
+  "lifeTaken": 1,
+  
+  "uiSprite": "OrcWolfRiderUI_Tex"
 }
