@@ -6,6 +6,8 @@ namespace Interface.towerShop {
 		[SerializeField]
 		private string towerName;
 
+		public string TowerName { get { return towerName; } }
+
 		public override void Inject(TowerFactory factory, Tower tower) {
 			base.Inject(factory, tower);
 			

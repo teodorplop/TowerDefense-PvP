@@ -16,6 +16,27 @@
 		"STR_loadingScreenTip1": "Random loading screen tip? Yes!",
 		
 		"STR_endGameVictory": "VICTORY",
-		"STR_endGameDefeat": "DEFEAT"
+		"STR_endGameDefeat": "DEFEAT",
+		
+		"STR_healthTooltip": "Health",
+		"STR_goldTooltip": "Gold",
+		
+		"STR_attackDamageTooltip": "Damage per Attack",
+		"STR_attackSpeedTooltip": "Attacks per second",
+		"STR_movementSpeedTooltip": "Movement units per second",
+		"STR_lifePenaltyTooltip": "Life penalty",
+		"STR_attackRangeTooltip": "Attack range",
+		"STR_respawnTimeTooltip": "Respawn time",
+		
+		"STR_buyTowerTooltip_ArcherTower": "Archer Tower",
+		"STR_buyTowerTooltip_CannonTower": "Cannon Tower",
+		"STR_buyTowerTooltip_BarracksTower": "Barracks Tower",
+		"STR_buyTowerTooltip_MarksmenTower": "Marksmen Tower",
+		"STR_buyTowerTooltip_ArtilleryTower": "Artillery Tower",
+		"STR_buyTowerTooltip_RallyPoint": "Set Rally Point",
+		"STR_buyTowerTooltip_SellTower": "Sell Tower",
+		
+		"STR_sendMonsterTooltip_GoblinWarrior": "Goblin Warrior",
+		"STR_sendMonsterTooltip_Skeleton": "Skeleton"
 	}
 }

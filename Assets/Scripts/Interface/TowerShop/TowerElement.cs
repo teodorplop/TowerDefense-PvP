@@ -8,6 +8,8 @@ namespace Interface.towerShop {
 		protected TowerFactory _factory;
 		protected Tower _tower;
 
+		public Tower tower { get { return _tower; } }
+
 		public virtual void Inject(TowerFactory factory, Tower tower) {
 			_tower = tower;
 		}

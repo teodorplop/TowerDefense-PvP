@@ -12,6 +12,9 @@ namespace Interface.sendMonsters {
 		void Awake() {
 			elements = new List<SendMonsterElement>();
 		}
+		void Start() {
+			sendMonsterPrefab.gameObject.SetActive(false);
+		}
 
 		public void Inject(SendMonstersList sendMonsters) {
 			this.sendMonsters = sendMonsters;

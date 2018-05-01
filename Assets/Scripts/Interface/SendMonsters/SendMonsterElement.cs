@@ -7,6 +7,8 @@ namespace Interface.sendMonsters {
 		
 		private MonsterToSend monster;
 
+		public MonsterToSend Monster { get { return monster; } }
+
 		public virtual void Inject(MonsterToSend monster) {
 			this.monster = monster;
 			nameLabel.text = monster.name;

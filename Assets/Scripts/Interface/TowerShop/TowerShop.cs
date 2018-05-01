@@ -12,6 +12,10 @@ namespace Interface.towerShop {
 		void Awake() {
 			_elements = new List<TowerElement>();
 		}
+		void Start() {
+			foreach (var prf in _prefabs)
+				prf.gameObject.SetActive(false);
+		}
 
 		private void Clear() {
 			foreach (TowerElement elm in _elements) {

@@ -4,43 +4,48 @@ using Ingame.towers;
 
 namespace Interface.towers {
 	public class TowerUI : MonoBehaviour {
-		[SerializeField]
-		private UIInformation[] _elements;
-
-		private HorizontalLayoutGroup layoutGroup;
-
-		void Awake() {
-			layoutGroup = GetComponent<HorizontalLayoutGroup>();
-		}
+		[SerializeField] private GameObject _properties;
+		[SerializeField] private Label _attackDamage;
+		[SerializeField] private Label _attackSpeed;
+		[SerializeField] private Label _range;
+		[SerializeField] private Label _respawnTime;
 
 		public void Show(Tower tower) {
+			if (tower == null) {
+				_properties.SetActive(false);
+				return;
+			}
+
 			if (tower is OffensiveTower) {
 				OffensiveTower t = tower as OffensiveTower;
 
-				_elements[0].gameObject.SetActive(true);
-				_elements[0].Set("Damage", t.AttackDamage.ToString());
+				_attackDamage.text = t.AttackDamage.ToString();
+				_attackDamage.transform.parent.gameObject.SetActive(true);
 
-				_elements[1].gameObject.SetActive(true);
-				_elements[1].Set("Attack Speed", t.AttackSpeed.ToString());
+				_attackSpeed.text = t.AttackSpeed.ToString();
+				_attackSpeed.transform.parent.gameObject.SetActive(true);
 
-				_elements[2].gameObject.SetActive(true);
-				_elements[2].Set("Range", t.Range.ToString());
+				_range.text = t.Range.ToString();
+				_range.transform.parent.gameObject.SetActive(true);
+
+				_respawnTime.transform.parent.gameObject.SetActive(false);
 			} else if (tower is BarracksTower) {
 				BarracksTower t = tower as BarracksTower;
 
-				_elements[0].gameObject.SetActive(true);
-				_elements[0].Set("Respawn Time", t.RespawnTimer.ToString());
+				_respawnTime.text = t.RespawnTimer.ToString();
+				_respawnTime.transform.parent.gameObject.SetActive(true);
 
-				_elements[1].gameObject.SetActive(false);
-				_elements[2].gameObject.SetActive(false);
+				_attackDamage.transform.parent.gameObject.SetActive(false);
+				_attackSpeed.transform.parent.gameObject.SetActive(false);
+				_range.transform.parent.gameObject.SetActive(false);
 			} else {
-				_elements[0].gameObject.SetActive(false);
-				_elements[1].gameObject.SetActive(false);
-				_elements[2].gameObject.SetActive(false);
+				_attackDamage.transform.parent.gameObject.SetActive(false);
+				_attackSpeed.transform.parent.gameObject.SetActive(false);
+				_range.transform.parent.gameObject.SetActive(false);
+				_respawnTime.transform.parent.gameObject.SetActive(false);
 			}
 
-			layoutGroup.enabled = false;
-			layoutGroup.enabled = true;
+			_properties.SetActive(true);
 		}
 	}
 }
