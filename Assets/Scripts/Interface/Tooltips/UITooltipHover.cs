@@ -6,12 +6,30 @@ public class UITooltipHover : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 	[SerializeField] private Vector3 offset;
 	[SerializeField] private string text;
 
+	private bool shown;
+
+	void OnDestroy() {
+		if (shown) {
+			shown = false;
+			UITooltip.Hide();
+		}
+	}
+
+	void OnDisable() {
+		if (shown) {
+			shown = false;
+			UITooltip.Hide();
+		}
+	}
+
 	public void OnPointerEnter(PointerEventData eventData) {
 		OnEnter();
+		shown = true;
 		UITooltip.Show(gameObject, offset);
 	}
 
 	public void OnPointerExit(PointerEventData eventData) {
+		shown = false;
 		UITooltip.Hide();
 	}
 

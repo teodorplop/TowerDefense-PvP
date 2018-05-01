@@ -28,11 +28,11 @@
 		"STR_attackRangeTooltip": "Attack range",
 		"STR_respawnTimeTooltip": "Respawn time",
 		
-		"STR_buyTowerTooltip_ArcherTower": "Archer Tower",
-		"STR_buyTowerTooltip_CannonTower": "Cannon Tower",
-		"STR_buyTowerTooltip_BarracksTower": "Barracks Tower",
-		"STR_buyTowerTooltip_MarksmenTower": "Marksmen Tower",
-		"STR_buyTowerTooltip_ArtilleryTower": "Artillery Tower",
+		"STR_buyTowerTooltip_ArcherTower": "Archer Tower\n\nStrike at an enemy from a distance",
+		"STR_buyTowerTooltip_CannonTower": "Cannon Tower\n\nBombard ground enemies dealing area damage",
+		"STR_buyTowerTooltip_BarracksTower": "Barracks\n\nTrains soldiers that block and damage your enemies",
+		"STR_buyTowerTooltip_MarksmenTower": "Marksmen Tower\n\nDeals more damage and has a longer attack range",
+		"STR_buyTowerTooltip_ArtilleryTower": "Artillery Tower\n\nDeals more damage and bombards an even larger area",
 		"STR_buyTowerTooltip_RallyPoint": "Set Rally Point",
 		"STR_buyTowerTooltip_SellTower": "Sell Tower",
 		
