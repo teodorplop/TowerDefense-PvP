@@ -2,8 +2,8 @@
   "movementSpeed": 10.0,
   "turnSpeed": 10.0,
 
-  "maxHealth": 55,
-  "regenTime":  10,
+  "maxHealth": 30,
+  "regenTime":  8,
 
   "engageRange": 20.0,
   "attackSpeed": 1.0,

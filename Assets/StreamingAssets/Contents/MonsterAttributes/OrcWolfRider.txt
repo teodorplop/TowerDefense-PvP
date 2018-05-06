@@ -2,11 +2,11 @@
   "movementSpeed": 18.0,
   "turnSpeed": 5.0,
 
-  "maxHealth": 40,
+  "maxHealth": 35,
 
-  "attackSpeed": 1.5,
+  "attackSpeed": 1.1,
   "attackRange": 5,
-  "attackDamage": 7,
+  "attackDamage": 3,
 
   "awardedGold": 5,
   "lifeTaken": 1,

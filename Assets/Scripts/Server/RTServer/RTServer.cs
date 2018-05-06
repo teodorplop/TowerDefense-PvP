@@ -1,19 +1,29 @@
 ﻿using UnityEngine;
 using GameSparks.RT;
 using System;
+using System.Collections;
 
 public class RTServer {
 	private const int PLAYERSJOINED_OPCODE = 100;
+	private const int LATENCY_OPCODE = 101;
+
 	private const int UPGRADETOWER_OPCODE = 120;
 	private const int SELLTOWER_OPCODE = 121;
 	private const int SENDMONSTER_OPCODE = 122;
+
 	private const int GAMEOVER_OPCODE = 130;
 
 	private MatchInfo matchInfo;
 	private Action<bool> onReady;
 
 	private int[] otherPeerIds;
+
+	private int roundTrip, latency;
+
 	private int PeerId { get { return (int)GameSparksRTUnity.Instance.PeerId; } }
+
+	public int RoundTrip { get { return roundTrip; } }
+	public int Latency { get { return latency; } }
 
 	public RTServer(MatchInfo matchInfo) {
 		this.matchInfo = matchInfo;
@@ -32,6 +42,17 @@ public class RTServer {
 		GameSparksRTUnity.Instance.Connect();
 	}
 
+	private IEnumerator CheckLatency() {
+		while (true) {
+			using (RTData data = RTData.Get()) {
+				data.SetLong(1, (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds);
+				GameSparksRTUnity.Instance.SendData(LATENCY_OPCODE, GameSparksRT.DeliveryIntent.UNRELIABLE, data, new int[] { 0 });
+			}
+
+			yield return new WaitForSeconds(5.0f);
+		}
+	}
+
 	private void OnPlayerConnect(int peerId) {
 		Debug.Log("OnPlayerConnect(" + peerId + ")");
 		matchInfo.GetPlayer(peerId).online = true;
@@ -42,23 +63,9 @@ public class RTServer {
 	}
 	private void OnReady(bool ready) {
 		Debug.Log("OnReady(" + ready + ")");
-
-		/*if (ready) {
-			otherPeerIds = new int[matchInfo.Players.Count - 1];
-			int idx = 0;
-			foreach (PlayerInfo pi in matchInfo.Players)
-				if (pi.PeerId == PeerId) pi.clientPlayer = true;
-				else otherPeerIds[idx++] = pi.PeerId;
-		}
-
-		if (onReady != null) {
-			onReady(ready);
-			onReady = null;
-		}*/
 	}
 	private void OnPacket(RTPacket packet) {
 		if (packet.OpCode == PLAYERSJOINED_OPCODE) {
-			Debug.Log("players joined.");
 			otherPeerIds = new int[matchInfo.Players.Count - 1];
 			int idx = 0;
 			foreach (PlayerInfo pi in matchInfo.Players)
@@ -69,6 +76,17 @@ public class RTServer {
 				onReady(true);
 				onReady = null;
 			}
+			
+			CoroutineStarter.CoroutineStart(CheckLatency());
+
+			return;
+		}
+
+		if (packet.OpCode == LATENCY_OPCODE) {
+			roundTrip = (int)((long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds - packet.Data.GetLong(1).Value);
+			latency = roundTrip / 2;
+
+			MacroSystem.SetMacroValue("LATENCY_VALUE", latency);
 
 			return;
 		}
