@@ -65,6 +65,8 @@ public partial class GameManager {
 			++idx;
 		}
 
+		_uiManager.Inject(Players.GetPlayers());
+
 		yield return null;
 
 		if (loadingCallback != null) loadingCallback();

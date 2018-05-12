@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour {
 	private WalletUI _walletUI;
 	private SendMonstersShop _sendMonstersShop;
 
+	private UIPlayerStats _playerStats;
+
 	private EndGameUI _endGameUI;
 
 	void Awake() {
@@ -25,12 +27,18 @@ public class UIManager : MonoBehaviour {
 		_walletUI = FindObjectOfType<WalletUI>();
 		_sendMonstersShop = FindObjectOfType<SendMonstersShop>();
 
+		_playerStats = FindObjectOfType<UIPlayerStats>();
+
 		_endGameUI = FindObjectOfType<EndGameUI>();
 	}
 
 	public void Inject(Wallet wallet, MonsterFactory monsterFactory, SendMonstersList sendMonsters) {
 		_walletUI.Inject(wallet);
 		_sendMonstersShop.Inject(monsterFactory, sendMonsters);
+	}
+
+	public void Inject(Player[] players) {
+		_playerStats.InjectPlayers(players);
 	}
 
 	public void ShowTower(TowerFactory towerFactory, Tower tower) {
@@ -48,6 +56,7 @@ public class UIManager : MonoBehaviour {
 
 	public void Refresh() {
 		_walletUI.Refresh();
+		_playerStats.Refresh();
 	}
 
 	public void GameEnded(bool win) {

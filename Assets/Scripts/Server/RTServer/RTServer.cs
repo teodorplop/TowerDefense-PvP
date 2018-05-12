@@ -75,7 +75,7 @@ public class RTServer {
 			if (onReady != null) {
 				onReady(true);
 				onReady = null;
-			}
+			}	
 			
 			CoroutineStarter.CoroutineStart(CheckLatency());
 

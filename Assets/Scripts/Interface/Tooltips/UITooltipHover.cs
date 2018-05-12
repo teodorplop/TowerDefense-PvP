@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class UITooltipHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 	[SerializeField] private Vector3 offset;
-	[SerializeField] private string text;
+	[SerializeField] protected string text;
 
 	private bool shown;
 

@@ -3,6 +3,7 @@ using Ingame.towers;
 
 namespace Interface.towerShop {
 	public class BuyTowerElement : TowerElement {
+
 		private string towerName;
 		public string TowerName { get { return towerName; } }
 
@@ -12,6 +13,8 @@ namespace Interface.towerShop {
 			this.towerName = upgrade;
 			_texture.sprite = StreamingAssets.GetSprite(factory.GetTowerUISprite(towerName));
 			_valueLabel.value = factory.GetUpgradeCost(tower.owner, towerName);
+
+			name = upgrade;
 		}
 
 		public override void OnPress() {
