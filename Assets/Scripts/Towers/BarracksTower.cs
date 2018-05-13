@@ -38,7 +38,8 @@ namespace Ingame.towers {
 
 			SetRallyPoint(point);
 			for (int i = 0; i < _maxUnits; ++i) {
-				_units[i].SetRallyPoint(_rallyPoints[i]);
+				if (_units[i] != null)
+					_units[i].SetRallyPoint(_rallyPoints[i]);
 			}
 		}
 	}

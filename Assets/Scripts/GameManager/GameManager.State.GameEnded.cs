@@ -27,7 +27,7 @@ public partial class GameManager {
 	}
 
 	IEnumerator GameEnded_EnterState() {
-		_uiManager.GameEnded(_winner.ClientPlayer);
+		_uiManager.GameEnded(matchInfo.GetClientPlayer().MMR, _winner.ClientPlayer);
 		EventManager.Raise(new MatchOverEvent(_winner.Id));
 
 		Debug.Log("Winner: " + _winner.Name);

@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour {
 		_playerStats.Refresh();
 	}
 
-	public void GameEnded(bool win) {
-		_endGameUI.Show(win);
+	public void GameEnded(int mmr, bool win) {
+		_endGameUI.Show(mmr, win);
 	}
 }

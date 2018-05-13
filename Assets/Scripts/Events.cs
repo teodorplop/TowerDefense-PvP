@@ -1,4 +1,6 @@
-﻿#region Utils
+﻿using UnityEngine;
+
+#region Utils
 public class OneElementEvent<T> : GameEvent {
 	private T t;
 	public T Element { get { return t; } }
@@ -36,6 +38,11 @@ public class LoggedOutEvent : GameEvent { }
 public class FindMatchStartedEvent : GameEvent { }
 public class FindMatchCanceledEvent : GameEvent { }
 public class MatchFoundEvent : GameEvent { }
+
+public class ProfileChangedEvent : GameEvent {
+	[SerializeField] private UserProfile profile;
+	public UserProfile Profile { get { return profile; } }
+}
 #endregion
 
 #region Ingame

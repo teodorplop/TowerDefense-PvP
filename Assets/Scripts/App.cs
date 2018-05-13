@@ -35,12 +35,17 @@ public class App : MonoBehaviour {
 		
 		InitAppData();
 		InitServer();
+
+		EventManager.AddListener<ProfileChangedEvent>(OnProfileChanged);
 	}
 	void Start() {
 		if (UserPrefs.RememberMe) Login(UserPrefs.Username, UserPrefs.Password);
 	}
 	void OnDestroy() {
-		if (instance == this) instance = null;
+		if (instance == this) {
+			EventManager.RemoveListener<ProfileChangedEvent>(OnProfileChanged);
+			instance = null;
+		}
 	}
 
 	void InitAppData() {
@@ -152,5 +157,9 @@ public class App : MonoBehaviour {
 		SceneLoader.UnloadScene("Splash", delegate {
 			GameManager.Instance.StartMatch();
 		});
+	}
+
+	private void OnProfileChanged(ProfileChangedEvent evt) {
+		MacroSystem.SetMacroValue("MMR", profile.MMR);
 	}
 }

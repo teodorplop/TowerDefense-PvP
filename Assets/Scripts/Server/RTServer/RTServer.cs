@@ -18,7 +18,7 @@ public class RTServer {
 
 	private int[] otherPeerIds;
 
-	private int roundTrip, latency;
+	private int roundTrip, latency, timeDelta;
 
 	private int PeerId { get { return (int)GameSparksRTUnity.Instance.PeerId; } }
 
@@ -85,6 +85,8 @@ public class RTServer {
 		if (packet.OpCode == LATENCY_OPCODE) {
 			roundTrip = (int)((long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds - packet.Data.GetLong(1).Value);
 			latency = roundTrip / 2;
+			int serverDelta = (int)(packet.Data.GetLong(2).Value - (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds);
+			timeDelta = serverDelta + latency;
 
 			MacroSystem.SetMacroValue("LATENCY_VALUE", latency);
 
