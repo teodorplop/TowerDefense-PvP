@@ -34,7 +34,8 @@ public partial class BaseUnit {
 
 	public void OnTargetHit() {
 		if (Target != null) {
-			Target.ApplyDamage(AttackDamage);
+			CombatManager.Instance.ApplyDamage(Target, Attack, AttackDamage);
+			//Target.ApplyDamage(AttackDamage);
 		}
 	}
 

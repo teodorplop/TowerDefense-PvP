@@ -11,5 +11,8 @@
   "awardedGold": 3,
   "lifeTaken": 1,
   
+  "attack": "Normal",
+  "armor": "Medium",
+  
   "uiSprite": "OrcSpearmanUI_Tex"
 }

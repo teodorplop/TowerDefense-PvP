@@ -1,0 +1,13 @@
+AttackType,ArmorType,value
+Normal,Light,1.0
+Normal,Medium,1.15
+Normal,Heavy,0.7
+Piercing,Light,1.2
+Piercing,Medium,0.87
+Piercing,Heavy,0.75
+Siege,Light,1.0
+Siege,Medium,0.9
+Siege,Heavy,0.8
+Magic,Light,1.0
+Magic,Medium,1.0
+Magic,Heavy,1.3

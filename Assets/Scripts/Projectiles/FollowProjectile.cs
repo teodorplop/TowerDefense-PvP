@@ -13,8 +13,8 @@ public class FollowProjectile : Projectile {
 	private Vector3 _targetOffset;
 	private Vector3 TargetPosition { get { return _target.transform.position + new Vector3(0, 0.5f); } }
 
-	public override void Inject(int damage, Monster monster, Player owner) {
-		base.Inject(damage, monster, owner);
+	public override void Inject(AttackType attack, int damage, Monster monster, Player owner) {
+		base.Inject(attack, damage, monster, owner);
 		_targetOffset = new Vector3(0, _offset, 0);
 
 		transform.LookAt(TargetPosition + _targetOffset);

@@ -5,6 +5,8 @@
   "attackSpeed": 1.25,
   "range": 45,
   "attackDamage": 9,
+  
+  "attack": "Piercing",
 
   "upgrades": [ "SellTower" ],
   

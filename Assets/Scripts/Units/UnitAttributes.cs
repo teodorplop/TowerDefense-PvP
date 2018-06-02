@@ -30,5 +30,11 @@ public class UnitAttributes : IGameResource {
 	public int lifeTaken;
 
 	[SerializeField]
+	public ArmorType armor;
+
+	[SerializeField]
+	public AttackType attack;
+
+	[SerializeField]
 	public string uiSprite;
 }

@@ -1,5 +1,5 @@
 {
-  "upgrades": [ "ArcherTower", "CannonTower", "BarracksTower" ],
+  "upgrades": [ "ArcherTower", "CannonTower", "BarracksTower", "MageTower" ],
   
   "uiSprite": ""
 }

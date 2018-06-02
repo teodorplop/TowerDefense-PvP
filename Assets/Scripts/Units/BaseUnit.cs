@@ -23,6 +23,8 @@ public partial class BaseUnit : StateMachineBase {
 	public bool IsDead { get { return _currentHealth == 0; } }
 	public float AttackRange { get { return _attributes.attackRange; } }
 	public int AttackDamage { get { return _attributes.attackDamage; } }
+	public ArmorType Armor { get { return _attributes.armor; } }
+	public AttackType Attack { get { return _attributes.attack; } }
 	
 	public float AttackSpeed { get { return _attributes.attackSpeed; } }
 	public float MovementSpeed { get { return _attributes.movementSpeed; } }

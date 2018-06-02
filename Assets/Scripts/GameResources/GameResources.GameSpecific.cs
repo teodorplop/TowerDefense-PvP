@@ -11,6 +11,7 @@ public partial class GameResources {
 	private const string UNIT_ATTRIBUTES_PATH = "UnitAttributes";
 	private const string WAVES_PATH = "Waves";
 	private const string SEND_MONSTERS_PATH = "SendMonsters";
+	private const string COMBAT_PATH = "Combat";
 	private const string STRINGS_PATH = "Strings";
 
 	private static string GetPath(string root, string level, string file) {
@@ -29,7 +30,7 @@ public partial class GameResources {
 		}
 		return t;
 	}
-	private static T LoadCSV<T>(string root, string level, string file) where T : CSVLoader, IGameResource {
+	private static T LoadCSV<T>(string root, string level, string file) where T : CSVLoader {
 		string path = GetPath(root, level, file);
 		T t = LoadCSV<T>(path);
 		if (t == null) {
@@ -89,6 +90,14 @@ public partial class GameResources {
 	}
 	public static Waves_Data LoadWaves() {
 		return LoadWaves(SceneLoader.ActiveScene);
+	}
+
+	public static Combat_Data LoadCombat(string level) {
+		return LoadCSV<Combat_Data>(COMBAT_PATH, level, "Combat");
+	}
+
+	public static Combat_Data LoadCombat() {
+		return LoadCombat(SceneLoader.ActiveScene);
 	}
 
 	public static Strings_Data LoadStrings(string language) {

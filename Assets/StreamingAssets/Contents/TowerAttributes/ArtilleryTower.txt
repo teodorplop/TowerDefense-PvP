@@ -6,6 +6,8 @@
   "range": 30,
   "attackDamage": 33,
 
+  "attack": "Siege",
+  
   "upgrades": [ "SellTower" ],
   
   "uiSprite": "ArcherTowerUI_Tex"

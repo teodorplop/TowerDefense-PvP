@@ -22,7 +22,7 @@ namespace Ingame.towers {
 			projectile.transform.SetParent(_launchPoint);
 			projectile.transform.localPosition = Vector3.zero;
 			projectile.transform.localRotation = Quaternion.identity;
-			projectile.Inject(AttackDamage, _target, owner);
+			projectile.Inject(Attack, AttackDamage, _target, owner);
 			projectile.gameObject.SetActive(true);
 		}
 	}

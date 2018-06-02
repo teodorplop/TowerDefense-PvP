@@ -10,6 +10,7 @@ namespace Ingame.towers {
 		public float AttackSpeed { get { return _attributes.attackSpeed; } }
 		public float Range { get { return _attributes.range; } }
 		public int AttackDamage { get { return _attributes.attackDamage; } }
+		public AttackType Attack { get { return _attributes.attack; } }
 
 		protected override void Awake() {
 			base.Awake();

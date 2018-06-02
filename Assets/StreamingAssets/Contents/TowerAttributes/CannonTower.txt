@@ -5,6 +5,8 @@
   "attackSpeed": 0.3,
   "range": 30,
   "attackDamage": 13,
+  
+  "attack": "Siege",
 
   "upgrades": [ "ArtilleryTower", "SellTower" ],
   

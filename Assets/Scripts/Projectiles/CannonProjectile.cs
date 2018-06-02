@@ -10,8 +10,10 @@ public class CannonProjectile : Projectile {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.layer == LayerMask.NameToLayer("Map")) {
 			List<Monster> monsters = _owner.GetMonstersInRange(transform.position, explosionRange);
-			foreach (Monster monster in monsters)
-				monster.ApplyDamage(_damage);
+			foreach (Monster monster in monsters) {
+				CombatManager.Instance.ApplyDamage(monster, _attackType, _damage);
+				//monster.ApplyDamage(_damage);
+			}
 
 			Die();
 		}

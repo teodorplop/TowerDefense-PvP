@@ -29,6 +29,9 @@ namespace Ingame.towers {
 		public int maxUnits;
 
 		[SerializeField]
+		public AttackType attack;
+
+		[SerializeField]
 		public string uiSprite;
 	}
 }

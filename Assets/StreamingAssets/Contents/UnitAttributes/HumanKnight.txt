@@ -10,5 +10,8 @@
   "attackRange": 5,
   "attackDamage": 2,
   
+  "attack": "Normal",
+  "armor": "Medium",
+  
   "uiSprite": "HumanKnightUI_Tex"
 }

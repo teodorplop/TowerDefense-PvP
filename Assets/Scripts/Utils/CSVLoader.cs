@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// First line is skipped!
 /// </summary>
-public abstract class CSVLoader {
+public abstract class CSVLoader : IGameResource {
 	private string[] lines;
 	public string[] Lines { get { return lines; } }
 
@@ -15,7 +15,7 @@ public abstract class CSVLoader {
 		Process();
 	}
 
-	private void Process() {
+	protected virtual void Process() {
 		for (int i = 1; i < lines.Length; i++)
 			ProcessLine(i, lines[i].Split(','));
 	}
