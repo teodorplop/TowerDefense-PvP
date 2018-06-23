@@ -107,8 +107,10 @@ public class App : MonoBehaviour {
 		EventManager.Raise(new LoggedOutEvent());
 	}
 
-	public static void FindMatch() {
-		instance.mmServer.FindMatch(delegate(bool success) {
+	public static void FindMatch(Mod selectedMod) {
+		GameResources.SetMod(selectedMod.Name);
+
+		instance.mmServer.FindMatch(selectedMod, delegate(bool success) {
 			Debug.Log("FindMatch: " + success);
 			if (success) EventManager.Raise(new FindMatchStartedEvent());
 		}, instance.OnMatchFound);
@@ -122,14 +124,14 @@ public class App : MonoBehaviour {
 	}
 
 	private void OnMatchFound(MatchInfo matchInfo) {
-		this.matchInfo = matchInfo;
-
 		if (matchInfo == null) {
 			Debug.Log("Match not found.");
-			EventManager.Raise(new FindMatchCanceledEvent());
-			EventManager.Raise(new ServerResponseEvent("STR_matchNotFound"));
-			return;
+			PlayerInfo client = new PlayerInfo(profile.DisplayName, "0", 0, profile.MMR);
+			PlayerInfo ai = new PlayerInfo(AIPlayer.GenerateAIName(), "1", 1, profile.MMR);
+			matchInfo = new MatchInfo(client, ai);
 		}
+
+		this.matchInfo = matchInfo;
 
 		for (int i = 0; i < matchInfo.Players.Count; ++i) {
 			MacroSystem.SetMacroValue(string.Format("PLAYER{0}_DISPLAYNAME", i), matchInfo.Players[i].DisplayName);

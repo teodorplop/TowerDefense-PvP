@@ -5,7 +5,7 @@ using System;
 using System.IO;
 
 public class StreamingAssets {
-	private const string DEFAULT_MOD_PATH = "Contents";
+	private const string DEFAULT_MOD_PATH = "Default";
 	private const string TEXTURES_PATH = "Textures";
 
 	private static bool _loaded = false;

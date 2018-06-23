@@ -31,9 +31,9 @@ public class MatchmakingServer {
 		}
 	}
 
-	public void FindMatch(Action<bool> callback, Action<MatchInfo> onMatchFound) {
+	public void FindMatch(Mod selectedMod, Action<bool> callback, Action<MatchInfo> onMatchFound) {
 		this.onMatchFound = onMatchFound;
-		new MatchmakingRequest().SetMatchShortCode("rankedMatch").SetSkill(profile.MMR).Send((response) => FindMatchCallback(response, callback));
+		new MatchmakingRequest().SetMatchShortCode("rankedMatch").SetSkill(profile.MMR).SetMatchGroup(selectedMod.Hash).Send((response) => FindMatchCallback(response, callback));
 	}
 	private void FindMatchCallback(MatchmakingResponse response, Action<bool> callback) {
 		if (response.HasErrors) {

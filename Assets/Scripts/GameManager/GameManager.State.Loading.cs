@@ -49,18 +49,21 @@ public partial class GameManager {
 		Player clientPlayer = GeneratePlayer(playerContainer, wallet.Clone(), clientPlayerInfo.Id, clientPlayerInfo.DisplayName, true);
 		PathRequestManager.Register(clientPlayer, pathfinder);
 		_uiManager.Inject(clientPlayer.Wallet, _monsterFactory, sendMonsters);
-
+		
 		// Generate other players
 		Player serverPlayer = null;
 		int idx = 1;
 		foreach (PlayerInfo playerInfo in matchInfo.Players) {
 			if (playerInfo.clientPlayer) continue;
-
+			
 			playerContainer = Instantiate(playerContainer);
 			playerContainer.transform.localScale = Vector3.one;
 			playerContainer.transform.position = new Vector3(idx * 160.0f, 0.0f, 0.0f);
 			serverPlayer = GeneratePlayer(playerContainer, wallet.Clone(), playerInfo.Id, playerInfo.DisplayName, false);
 			PathRequestManager.Register(serverPlayer, pathfinder);
+
+			if (matchInfo.IsFake)
+				AIPlayer.GenerateAI(serverPlayer);
 
 			++idx;
 		}

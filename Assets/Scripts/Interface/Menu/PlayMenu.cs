@@ -5,6 +5,7 @@ public class PlayMenu : MonoBehaviour {
 	[SerializeField] private GameObject findMatchIdle;
 	[SerializeField] private GameObject findMatchInProgress;
 	[SerializeField] private TimerLabel findMatchTimer;
+	[SerializeField] private ModSelectionMenu modSelection;
 
 	void Awake() {
 		EventManager.AddListener<FindMatchStartedEvent>(OnFindMatchStarted);
@@ -34,7 +35,7 @@ public class PlayMenu : MonoBehaviour {
 	}
 
 	public void FindMatch() {
-		App.FindMatch();
+		App.FindMatch(modSelection.SelectedMod);
 	}
 
 	public void CancelFindMatch() {

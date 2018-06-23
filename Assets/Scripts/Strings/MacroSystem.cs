@@ -9,9 +9,8 @@ public class MacroSystem {
 
     public static void SetMacroValue(string macro, object value) {
         macros[macro] = value;
-        if (macroEvents.ContainsKey(macro)) {
+        if (macroEvents.ContainsKey(macro))
             macroEvents[macro].DynamicInvoke();
-        }
     }
 
     public static void Register(UpdateLabelDelegate updateLabel, string macroText) {
@@ -31,11 +30,8 @@ public class MacroSystem {
         foreach (string str in macroArray) {
             if (macroEvents.ContainsKey(str)) {
                 Delegate currentDel = Delegate.Remove(macroEvents[str], updateLabel);
-                if (currentDel == null) {
-                    macroEvents.Remove(str);
-                } else {
-                    macroEvents[str] = currentDel;
-                }
+                if (currentDel == null) macroEvents.Remove(str);
+                else macroEvents[str] = currentDel;
             }
         }
     }

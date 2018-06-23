@@ -27,13 +27,16 @@ public class PlayerInfo {
 public class MatchInfo {
 	private string map = "Map0";
 
+	private bool fakeMatch;
+
 	private string hostURL;
 	private int portId;
 	private string accessToken;
 	private string matchId;
 	private List<PlayerInfo> players;
-
+	
 	public string Map { get { return map; } }
+	public bool IsFake { get { return fakeMatch; } }
 	public string HostURL { get { return hostURL; } }
 	public int PortId { get { return portId; } }
 	public string AccessToken { get { return accessToken; } }
@@ -46,9 +49,20 @@ public class MatchInfo {
 			new PlayerInfo("Hetamess", "1", 1, 1000)
 		};
 		players[0].clientPlayer = true;
+
+		fakeMatch = true;
+	}
+
+	public MatchInfo(PlayerInfo client, PlayerInfo ai) {
+		players = new List<PlayerInfo>() { client, ai };
+		players[0].clientPlayer = true;
+
+		fakeMatch = true;
 	}
 
 	public MatchInfo(MatchFoundMessage msg) {
+		fakeMatch = false;
+
 		portId = (int)msg.Port;
 		hostURL = msg.Host;
 		accessToken = msg.AccessToken;

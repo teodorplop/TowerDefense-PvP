@@ -19,8 +19,13 @@ namespace Ingame.towers {
 			for (int i = 0; i < _maxUnits; ++i) {
 				_respawnTimers[i] = RespawnTimer;
 			}
-
-			Vector3 bestRallyPoint = PathRequestManager.GetConvenientPoint(owner, transform.position - owner.WorldOffset, _range) + owner.WorldOffset;
+			
+			Transform rallyPointTransform = transform.parent.Find(name + "_RallyPoint");
+			Vector3 bestRallyPoint = Vector3.zero;
+			if (rallyPointTransform == null)
+				bestRallyPoint = PathRequestManager.GetConvenientPoint(owner, transform.position - owner.WorldOffset, _range) + owner.WorldOffset;
+			else
+				bestRallyPoint = rallyPointTransform.position;
 			SetRallyPoint(bestRallyPoint);
 
 			yield return StartCoroutine(SpawnUnits());

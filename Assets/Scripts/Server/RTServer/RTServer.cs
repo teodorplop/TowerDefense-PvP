@@ -35,6 +35,12 @@ public class RTServer {
 	}
 
 	public void Connect(Action<bool> onReady) {
+		if (matchInfo.IsFake) {
+			MacroSystem.SetMacroValue("LATENCY_VALUE", latency = 26);
+			if (onReady != null) onReady(true);
+			return;
+		}
+
 		this.onReady = onReady;
 		
 		GameSparksRTUnity.Instance.Configure(matchInfo.HostURL, matchInfo.PortId, matchInfo.AccessToken, 
@@ -106,6 +112,7 @@ public class RTServer {
 	}
 
 	private void OnTowerUpgraded(UpgradeTowerEvent evt) {
+		if (matchInfo.IsFake) return;
 		if (matchInfo.GetClientPlayer().Id != evt.Element.Player) return;
 
 		using (RTData data = RTData.Get()) {
@@ -117,6 +124,7 @@ public class RTServer {
 		}
 	}
 	private void OnTowerSold(SellTowerEvent evt) {
+		if (matchInfo.IsFake) return;
 		if (matchInfo.GetClientPlayer().Id != evt.Element.Player) return;
 
 		using (RTData data = RTData.Get()) {
@@ -127,6 +135,7 @@ public class RTServer {
 		}
 	}
 	private void OnMonsterSent(SendMonsterEvent evt) {
+		if (matchInfo.IsFake) return;
 		if (matchInfo.GetClientPlayer().Id != evt.Element.PlayerOwner) return;
 
 		using (RTData data = RTData.Get()) {
@@ -138,6 +147,7 @@ public class RTServer {
 		}
 	}
 	private void OnMatchOver(MatchOverEvent evt) {
+		if (matchInfo.IsFake) return;
 		using (RTData data = RTData.Get()) {
 			data.SetString(1, evt.Element);
 

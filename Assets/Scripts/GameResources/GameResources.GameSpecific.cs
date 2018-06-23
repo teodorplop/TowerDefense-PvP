@@ -3,7 +3,7 @@ using Ingame.waves;
 using System.IO;
 
 public partial class GameResources {
-	private const string DEFAULT_MOD_PATH = "Contents";
+	private const string DEFAULT_MOD_PATH = "Default";
 
 	private const string WALLET_PATH = "Wallet";
 	private const string TOWER_ATTRIBUTES_PATH = "TowerAttributes";
@@ -14,39 +14,77 @@ public partial class GameResources {
 	private const string COMBAT_PATH = "Combat";
 	private const string STRINGS_PATH = "Strings";
 
-	private static string GetPath(string root, string level, string file) {
-		return Path.Combine(Path.Combine(DEFAULT_MOD_PATH, root), string.Format("{0}_{1}", file, level));
+	private static string modPath = DEFAULT_MOD_PATH;
+
+	private static string GetPath(string mod, string root, string level, string file) {
+		string path = Path.Combine(Path.Combine(mod, root), string.Format("{0}_{1}", file, level));
+		return path;
 	}
-	private static string GetDefaultPath(string root, string file) {
-		return Path.Combine(Path.Combine(DEFAULT_MOD_PATH, root), file);
+	private static string GetDefaultPath(string mod, string root, string file) {
+		string path = Path.Combine(Path.Combine(mod, root), file);
+		return path;
 	}
 
 	private static T LoadJSON<T>(string root, string level, string file) where T : IGameResource {
-		string path = GetPath(root, level, file);
+		string path = GetPath(modPath, root, level, file);
 		T t = LoadJSON<T>(path);
 		if (t == null) {
-			path = GetDefaultPath(root, file);
+			path = GetDefaultPath(modPath, root, file);
 			t = LoadJSON<T>(path);
+
+			if (t == null) {
+				path = GetPath(DEFAULT_MOD_PATH, root, level, file);
+				t = LoadJSON<T>(path);
+
+				if (t == null) {
+					path = GetDefaultPath(DEFAULT_MOD_PATH, root, file);
+					t = LoadJSON<T>(path);
+				}
+			}
 		}
 		return t;
 	}
 	private static T LoadCSV<T>(string root, string level, string file) where T : CSVLoader {
-		string path = GetPath(root, level, file);
+		string path = GetPath(modPath, root, level, file);
 		T t = LoadCSV<T>(path);
 		if (t == null) {
-			path = GetDefaultPath(root, file);
+			path = GetDefaultPath(modPath, root, file);
 			t = LoadCSV<T>(path);
+
+			if (t == null) {
+				path = GetPath(DEFAULT_MOD_PATH, root, level, file);
+				t = LoadCSV<T>(path);
+
+				if (t == null) {
+					path = GetDefaultPath(DEFAULT_MOD_PATH, root, file);
+					t = LoadCSV<T>(path);
+				}
+			}
 		}
 		return t;
 	}
 	private static T LoadFile<T>(string root, string level, string file) where T : ILoadableFile, new() {
-		string path = GetPath(root, level, file);
+		string path = GetPath(modPath, root, level, file);
 		T t = LoadFile<T>(path);
 		if (t == null) {
-			path = GetDefaultPath(root, file);
+			path = GetDefaultPath(modPath, root, file);
 			t = LoadFile<T>(path);
+
+			if (t == null) {
+				path = GetPath(DEFAULT_MOD_PATH, root, level, file);
+				t = LoadFile<T>(path);
+
+				if (t == null) {
+					path = GetDefaultPath(DEFAULT_MOD_PATH, root, file);
+					t = LoadFile<T>(path);
+				}
+			}
 		}
 		return t;
+	}
+
+	public static void SetMod(string mod) {
+		modPath = mod;
 	}
 
 	public static SendMonstersList LoadSendMonsters(string level) {
@@ -101,6 +139,6 @@ public partial class GameResources {
 	}
 
 	public static Strings_Data LoadStrings(string language) {
-		return LoadJSON<Strings_Data>(GetDefaultPath(STRINGS_PATH, language));
+		return LoadJSON<Strings_Data>(GetDefaultPath(DEFAULT_MOD_PATH, STRINGS_PATH, language));
 	}
 }
