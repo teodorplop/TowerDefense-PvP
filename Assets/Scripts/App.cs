@@ -143,7 +143,7 @@ public class App : MonoBehaviour {
 		SceneLoader.LoadScene("Splash", OnSplashLoaded);
 	}
 	private void OnSplashLoaded() {
-		rtServer = new RTServer(matchInfo);
+		rtServer = new RTServer(server, matchInfo);
 		rtServer.Connect(OnRTReady);
 	}
 	private void OnRTReady(bool ready) {

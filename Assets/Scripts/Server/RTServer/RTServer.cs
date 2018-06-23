@@ -13,6 +13,7 @@ public class RTServer {
 
 	private const int GAMEOVER_OPCODE = 130;
 
+	private GameServer gameServer;
 	private MatchInfo matchInfo;
 	private Action<bool> onReady;
 
@@ -25,7 +26,7 @@ public class RTServer {
 	public int RoundTrip { get { return roundTrip; } }
 	public int Latency { get { return latency; } }
 
-	public RTServer(MatchInfo matchInfo) {
+	public RTServer(GameServer gameServer, MatchInfo matchInfo) {
 		this.matchInfo = matchInfo;
 
 		EventManager.AddListener<UpgradeTowerEvent>(OnTowerUpgraded);
@@ -147,11 +148,23 @@ public class RTServer {
 		}
 	}
 	private void OnMatchOver(MatchOverEvent evt) {
-		if (matchInfo.IsFake) return;
+		if (matchInfo.IsFake) {
+			OnFakeMatchOver(evt);
+			return;
+		}
+
 		using (RTData data = RTData.Get()) {
 			data.SetString(1, evt.Element);
 
 			GameSparksRTUnity.Instance.SendData(GAMEOVER_OPCODE, GameSparksRT.DeliveryIntent.RELIABLE, data, new int[] { 0 });
+		}
+	}
+
+	private void OnFakeMatchOver(MatchOverEvent evt) {
+		if (evt.Element == Players.ClientPlayer.Id) {
+			gameServer.AddMMR(5);
+		} else {
+			gameServer.AddMMR(-5);
 		}
 	}
 }

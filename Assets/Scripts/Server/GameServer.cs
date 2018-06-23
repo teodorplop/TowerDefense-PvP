@@ -28,4 +28,12 @@ public partial class GameServer {
 			Debug.LogError(typeName + " type for server message not found.");
 		}
 	}
+
+	public void AddMMR(int value) {
+		string json = "{ \"mmr\": " + value + " }";
+		server.SendRequest("addmmr", json, AddMMR_Callback);
+	}
+	private void AddMMR_Callback(RequestResponse callback) {
+		Debug.Log("AddMMR_Callback: " + callback.Success);
+	}
 }
