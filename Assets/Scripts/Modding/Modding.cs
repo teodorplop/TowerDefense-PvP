@@ -31,7 +31,7 @@ public class Mod {
 		DirectoryInfo dir = new DirectoryInfo(path);
 		foreach (var file in dir.GetFiles("*", SearchOption.AllDirectories)) {
 			if (file.Extension == ".txt") {
-				sb.Append(file.FullName);
+				sb.Append(file.Name);
 				sb.Append(File.ReadAllText(file.FullName));
 			}
 		}

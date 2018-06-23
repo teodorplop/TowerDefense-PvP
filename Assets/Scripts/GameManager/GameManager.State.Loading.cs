@@ -63,7 +63,7 @@ public partial class GameManager {
 			PathRequestManager.Register(serverPlayer, pathfinder);
 
 			if (matchInfo.IsFake)
-				AIPlayer.GenerateAI(serverPlayer);
+				AIPlayer.GenerateAI(serverPlayer, _towerFactory, sendMonsters);
 
 			++idx;
 		}

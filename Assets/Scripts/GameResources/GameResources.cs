@@ -67,7 +67,7 @@ public class ExternalResources : IResourcesLoader {
 		}
 
 		T resource = JsonSerializer.Deserialize<T>(File.ReadAllText(fullPath));
-		resource.Name = path;
+		resource.Name = Path.GetFileNameWithoutExtension(path);
 		return resource;
 	}
 
@@ -79,7 +79,7 @@ public class ExternalResources : IResourcesLoader {
 		}
 
 		T resource = Activator.CreateInstance(typeof(T), File.ReadAllText(fullPath)) as T;
-		resource.Name = path;
+		resource.Name = Path.GetFileNameWithoutExtension(path);
 		return resource;
 	}
 
@@ -91,7 +91,7 @@ public class ExternalResources : IResourcesLoader {
 		}
 
 		T resource = new T();
-		resource.Name = path;
+		resource.Name = Path.GetFileNameWithoutExtension(path);
 		resource.Load(File.ReadAllText(fullPath));
 		return resource;
 	}
