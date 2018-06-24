@@ -2,8 +2,6 @@
 
 namespace Ingame.towers {
 	public partial class BarracksTower : Tower {
-		public enum TowerState { Construction, Active, Destroyed }
-
 		private string _trainedUnit { get { return _attributes.trainedUnit; } }
 		private int _maxUnits { get { return _attributes.maxUnits; } }
 		public float RespawnTimer { get { return _attributes.respawnTimer; } }

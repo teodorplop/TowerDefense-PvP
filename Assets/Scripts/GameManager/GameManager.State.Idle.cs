@@ -16,6 +16,11 @@ public partial class GameManager {
 		}
 	}
 
+	private void Idle_HandleKey() {
+		if (Input.GetKeyDown(KeyCode.Escape))
+			_uiManager.Escape();
+	}
+
 	private Tower _selectedTower;
 	private void DeselectTower() {
 		if (_selectedTower != null) {

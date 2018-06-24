@@ -2,8 +2,6 @@
 
 namespace Ingame.towers {
 	public partial class OffensiveTower : Tower {
-		public enum TowerState { Construction, Active }
-
 		[SerializeField]
 		private GameObject _rangeSprite;
 

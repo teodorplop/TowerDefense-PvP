@@ -162,6 +162,7 @@ public class App : MonoBehaviour {
 	}
 
 	private void OnProfileChanged(ProfileChangedEvent evt) {
+		profile = evt.Profile;
 		MacroSystem.SetMacroValue("MMR", profile.MMR);
 	}
 }

@@ -15,4 +15,11 @@ public partial class GameManager {
 			SelectUnit(unit);
 		}
 	}
+
+	private void TowerSelected_HandleKey() {
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			DeselectTower();
+			SetState(GameState.Idle);
+		}
+	}
 }

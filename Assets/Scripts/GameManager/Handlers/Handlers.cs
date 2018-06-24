@@ -9,7 +9,6 @@ public partial class GameManager {
 
 		public override void Execute() {
 			SellTowerRequest request = _request as SellTowerRequest;
-			_instance._uiManager.ShowTower(null, null);
 
 			Player player = Players.GetPlayer(request.Player);
 			player.Wallet.Add(Wallet.Currency.Gold, _instance._towerFactory.GetSellCost(player, request.Tower));
@@ -19,7 +18,10 @@ public partial class GameManager {
 
 			_instance._uiManager.Refresh();
 
-			_instance.SetState(GameState.Idle);
+			if (player.ClientPlayer) {
+				_instance._uiManager.ShowTower(null, null);
+				_instance.SetState(GameState.Idle);
+			}
 		}
 	}
 
@@ -39,13 +41,17 @@ public partial class GameManager {
 				Tower tower = _instance._towerFactory.UpgradeTower(player, request.Tower, request.Upgrade, cost);
 				if (tower is BarracksTower)
 					(tower as BarracksTower).Inject(_instance._unitFactory);
+				if (request.HasDelay)
+					tower.SetConstructionDelay((float)request.Delay);
 
 				EventManager.Raise(new UpgradeTowerEvent(request));
 
 				_instance._uiManager.Refresh();
-				_instance._uiManager.ShowTower(null, null);
 
-				_instance.SetState(GameState.Idle);
+				if (player.ClientPlayer) {
+					_instance._uiManager.ShowTower(null, null);
+					_instance.SetState(GameState.Idle);
+				}
 			} else {
 				Debug.Log("Not enough gold.");
 			}

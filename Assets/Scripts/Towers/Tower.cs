@@ -2,7 +2,9 @@
 using UnityEngine;
 
 namespace Ingame.towers {
-	public class Tower : StateMachineBase {
+	public partial class Tower : StateMachineBase {
+		public enum TowerState { Construction, Active, Destroyed }
+
 		protected static readonly float _constructionTime = 1.0f;
 
 		[SerializeField]

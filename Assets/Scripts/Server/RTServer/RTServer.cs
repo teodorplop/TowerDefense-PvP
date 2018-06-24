@@ -33,6 +33,16 @@ public class RTServer {
 		EventManager.AddListener<SellTowerEvent>(OnTowerSold);
 		EventManager.AddListener<SendMonsterEvent>(OnMonsterSent);
 		EventManager.AddListener<MatchOverEvent>(OnMatchOver);
+
+		EventManager.AddListener<ExitEvent>(OnExitEvent);
+	}
+	private void Destroy() {
+		EventManager.RemoveListener<UpgradeTowerEvent>(OnTowerUpgraded);
+		EventManager.RemoveListener<SellTowerEvent>(OnTowerSold);
+		EventManager.RemoveListener<SendMonsterEvent>(OnMonsterSent);
+		EventManager.RemoveListener<MatchOverEvent>(OnMatchOver);
+
+		EventManager.RemoveListener<ExitEvent>(OnExitEvent);
 	}
 
 	public void Connect(Action<bool> onReady) {
@@ -67,6 +77,7 @@ public class RTServer {
 	private void OnPlayerDisconnect(int peerId) {
 		Debug.Log("OnPlayerDisconnect(" + peerId + ")");
 		matchInfo.GetPlayer(peerId).online = false;
+
 	}
 	private void OnReady(bool ready) {
 		Debug.Log("OnReady(" + ready + ")");
@@ -101,9 +112,13 @@ public class RTServer {
 		}
 
 		ActionRequest req = null;
-		if (packet.OpCode == UPGRADETOWER_OPCODE)
-			req = new UpgradeTowerRequest(packet.Data.GetString(1), packet.Data.GetString(2), packet.Data.GetString(3));
-		else if (packet.OpCode == SELLTOWER_OPCODE)
+		if (packet.OpCode == UPGRADETOWER_OPCODE) {
+			double sentMS = packet.Data.GetDouble(4).Value;
+			double nowMS = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
+			double delay = nowMS - sentMS;
+
+			req = new UpgradeTowerRequest(packet.Data.GetString(1), packet.Data.GetString(2), packet.Data.GetString(3), delay);
+		} else if (packet.OpCode == SELLTOWER_OPCODE)
 			req = new SellTowerRequest(packet.Data.GetString(1), packet.Data.GetString(2));
 		else if (packet.OpCode == SENDMONSTER_OPCODE)
 			req = new SendMonsterRequest(packet.Data.GetString(1), new MonsterToSend(packet.Data.GetString(2), (int)packet.Data.GetInt(3)));
@@ -120,6 +135,7 @@ public class RTServer {
 			data.SetString(1, evt.Element.Player);
 			data.SetString(2, evt.Element.Tower);
 			data.SetString(3, evt.Element.Upgrade);
+			data.SetDouble(4, (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds);
 
 			GameSparksRTUnity.Instance.SendData(UPGRADETOWER_OPCODE, GameSparksRT.DeliveryIntent.RELIABLE, data, otherPeerIds);
 		}
@@ -166,5 +182,11 @@ public class RTServer {
 		} else {
 			gameServer.AddMMR(-5);
 		}
+	}
+
+	private void OnExitEvent(ExitEvent evt) {
+		GameSparksRTUnity.Instance.Disconnect();
+
+		Destroy();
 	}
 }

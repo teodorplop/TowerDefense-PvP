@@ -28,23 +28,21 @@ public class InputManager : MonoBehaviour {
 	}
 
 	void Update() {
-		Vector3 mousePosition = Input.mousePosition;
-		
-		if (InputScanner.CheckForUI(mousePosition)) {
-			return;
-		}
-
 		InputContext context = ActiveContext;
+		Vector3 mousePosition = Input.mousePosition;
 
-		context.onMouse(mousePosition);
-		for (int i = 0; i < 3; ++i) {
-			if (Input.GetMouseButtonDown(i)) {
-				context.onMouseDown(i, mousePosition);
-			}
-			if (Input.GetMouseButtonUp(i)) {
-				context.onMouseUp(i, mousePosition);
+		if (!InputScanner.CheckForUI(mousePosition)) {
+			context.onMouse(mousePosition);
+			for (int i = 0; i < 3; ++i) {
+				if (Input.GetMouseButtonDown(i)) {
+					context.onMouseDown(i, mousePosition);
+				}
+				if (Input.GetMouseButtonUp(i)) {
+					context.onMouseUp(i, mousePosition);
+				}
 			}
 		}
+
 		context.onKey();
 	}
 

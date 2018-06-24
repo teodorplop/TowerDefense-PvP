@@ -24,15 +24,29 @@ public class UpgradeTowerRequest : ActionRequest {
 	private string _tower;
 	[SerializeField]
 	private string _upgrade;
+	[SerializeField]
+	private double _delay;
+	[SerializeField]
+	private bool _hasDelay;
 	public UpgradeTowerRequest(string player, string tower, string upgrade) {
 		_player = player;
 		_tower = tower;
 		_upgrade = upgrade;
+		_hasDelay = false;
+	}
+	public UpgradeTowerRequest(string player, string tower, string upgrade, double delay) {
+		_player = player;
+		_tower = tower;
+		_upgrade = upgrade;
+		_delay = delay;
+		_hasDelay = true;
 	}
 
 	public string Player { get { return _player; } }
 	public string Tower { get { return _tower; } }
 	public string Upgrade { get { return _upgrade; } }
+	public double Delay { get { return _delay; } }
+	public bool HasDelay { get { return _hasDelay; } }
 
 	public override string ToString() {
 		return "UpgradeTowerRequest(" + _tower + ", " + _upgrade + ")";

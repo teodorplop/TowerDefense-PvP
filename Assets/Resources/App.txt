@@ -1,4 +1,4 @@
 {
-	"versionNumber": "1.00",
+	"versionNumber": "1.01",
 	"buildStage": "Alpha"
 }

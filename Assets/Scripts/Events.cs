@@ -43,6 +43,8 @@ public class ProfileChangedEvent : GameEvent {
 	[SerializeField] private UserProfile profile;
 	public UserProfile Profile { get { return profile; } }
 }
+
+public class ExitEvent : GameEvent { }
 #endregion
 
 #region Ingame

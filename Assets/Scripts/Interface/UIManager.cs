@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour {
 
 	private EndGameUI _endGameUI;
 
+	[SerializeField] private GameObject _escapeCanvas;
+
 	void Awake() {
 		_towerShop = FindObjectOfType<TowerShop>();
 
@@ -61,5 +63,9 @@ public class UIManager : MonoBehaviour {
 
 	public void GameEnded(int mmr, bool win) {
 		_endGameUI.Show(mmr, win);
+	}
+
+	public void Escape() {
+		_escapeCanvas.SetActive(!_escapeCanvas.activeSelf);
 	}
 }
