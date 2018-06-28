@@ -28,6 +28,7 @@ public class RTServer {
 
 	public RTServer(GameServer gameServer, MatchInfo matchInfo) {
 		this.matchInfo = matchInfo;
+		this.gameServer = gameServer;
 
 		EventManager.AddListener<UpgradeTowerEvent>(OnTowerUpgraded);
 		EventManager.AddListener<SellTowerEvent>(OnTowerSold);
