@@ -2,13 +2,13 @@
   "movementSpeed": 10.0,
   "turnSpeed": 10.0,
 
-  "maxHealth": 30,
+  "maxHealth": 35,
   "regenTime":  8,
 
   "engageRange": 20.0,
   "attackSpeed": 1.0,
   "attackRange": 5,
-  "attackDamage": 2,
+  "attackDamage": 3,
   
   "attack": "Normal",
   "armor": "Medium",

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Text;
 
 namespace Ingame.waves {
 	[Serializable]
@@ -11,6 +12,25 @@ namespace Ingame.waves {
 		[SerializeField] public float spawnTime;
 		[SerializeField] public List<WaveMonster> monsters = new List<WaveMonster>();
 		[NonSerialized] public bool finished;
+
+		public Wave() { }
+
+		public Wave(Wave other) {
+			spawnTime = other.spawnTime;
+			monsters = new List<WaveMonster>();
+			foreach (var monster in other.monsters)
+				monsters.Add(new WaveMonster(monster));
+		}
+
+		public override string ToString() {
+			StringBuilder sb = new StringBuilder();
+			sb.AppendLine("Spawn Time " + spawnTime);
+			foreach (var m in monsters)
+				sb.Append(m);
+			sb.AppendLine("Finished " + finished);
+
+			return sb.ToString();
+		}
 	}
 
 	[Serializable]
@@ -28,11 +48,25 @@ namespace Ingame.waves {
 			this.spawnTime = spawnTime;
 			this.path = path;
 		}
+		
+		public WaveMonster(WaveMonster other) {
+			name = other.name;
+			spawnTime = other.spawnTime;
+			path = other.path;
+		}
+
+		public override string ToString() {
+			return string.Format("SpawnTime: {0} Name: {1} Path: {2} Sent: {3}\n", spawnTime, name, path, sent);
+		}
 	}
 
 	public class WavesManager : MonoBehaviour {
 		[SerializeField]
 		private float _displacement = 2.5f;
+		[SerializeField]
+		private float _repeatWaveDelay = 15.0f;
+		[SerializeField]
+		private float _repeatWaveDecay = 1.0f;
 
 		private Waves_Data _waves;
 		private Wave _currentWave, _nextWave;
@@ -52,7 +86,7 @@ namespace Ingame.waves {
 			_nextWave = _waves.GetNextWave();
 		}
 		public void QueueMonster(Player player, string monster, string path) {
-			if (_nextWave == null) {
+			if (_currentWave.spawnTime >= _matchTimer && _nextWave == null) {
 				Debug.Log("This is the last wave. Cannot queue more monsters.");
 				return;
 			}
@@ -60,7 +94,10 @@ namespace Ingame.waves {
 			Wave wave;
 			if (!_queuedWaves.TryGetValue(player, out wave)) {
 				_queuedWaves.Add(player, wave = new Wave());
-				wave.spawnTime = _nextWave.spawnTime;
+				if (_currentWave.spawnTime < _matchTimer)
+					wave.spawnTime = _currentWave.spawnTime;
+				else
+					wave.spawnTime = _nextWave.spawnTime;//_nextWave.spawnTime;
 			}
 			wave.monsters.Add(new WaveMonster(monster, 0.0f, path));
 		}
@@ -93,7 +130,6 @@ namespace Ingame.waves {
 						monster.sent = true;
 					}
 				}
-
 			if (player == null) SendMonsters(toSend);
 			else SendMonsters(toSend, player);
 		}
@@ -101,7 +137,17 @@ namespace Ingame.waves {
 		private void ManageNextWave() {
 			_currentWave = _nextWave;
 			_nextWave = _waves.GetNextWave();
-			_queuedWaves.Clear();
+			if (_nextWave == null) {
+				_nextWave = new Wave(_currentWave);
+				_nextWave.spawnTime = _matchTimer + _repeatWaveDelay;
+				_repeatWaveDelay = Mathf.Max(2.0f, _repeatWaveDelay - _repeatWaveDecay);
+			}
+
+			List<Player> toRemove = new List<Player>();
+			foreach (var wave in _queuedWaves)
+				if (wave.Value.finished) toRemove.Add(wave.Key);
+			foreach (var p in toRemove)
+				_queuedWaves.Remove(p);
 		}
 		
 		private void SendMonsters(List<WaveMonster> monsters) {

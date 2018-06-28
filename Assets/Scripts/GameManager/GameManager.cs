@@ -100,7 +100,7 @@ public partial class GameManager : StateMachineBase {
 		ActionHandler sellTower = new SellTowerHandler();
 
 		Idle_ActionHandlers = new ActionHandler[] { sendMonsters, sendMonster, upgradeTower, sellTower };
-		TowerSelected_ActionHandlers = new ActionHandler[] { sendMonsters, upgradeTower, sellTower };
+		TowerSelected_ActionHandlers = new ActionHandler[] { sendMonsters, sendMonster, upgradeTower, sellTower };
 	}
 
 	#region PUBLICS
